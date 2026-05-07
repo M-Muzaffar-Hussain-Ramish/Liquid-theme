@@ -1,0 +1,421 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Outfit:wght@400;600;700;800&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+  @font-face {
+    font-family: 'Dimbo';
+    src: url('{{ "dimbo.ttf" | asset_url }}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+</style>
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --hero-bg:        {{ section.settings.bg_color }};
+    --hero-word1:     {{ section.settings.word1_color }};
+    --hero-word2:     {{ section.settings.word2_color }};
+    --hero-sub:       {{ section.settings.subheading_color }};
+    --hero-btn-bg:    {{ section.settings.btn_bg_color }};
+    --hero-btn-text:  {{ section.settings.btn_text_color }};
+    background-color: var(--hero-bg);
+  }
+{%- endstyle -%}
+
+<style>
+  .gwmf-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Snow dots background */
+  .gwmf-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.85) 5px, transparent 5px),
+      radial-gradient(circle, rgba(255, 255, 255, 0.7) 4px, transparent 4px),
+      radial-gradient(circle, rgba(255, 255, 255, 0.9) 6px, transparent 6px),
+      radial-gradient(circle, rgba(255, 255, 255, 0.75) 4px, transparent 4px),
+      radial-gradient(circle, rgba(255, 255, 255, 0.8) 5px, transparent 5px),
+      radial-gradient(circle, rgba(255, 255, 255, 0.65) 3px, transparent 3px);
+    background-size: 280px 280px, 200px 200px, 340px 340px, 220px 220px, 300px 300px, 180px 180px;
+    background-position: 30px 40px, 100px 160px, 200px 60px, 60px 220px, 260px 140px, 140px 80px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .gwmf-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 48px 0px 64px;
+    display: grid;
+    grid-template-columns: 45% 55%;
+    align-items: center;
+    min-height: 520px;
+    gap: 0;
+  }
+
+  /* ---- LEFT COLUMN ---- */
+  .gwmf-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding-right: 20px;
+  }
+
+  .gwmf-hero__heading {
+    margin: 0;
+    line-height: 0.9;
+  }
+
+  .gwmf-hero__word1 {
+    display: block;
+    font-family: 'Dimbo', 'Outfit', sans-serif;
+    font-size: clamp(80px, 10vw, 140px);
+    font-weight: 800;
+    color: var(--hero-word1);
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 0.95;
+  }
+
+  .gwmf-hero__word2 {
+    display: block;
+    font-family: 'Amatic SC', cursive;
+    font-size: clamp(52px, 6.5vw, 90px);
+    font-weight: 700;
+    color: var(--hero-word2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.05;
+  }
+
+  .gwmf-hero__subheading {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.4;
+    color: var(--hero-sub);
+    margin: 4px 0 0;
+    max-width: 420px;
+  }
+
+  .gwmf-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    background: var(--hero-btn-bg);
+    color: var(--hero-btn-text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.15s;
+    margin-top: 6px;
+    min-width: 240px;
+  }
+
+  .gwmf-hero__btn:hover {
+    filter: brightness(0.85);
+    transform: translateY(-2px);
+  }
+
+  /* ---- RIGHT COLUMN ---- */
+  .gwmf-hero__image-wrap {
+    position: relative;
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    height: 100%;
+  }
+
+  .gwmf-hero__image-wrap img {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+  }
+
+  .gwmf-hero__image-placeholder {
+    width: 100%;
+    max-width: 700px;
+    aspect-ratio: 16/10;
+    background: rgba(26, 95, 190, 0.08);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #1a5fbe;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    border: 2px dashed rgba(26, 95, 190, 0.25);
+  }
+
+  /* ---- ANIMATIONS ---- */
+  .gwmf-hero__content,
+  .gwmf-hero__image-wrap {
+    opacity: 0;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .gwmf-hero__content {
+    transform: translateX(-48px);
+  }
+
+  .gwmf-hero__image-wrap {
+    transform: translateX(48px);
+  }
+
+  .gwmf-hero.is-visible .gwmf-hero__content {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .gwmf-hero.is-visible .gwmf-hero__image-wrap {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.15s;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media screen and (max-width: 989px) {
+    .gwmf-hero__inner {
+      grid-template-columns: 1fr;
+      padding: 40px 24px 0;
+      min-height: auto;
+      gap: 24px;
+      text-align: center;
+    }
+    .gwmf-hero__content {
+      align-items: center;
+      padding-right: 0;
+      order: 1;
+    }
+    .gwmf-hero__image-wrap {
+      justify-content: center;
+      order: 2;
+    }
+    .gwmf-hero__subheading {
+      max-width: 560px;
+    }
+    .gwmf-hero__btn {
+      width: 100%;
+      max-width: 360px;
+      min-width: unset;
+    }
+    .gwmf-hero__word1 {
+      font-size: clamp(64px, 16vw, 100px);
+    }
+    .gwmf-hero__word2 {
+      font-size: clamp(40px, 10vw, 64px);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gwmf-hero__inner {
+      padding: 32px 20px 0;
+      gap: 20px;
+    }
+    .gwmf-hero__word1 {
+      font-size: clamp(52px, 17vw, 80px);
+    }
+    .gwmf-hero__word2 {
+      font-size: clamp(32px, 11vw, 54px);
+    }
+    .gwmf-hero__subheading {
+      font-size: 16px;
+      max-width: 100%;
+    }
+    .gwmf-hero__btn {
+      width: 100%;
+      max-width: 100%;
+      padding: 15px 20px;
+      font-size: 13px;
+    }
+    .gwmf-hero__image-wrap img {
+      max-width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .gwmf-hero__inner {
+      padding: 24px 16px 0;
+    }
+    .gwmf-hero__word1 {
+      font-size: clamp(44px, 18vw, 68px);
+    }
+    .gwmf-hero__word2 {
+      font-size: clamp(28px, 12vw, 46px);
+    }
+    .gwmf-hero__subheading {
+      font-size: 15px;
+    }
+  }
+</style>
+
+<section class="gwmf-hero" id="shopify-section-{{ section.id }}" aria-label="Hero banner">
+  <div class="gwmf-hero__inner">
+    {%- comment -%} LEFT — Text {%- endcomment -%}
+    <div class="gwmf-hero__content">
+      <h1 class="gwmf-hero__heading">
+        <span class="gwmf-hero__word1">{{ section.settings.heading_word1 }}</span>
+        <span class="gwmf-hero__word2">{{ section.settings.heading_word2 }}</span>
+      </h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="gwmf-hero__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.btn_label != blank -%}
+        <a href="{{ section.settings.btn_link }}" class="gwmf-hero__btn">
+          {{ section.settings.btn_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} RIGHT — Image {%- endcomment -%}
+    <div class="gwmf-hero__image-wrap">
+      {%- if section.settings.image != blank -%}
+        {%- assign img_alt = section.settings.image.alt | default: shop.name | escape -%}
+        {{
+          section.settings.image
+          | image_url: width: 1400
+          | image_tag: alt: img_alt, loading: 'eager', fetchpriority: 'high', widths: '600, 800, 1000, 1200, 1400'
+        }}
+      {%- else -%}
+        <div class="gwmf-hero__image-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
+          </svg>
+          Upload hero image in Theme Editor → Hero Banner → Hero image
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var hero = document.querySelector('#shopify-section-{{ section.id }} .gwmf-hero');
+    if (!hero) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { hero.classList.add('is-visible'); io.disconnect(); }
+    }, { threshold: 0.15 });
+    io.observe(hero);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#D8F3FC"
+    },
+    {
+      "type": "color",
+      "id": "word1_color",
+      "label": "Heading line 1 color",
+      "default": "#1a5fbe"
+    },
+    {
+      "type": "color",
+      "id": "word2_color",
+      "label": "Heading line 2 color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#1a3a6e"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button background color",
+      "default": "#1a3a6e"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading_word1",
+      "label": "Heading — Line 1",
+      "default": "GIFT"
+    },
+    {
+      "type": "text",
+      "id": "heading_word2",
+      "label": "Heading — Line 2 (dark)",
+      "default": "HILARIOUSLY"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Gifts featuring your face, your pets or the people you love with your own custom gift wrap."
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button label",
+      "default": "CREATE MY FACE WRAP"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image (right column)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

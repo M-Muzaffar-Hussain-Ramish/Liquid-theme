@@ -1,0 +1,295 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --press-bg:    {{ section.settings.bg_color }};
+    --press-quote: {{ section.settings.quote_color }};
+    --press-stat:  {{ section.settings.stat_color }};
+    background-color: var(--press-bg);
+  }
+{%- endstyle -%}
+
+<style>
+  .gwmf-press {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .gwmf-press__wave-top,
+  .gwmf-press__wave-bottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .gwmf-press__wave-top {
+    top: -1px;
+  }
+
+  .gwmf-press__wave-bottom {
+    bottom: -1px;
+  }
+
+  .gwmf-press__wave-top svg,
+  .gwmf-press__wave-bottom svg {
+    display: block;
+    width: 100%;
+    height: 80px;
+  }
+
+  /* Decorative circles */
+  .gwmf-press::before,
+  .gwmf-press::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .gwmf-press::before {
+    width: 460px;
+    height: 460px;
+    left: -120px;
+    bottom: -100px;
+  }
+
+  .gwmf-press::after {
+    width: 320px;
+    height: 320px;
+    right: -60px;
+    top: -40px;
+  }
+
+  .gwmf-press__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 100px 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .gwmf-press__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gwmf-press__logo img {
+    max-height: 80px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+
+  .gwmf-press__logo-placeholder {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .gwmf-press__quote {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 800;
+    color: var(--press-quote);
+    line-height: 1.25;
+    margin: 0;
+    max-width: 780px;
+  }
+
+  .gwmf-press__stat {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(16px, 1.8vw, 22px);
+    font-weight: 800;
+    color: var(--press-stat);
+    margin: 12px 0 0;
+    letter-spacing: 0.3px;
+  }
+
+  /* ---- ANIMATIONS ---- */
+  .gwmf-press__logo,
+  .gwmf-press__quote,
+  .gwmf-press__stat {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .gwmf-press.is-visible .gwmf-press__logo {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
+  }
+
+  .gwmf-press.is-visible .gwmf-press__quote {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.15s;
+  }
+
+  .gwmf-press.is-visible .gwmf-press__stat {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+  }
+
+  @media screen and (max-width: 989px) {
+    .gwmf-press__inner {
+      padding: 88px 32px;
+    }
+    .gwmf-press__wave-top svg,
+    .gwmf-press__wave-bottom svg {
+      height: 56px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gwmf-press__inner {
+      padding: 72px 20px;
+      gap: 16px;
+    }
+    .gwmf-press__wave-top svg,
+    .gwmf-press__wave-bottom svg {
+      height: 40px;
+    }
+    .gwmf-press__logo img {
+      max-height: 56px;
+    }
+    .gwmf-press__quote {
+      font-size: clamp(18px, 5.5vw, 26px);
+    }
+    .gwmf-press__stat {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .gwmf-press__inner {
+      padding: 60px 16px;
+    }
+  }
+</style>
+
+<section class="gwmf-press" id="shopify-section-{{ section.id }}">
+  <!-- Wave top: white lens curves down into center -->
+  <div class="gwmf-press__wave-top">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 C480,80 960,80 1440,0 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <div class="gwmf-press__inner">
+    <!-- Press logo -->
+    <div class="gwmf-press__logo">
+      {%- if section.settings.press_logo != blank -%}
+        {%- assign logo_alt = section.settings.press_logo.alt | default: section.settings.press_name | escape -%}
+        {{ section.settings.press_logo | image_url: width: 400 | image_tag: alt: logo_alt, loading: 'lazy' }}
+      {%- elsif section.settings.press_name != blank -%}
+        <span class="gwmf-press__logo-placeholder">{{ section.settings.press_name }}</span>
+      {%- endif -%}
+    </div>
+
+    <!-- Quote -->
+    {%- if section.settings.quote != blank -%}
+      <p class="gwmf-press__quote">&ldquo;{{ section.settings.quote }}&rdquo;</p>
+    {%- endif -%}
+
+    <!-- Stat -->
+    {%- if section.settings.stat != blank -%}
+      <p class="gwmf-press__stat">{{ section.settings.stat }}</p>
+    {%- endif -%}
+  </div>
+
+  <!-- Wave bottom: white fills sides, center dips down same as top -->
+  <div class="gwmf-press__wave-bottom">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 C480,80 960,80 1440,0 L1440,80 L0,80 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var sec = document.querySelector('#shopify-section-{{ section.id }} .gwmf-press');
+    if (!sec) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { sec.classList.add('is-visible'); io.disconnect(); }
+    }, { threshold: 0.2 });
+    io.observe(sec);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Press Quote",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#1a6fcc"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "stat_color",
+      "label": "Stat text color",
+      "default": "#FFD600"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "press_logo",
+      "label": "Press logo (will be shown white)"
+    },
+    {
+      "type": "text",
+      "id": "press_name",
+      "label": "Press name (fallback if no logo)",
+      "default": "TODAY"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "Customizable wrapping paper that’s just as exciting as the actual gift"
+    },
+    {
+      "type": "text",
+      "id": "stat",
+      "label": "Stat / supporting text",
+      "default": "Over 250,000 gifts wrapped"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press Quote"
+    }
+  ]
+}
+{% endschema %}

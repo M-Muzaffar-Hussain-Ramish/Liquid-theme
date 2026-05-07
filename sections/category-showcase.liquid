@@ -1,0 +1,465 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --cats-bg:          {{ section.settings.bg_color }};
+    --cats-eyebrow:     {{ section.settings.eyebrow_color }};
+    --cats-heading:     {{ section.settings.heading_color }};
+    --cats-subtitle:    {{ section.settings.subtitle_color }};
+    --cats-label:       {{ section.settings.label_color }};
+    --cats-card-sub:    {{ section.settings.card_subtitle_color }};
+    --cats-btn-bg:      {{ section.settings.btn_bg_color }};
+    --cats-btn-text:    {{ section.settings.btn_text_color }};
+    background-color: var(--cats-bg);
+  }
+{%- endstyle -%}
+
+<style>
+  .gwmf-cats {
+    width: 100%;
+  }
+
+  .gwmf-cats__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 72px 64px 80px;
+    text-align: center;
+  }
+
+  .gwmf-cats__eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--cats-eyebrow);
+    margin: 0 0 16px;
+  }
+
+  .gwmf-cats__heading {
+    font-family: 'Dimbo', 'Outfit', sans-serif;
+    font-size: clamp(36px, 4.5vw, 62px);
+    font-weight: 800;
+    color: var(--cats-heading);
+    line-height: 1.05;
+    margin: 0 0 18px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gwmf-cats__subtitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--cats-subtitle);
+    margin: 0 0 52px;
+    line-height: 1.5;
+  }
+
+  .gwmf-cats__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .gwmf-cats__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .gwmf-cats__img-wrap {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .gwmf-cats__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .gwmf-cats__card:hover .gwmf-cats__img-wrap img {
+    transform: scale(1.04);
+  }
+
+  .gwmf-cats__img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0px;
+  }
+
+  .gwmf-cats__label {
+    font-family: 'Dimbo', sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cats-label);
+  }
+
+  .gwmf-cats__card-subtitle {
+    font-family: 'Dimbo', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--cats-card-sub);
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+  }
+
+  .gwmf-cats__card-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    background: var(--cats-btn-bg);
+    color: var(--cats-btn-text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s, transform 0.15s;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .gwmf-cats__card-btn:hover {
+    background: #172d55;
+    transform: translateY(-2px);
+  }
+
+  /* ---- ANIMATIONS ---- */
+  .gwmf-cats__eyebrow,
+  .gwmf-cats__heading,
+  .gwmf-cats__subtitle,
+  .gwmf-cats__card {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .gwmf-cats.is-visible .gwmf-cats__eyebrow {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
+  }
+
+  .gwmf-cats.is-visible .gwmf-cats__heading {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s;
+  }
+
+  .gwmf-cats.is-visible .gwmf-cats__subtitle {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.18s;
+  }
+
+  .gwmf-cats.is-visible .gwmf-cats__card:nth-child(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.28s;
+  }
+
+  .gwmf-cats.is-visible .gwmf-cats__card:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.42s;
+  }
+
+  .gwmf-cats.is-visible .gwmf-cats__card:nth-child(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.56s;
+  }
+
+  @media screen and (max-width: 989px) {
+    .gwmf-cats__inner {
+      padding: 52px 24px 60px;
+    }
+    .gwmf-cats__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .gwmf-cats__label {
+      font-size: 32px;
+    }
+    .gwmf-cats__card-subtitle {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gwmf-cats__inner {
+      padding: 40px 16px 48px;
+    }
+    .gwmf-cats__heading {
+      font-size: clamp(26px, 8vw, 40px);
+    }
+    .gwmf-cats__subtitle {
+      font-size: 14px;
+      margin-bottom: 36px;
+    }
+    .gwmf-cats__grid {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      margin: 0 auto;
+      gap: 36px;
+    }
+    .gwmf-cats__label {
+      font-size: 36px;
+    }
+    .gwmf-cats__card-subtitle {
+      font-size: 18px;
+    }
+    .gwmf-cats__card-btn {
+      max-width: 100%;
+      font-size: 12px;
+      padding: 13px 20px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .gwmf-cats__inner {
+      padding: 32px 14px 40px;
+    }
+    .gwmf-cats__eyebrow {
+      font-size: 11px;
+    }
+    .gwmf-cats__label {
+      font-size: 30px;
+    }
+    .gwmf-cats__card-subtitle {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<section class="gwmf-cats" id="shopify-section-{{ section.id }}">
+  <div class="gwmf-cats__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="gwmf-cats__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="gwmf-cats__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="gwmf-cats__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    <div class="gwmf-cats__grid">
+      {%- for block in section.blocks -%}
+        <div class="gwmf-cats__card" {{ block.shopify_attributes }}>
+          <div class="gwmf-cats__img-wrap">
+            {%- if block.settings.image != blank -%}
+              {%- assign img_alt = block.settings.image.alt | default: block.settings.label | escape -%}
+              {{
+                block.settings.image
+                | image_url: width: 800
+                | image_tag: alt: img_alt, loading: 'lazy', widths: '400, 600, 800'
+              }}
+            {%- else -%}
+              <div class="gwmf-cats__img-placeholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
+                </svg>
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.label != blank -%}
+            <span class="gwmf-cats__label">{{ block.settings.label }}</span>
+          {%- endif -%}
+
+          {%- if block.settings.subtitle != blank -%}
+            <p class="gwmf-cats__card-subtitle">{{ block.settings.subtitle }}</p>
+          {%- endif -%}
+
+          {%- if block.settings.btn_label != blank -%}
+            <a href="{{ block.settings.btn_link }}" class="gwmf-cats__card-btn">
+              {{ block.settings.btn_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var sec = document.querySelector('#shopify-section-{{ section.id }} .gwmf-cats');
+    if (!sec) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { sec.classList.add('is-visible'); io.disconnect(); }
+    }, { threshold: 0.1 });
+    io.observe(sec);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Category Showcase",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#0a1a30"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow text color",
+      "default": "#7aa8d8"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#4a9fe0"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#8eacc8"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Card label color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_subtitle_color",
+      "label": "Card subtitle color",
+      "default": "#667085"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button background color",
+      "default": "#0056a3"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Because One Face Isn't Enough"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Wrap Every Occasion in Pure Ridiculous Joy"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Choose your product and make someone's day unforgettable."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Category label",
+          "default": "Gift Wrap"
+        },
+        {
+          "type": "textarea",
+          "id": "subtitle",
+          "label": "Card subtitle"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button label",
+          "default": "Shop All Gift Wrap Designs"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button link",
+          "default": "/collections/all"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Showcase",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "label": "Gift Wrap",
+            "btn_label": "Shop All Gift Wrap Designs",
+            "btn_link": "/collections/gift-wrap"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "label": "Gift Tags",
+            "btn_label": "Explore Gift Tags Collection",
+            "btn_link": "/collections/gift-tags"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "label": "Socks",
+            "btn_label": "Browse All Face Socks",
+            "btn_link": "/collections/socks"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

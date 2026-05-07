@@ -1,210 +1,432 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "custom_hero": {
+      "type": "custom-hero",
+      "settings": {
+        "bg_color": "#d8f3fc",
+        "word1_color": "#1a5fbe",
+        "word2_color": "#1a1a1a",
+        "subheading_color": "#1a3a6e",
+        "btn_bg_color": "#1a3a6e",
+        "btn_text_color": "#ffffff",
+        "heading_word1": "GIFT",
+        "heading_word2": "HILARIOUSLY",
+        "subheading": "Gifts featuring your face, your pets or the people you love with your own custom gift wrap.",
+        "btn_label": "CREATE MY FACE WRAP",
+        "btn_link": "/collections/all",
+        "image": "shopify://shop_images/Section_1.png"
+      }
+    },
+    "category_showcase": {
+      "type": "category-showcase",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "cat1": {
+          "type": "category",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
+            "image": "shopify://shop_images/Content.png",
+            "label": "Gift Wrap",
+            "subtitle": "The Original Face Wrap",
+            "btn_label": "Shop All Gift Wrap Designs",
+            "btn_link": "/collections/gift-wrap"
           }
         },
-        "text": {
-          "type": "text",
+        "cat2": {
+          "type": "category",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "image": "shopify://shop_images/Content_1.png",
+            "label": "Gift Tags",
+            "subtitle": "Add faces to your gift tags.",
+            "btn_label": "Explore Gift Tags Collection",
+            "btn_link": "/collections/gift-tags"
           }
         },
-        "button": {
-          "type": "buttons",
+        "cat3": {
+          "type": "category",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "image": "shopify://shop_images/Image.png",
+            "label": "Socks",
+            "subtitle": "Cozy socks covered in faces.",
+            "btn_label": "Browse All Face Socks",
+            "btn_link": "/collections/socks"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text",
-        "button"
+        "cat1",
+        "cat2",
+        "cat3"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "bg_color": "#ffffff",
+        "eyebrow_color": "#7aa8d8",
+        "heading_color": "#4a9fe0",
+        "subtitle_color": "#8eacc8",
+        "label_color": "#000000",
+        "card_subtitle_color": "#667085",
+        "btn_bg_color": "#0056a3",
+        "btn_text_color": "#ffffff",
+        "eyebrow": "Because One Face Isn't Enough",
+        "heading": "Wrap Every Occasion in Pure Ridiculous Joy",
+        "subtitle": "Choose your product and make someone's day unforgettable."
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "press_quote": {
+      "type": "press-quote",
+      "settings": {
+        "bg_color": "#1a6fcc",
+        "quote_color": "#ffffff",
+        "stat_color": "#ffd600",
+        "press_logo": "shopify://shop_images/image_17.png",
+        "press_name": "TODAY",
+        "quote": "Customizable wrapping paper that’s just as exciting as the actual gift",
+        "stat": "Over 250,000 gifts wrapped"
+      }
+    },
+    "collection_grid": {
+      "type": "collection-grid",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "tag1": {
+          "type": "tag_filter",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
+            "label": "Baby Shower",
+            "tag": "baby-shower"
           }
         },
-        "text": {
-          "type": "text",
+        "tag2": {
+          "type": "tag_filter",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "label": "Birthdays",
+            "tag": "birthdays"
+          }
+        },
+        "tag3": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Characters",
+            "tag": "characters"
+          }
+        },
+        "tag4": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Christmas",
+            "tag": "christmas"
+          }
+        },
+        "tag5": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Everyday",
+            "tag": "everyday"
+          }
+        },
+        "tag6": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Hanukkah",
+            "tag": "hanukkah"
+          }
+        },
+        "tag7": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Love",
+            "tag": "love"
+          }
+        },
+        "tag8": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Moms and Dads",
+            "tag": "moms-and-dads"
+          }
+        },
+        "tag9": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Pet Lovers",
+            "tag": "pet-lovers"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "tag1",
+        "tag2",
+        "tag3",
+        "tag4",
+        "tag5",
+        "tag6",
+        "tag7",
+        "tag8",
+        "tag9"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "collection": "all",
+        "bg_color": "#ffffff",
+        "heading_color": "#1a5fbe",
+        "subtitle_color": "#7a8fa8",
+        "pill_border_color": "#d0dce8",
+        "pill_text_color": "#4a6080",
+        "pill_active_color": "#1a3a6e",
+        "price_color": "#1a5fbe",
+        "btn_bg_color": "#1a3a6e",
+        "btn_text_color": "#ffffff",
+        "heading": "Gift Wrap",
+        "subtitle": "Premium Quality. Printed Fast. Made for Laughs.",
+        "collection": "",
         "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
+        "btn_label": "SEE ALL",
+        "btn_link": ""
       }
     },
-    "collage": {
-      "type": "collage",
+    "promo_banner": {
+      "type": "promo-banner",
+      "settings": {
+        "bg_color": "#1e6b2e",
+        "eyebrow_color": "#ffd600",
+        "heading_color": "#ffffff",
+        "body_color": "#e8e8e8",
+        "btn_color": "#e8430a",
+        "corner_image": "shopify://shop_images/image_33.png",
+        "eyebrow": "Limited Holiday Designs Available",
+        "heading": "Buy any 3 products\nGet 1 free",
+        "body": "Get exclusive savings when you bundle multiple face wraps. Great for families, parties, or coworkers!",
+        "btn_label": "Create a Custom Bundle",
+        "btn_link": "/collections/all",
+        "image": "shopify://shop_images/ChristmasRolls_600x600px_1.png"
+      }
+    },
+    "collection_grid_ygPMJF": {
+      "type": "collection-grid",
       "blocks": {
-        "collection-0": {
-          "type": "collection",
+        "tag_filter_ChmwHh": {
+          "type": "tag_filter",
           "settings": {
-            "collection": ""
+            "label": "Baby Shower",
+            "tag": "baby-shower"
           }
         },
-        "product": {
-          "type": "product",
+        "tag_filter_p9JBMj": {
+          "type": "tag_filter",
           "settings": {
-            "product": "",
-            "second_image": false
+            "label": "Birthdays",
+            "tag": "birthdays"
           }
         },
-        "collection-1": {
-          "type": "collection",
+        "tag_filter_PrQXDb": {
+          "type": "tag_filter",
           "settings": {
-            "collection": ""
+            "label": "Characters",
+            "tag": "characters"
+          }
+        },
+        "tag_filter_tzAt47": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Christmas",
+            "tag": "christmas"
+          }
+        },
+        "tag_filter_6XGWKW": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Everyday",
+            "tag": "everyday"
+          }
+        },
+        "tag_filter_hAq4eC": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Hanukkah",
+            "tag": "hanukkah"
+          }
+        },
+        "tag_filter_hKpBKU": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Love",
+            "tag": "love"
+          }
+        },
+        "tag_filter_eeQtYw": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Moms and Dads",
+            "tag": "moms-and-dads"
+          }
+        },
+        "tag_filter_RxXEbK": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Pet Lovers",
+            "tag": "pet-lovers"
           }
         }
       },
       "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
+        "tag_filter_ChmwHh",
+        "tag_filter_p9JBMj",
+        "tag_filter_PrQXDb",
+        "tag_filter_tzAt47",
+        "tag_filter_6XGWKW",
+        "tag_filter_hAq4eC",
+        "tag_filter_hKpBKU",
+        "tag_filter_eeQtYw",
+        "tag_filter_RxXEbK"
       ],
+      "name": "Collection Grid",
       "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "bg_color": "#ffffff",
+        "heading_color": "#1a5fbe",
+        "subtitle_color": "#7a8fa8",
+        "pill_border_color": "#d0dce8",
+        "pill_text_color": "#4a6080",
+        "pill_active_color": "#1a3a6e",
+        "price_color": "#1a5fbe",
+        "btn_bg_color": "#1a3a6e",
+        "btn_text_color": "#ffffff",
+        "heading": "Gift Wrap",
+        "subtitle": "Premium Quality. Printed Fast. Made for Laughs.",
+        "collection": "",
+        "products_to_show": 8,
+        "btn_label": "SEE ALL",
+        "btn_link": ""
       }
     },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
+    "collection_grid_TDwdVq": {
+      "type": "collection-grid",
       "blocks": {
-        "column1": {
-          "type": "column",
+        "tag_filter_yK3kXM": {
+          "type": "tag_filter",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "label": "Baby Shower",
+            "tag": "baby-shower"
           }
         },
-        "column2": {
-          "type": "column",
+        "tag_filter_TGA9dK": {
+          "type": "tag_filter",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "label": "Birthdays",
+            "tag": "birthdays"
           }
         },
-        "column3": {
-          "type": "column",
+        "tag_filter_cLFQDH": {
+          "type": "tag_filter",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "label": "Characters",
+            "tag": "characters"
+          }
+        },
+        "tag_filter_pLqH6L": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Christmas",
+            "tag": "christmas"
+          }
+        },
+        "tag_filter_hrNWPh": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Everyday",
+            "tag": "everyday"
+          }
+        },
+        "tag_filter_7EL7i4": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Hanukkah",
+            "tag": "hanukkah"
+          }
+        },
+        "tag_filter_BEUaC7": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Love",
+            "tag": "love"
+          }
+        },
+        "tag_filter_hcEyXt": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Moms and Dads",
+            "tag": "moms-and-dads"
+          }
+        },
+        "tag_filter_AYB77K": {
+          "type": "tag_filter",
+          "settings": {
+            "label": "Pet Lovers",
+            "tag": "pet-lovers"
           }
         }
       },
       "block_order": [
-        "column1",
-        "column2",
-        "column3"
+        "tag_filter_yK3kXM",
+        "tag_filter_TGA9dK",
+        "tag_filter_cLFQDH",
+        "tag_filter_pLqH6L",
+        "tag_filter_hrNWPh",
+        "tag_filter_7EL7i4",
+        "tag_filter_BEUaC7",
+        "tag_filter_hcEyXt",
+        "tag_filter_AYB77K"
       ],
+      "name": "Collection Grid",
       "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "bg_color": "#ffffff",
+        "heading_color": "#1a5fbe",
+        "subtitle_color": "#7a8fa8",
+        "pill_border_color": "#d0dce8",
+        "pill_text_color": "#4a6080",
+        "pill_active_color": "#1a3a6e",
+        "price_color": "#1a5fbe",
+        "btn_bg_color": "#1a3a6e",
+        "btn_text_color": "#ffffff",
+        "heading": "Gift Wrap",
+        "subtitle": "Premium Quality. Printed Fast. Made for Laughs.",
+        "collection": "",
+        "products_to_show": 8,
+        "btn_label": "SEE ALL",
+        "btn_link": ""
+      }
+    },
+    "promo_banner_DwUenU": {
+      "type": "promo-banner",
+      "custom_css": [
+        ".gwmf-promo__image-wrap{margin-bottom: -200px;}"
+      ],
+      "name": "Promo Banner",
+      "settings": {
+        "bg_color": "#d8f3fc",
+        "eyebrow_color": "#FFD600",
+        "heading_color": "#121212",
+        "body_color": "#334fb4",
+        "btn_color": "#e8430a",
+        "eyebrow": "Limited Holiday Designs Available",
+        "heading": "Buy any 3 products\nGet 1 free",
+        "body": "Get exclusive savings when you bundle multiple face wraps. Great for families, parties, or coworkers!",
+        "btn_label": "Create a Custom Bundle",
+        "btn_link": "shopify://collections/all",
+        "image": "shopify://shop_images/Group_50399.png"
       }
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "custom_hero",
+    "category_showcase",
+    "press_quote",
+    "collection_grid",
+    "promo_banner",
+    "collection_grid_ygPMJF",
+    "collection_grid_TDwdVq",
+    "promo_banner_DwUenU"
   ]
 }
