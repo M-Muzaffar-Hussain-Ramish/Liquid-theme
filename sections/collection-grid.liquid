@@ -314,6 +314,19 @@
     .gwmf-colgrid__heading {
       font-size: clamp(36px, 12vw, 56px);
     }
+    /* Make filter pills scroll horizontally on mobile */
+    .gwmf-colgrid__filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      justify-content: flex-start;
+      padding-bottom: 4px;
+      margin: 0 -16px 40px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .gwmf-colgrid__filters::-webkit-scrollbar { display: none; }
+    .gwmf-filter__tag { flex-shrink: 0; }
     .gwmf-colgrid__grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 14px;

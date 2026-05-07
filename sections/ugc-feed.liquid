@@ -1,0 +1,456 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    width: 100% !important;
+    max-width: 100% !important;
+    background-color: {{ section.settings.bg_color }};
+  }
+{%- endstyle -%}
+
+<style>
+  .gwmf-ugc {
+    width: 100%;
+    background-color: {{ section.settings.bg_color }};
+    padding: 72px 0 80px;
+    overflow: hidden;
+  }
+
+  /* ---- HEADER ---- */
+  .gwmf-ugc__header {
+    text-align: center;
+    padding: 0 20px;
+    margin-bottom: 48px;
+  }
+
+  .gwmf-ugc__eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: {{ section.settings.eyebrow_color }};
+    margin: 0 0 12px;
+  }
+
+  .gwmf-ugc__heading {
+    font-family: 'Dimbo', 'Outfit', sans-serif;
+    font-size: clamp(32px, 4.5vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 16px;
+  }
+
+  .gwmf-ugc__heading em {
+    font-style: normal;
+    color: {{ section.settings.heading_accent_color }};
+  }
+
+  .gwmf-ugc__subtext {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: {{ section.settings.subtext_color }};
+    margin: 0;
+  }
+
+  .gwmf-ugc__subtext strong {
+    color: {{ section.settings.hashtag_color }};
+    font-weight: 700;
+  }
+
+  /* ---- MARQUEE TRACK ---- */
+  .gwmf-ugc__track-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .gwmf-ugc__track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: gwmf-ugc-scroll {{ section.settings.scroll_speed }}s linear infinite;
+  }
+
+  .gwmf-ugc__track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes gwmf-ugc-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ---- PHOTO CARDS ---- */
+  .gwmf-ugc__card {
+    position: relative;
+    flex-shrink: 0;
+    width: {{ section.settings.card_size }}px;
+    height: {{ section.settings.card_size }}px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+  }
+
+  .gwmf-ugc__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .gwmf-ugc__card:hover img {
+    transform: scale(1.06);
+  }
+
+  /* Instagram badge */
+  .gwmf-ugc__badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .gwmf-ugc__badge svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* placeholder card */
+  .gwmf-ugc__card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #e8edf2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0,0,0,0.2);
+  }
+
+  /* ---- ANIMATIONS ---- */
+  .gwmf-ugc__eyebrow,
+  .gwmf-ugc__heading,
+  .gwmf-ugc__subtext {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .gwmf-ugc__track-wrap {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease 0.25s, transform 0.7s ease 0.25s;
+  }
+
+  .gwmf-ugc.is-visible .gwmf-ugc__eyebrow {
+    opacity: 1; transform: translateY(0); transition-delay: 0s;
+  }
+  .gwmf-ugc.is-visible .gwmf-ugc__heading {
+    opacity: 1; transform: translateY(0); transition-delay: 0.1s;
+  }
+  .gwmf-ugc.is-visible .gwmf-ugc__subtext {
+    opacity: 1; transform: translateY(0); transition-delay: 0.18s;
+  }
+  .gwmf-ugc.is-visible .gwmf-ugc__track-wrap {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media screen and (max-width: 989px) {
+    .gwmf-ugc {
+      padding: 52px 0 60px;
+    }
+    .gwmf-ugc__header {
+      margin-bottom: 36px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gwmf-ugc {
+      padding: 40px 0 48px;
+    }
+    .gwmf-ugc__heading {
+      font-size: clamp(28px, 8.5vw, 40px);
+    }
+    .gwmf-ugc__card {
+      width: 240px;
+      height: 240px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .gwmf-ugc {
+      padding: 32px 0 40px;
+    }
+    .gwmf-ugc__card {
+      width: 200px;
+      height: 200px;
+    }
+    .gwmf-ugc__track {
+      gap: 14px;
+    }
+  }
+</style>
+
+<section class="gwmf-ugc" id="shopify-section-{{ section.id }}">
+  <!-- Header -->
+  <div class="gwmf-ugc__header">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="gwmf-ugc__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="gwmf-ugc__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="gwmf-ugc__subtext">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+  </div>
+
+  <!-- Photo marquee -->
+  {%- if section.blocks.size > 0 -%}
+    <div class="gwmf-ugc__track-wrap">
+      <div class="gwmf-ugc__track">
+
+        {%- comment -%} First pass {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- assign card_href = block.settings.link | default: section.settings.instagram_url -%}
+          <a
+            class="gwmf-ugc__card"
+            href="{{ card_href }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View on Instagram"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.image != blank -%}
+              {%- assign img_alt = block.settings.image.alt | default: 'GiftWrapMyFace customer photo' | escape -%}
+              {{
+                block.settings.image
+                | image_url: width: 600
+                | image_tag: alt: img_alt, loading: 'lazy', widths: '300, 400, 600'
+              }}
+            {%- else -%}
+              <div class="gwmf-ugc__card-placeholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <path d="m21 15-5-5L5 21"/>
+                </svg>
+              </div>
+            {%- endif -%}
+            <div class="gwmf-ugc__badge">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ig-grad-{{ block.id }}" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#fd5949"/>
+                    <stop offset="50%" stop-color="#d6249f"/>
+                    <stop offset="100%" stop-color="#285AEB"/>
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="url(#ig-grad-{{ block.id }})" stroke-width="1.8" fill="none"/>
+                <circle cx="12" cy="12" r="4.5" stroke="url(#ig-grad-{{ block.id }})" stroke-width="1.8" fill="none"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="#d6249f"/>
+              </svg>
+            </div>
+          </a>
+        {%- endfor -%}
+
+        {%- comment -%} Duplicate pass for seamless loop {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- assign card_href = block.settings.link | default: section.settings.instagram_url -%}
+          <a
+            class="gwmf-ugc__card"
+            href="{{ card_href }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View on Instagram"
+            aria-hidden="true"
+            tabindex="-1"
+          >
+            {%- if block.settings.image != blank -%}
+              {%- assign img_alt = block.settings.image.alt | default: 'GiftWrapMyFace customer photo' | escape -%}
+              {{
+                block.settings.image
+                | image_url: width: 600
+                | image_tag: alt: img_alt, loading: 'lazy', widths: '300, 400, 600'
+              }}
+            {%- else -%}
+              <div class="gwmf-ugc__card-placeholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <path d="m21 15-5-5L5 21"/>
+                </svg>
+              </div>
+            {%- endif -%}
+            <div class="gwmf-ugc__badge">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ig-grad2-{{ block.id }}" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#fd5949"/>
+                    <stop offset="50%" stop-color="#d6249f"/>
+                    <stop offset="100%" stop-color="#285AEB"/>
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="url(#ig-grad2-{{ block.id }})" stroke-width="1.8" fill="none"/>
+                <circle cx="12" cy="12" r="4.5" stroke="url(#ig-grad2-{{ block.id }})" stroke-width="1.8" fill="none"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="#d6249f"/>
+              </svg>
+            </div>
+          </a>
+        {%- endfor -%}
+
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+<script>
+  (function () {
+    var sec = document.querySelector('#shopify-section-{{ section.id }} .gwmf-ugc');
+    if (!sec) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { sec.classList.add('is-visible'); io.disconnect(); }
+    }, { threshold: 0.1 });
+    io.observe(sec);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UGC / Instagram Feed",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#1a5fbe"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a3a6e"
+    },
+    {
+      "type": "color",
+      "id": "heading_accent_color",
+      "label": "Heading accent color (italic words)",
+      "default": "#e8430a"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext color",
+      "default": "#4a5568"
+    },
+    {
+      "type": "color",
+      "id": "hashtag_color",
+      "label": "Hashtag highlight color",
+      "default": "#e8430a"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Join the Wrap Party Online!"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (wrap accent words in <em></em>)",
+      "default": "Find Us. <em>Tag Us.</em> Laugh With Us."
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext (wrap hashtag in <strong></strong>)",
+      "default": "Tag us with <strong>#GiftWrapMyFace</strong> and you might just get featured!"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Default Instagram link (used if card has no link)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "card_size",
+      "label": "Card size (px)",
+      "min": 200,
+      "max": 400,
+      "step": 10,
+      "default": 290
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll speed (seconds for one loop)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (overrides section Instagram URL)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "UGC / Instagram Feed",
+      "blocks": [
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

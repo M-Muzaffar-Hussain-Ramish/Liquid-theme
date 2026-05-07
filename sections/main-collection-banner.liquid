@@ -1,49 +1,189 @@
-{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
-{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
 
-{%- style -%}
-  @media screen and (max-width: 749px) {
-    .collection-hero--with-image .collection-hero__inner {
-      padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
-    }
+<style>
+  .gwmf-col-banner {
+    width: 100%;
+    background: {{ section.settings.bg_color }};
+    border-bottom: 1px solid #e8edf4;
   }
-{%- endstyle -%}
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
-  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
-        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-        {{- collection.title | escape -}}
-      </h1>
+  .gwmf-col-banner__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 48px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 
-      {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
-      {%- endif -%}
-    </div>
+  .gwmf-col-banner__title {
+    font-family: 'Dimbo', 'Outfit', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 1;
+  }
 
-    {%- if section.settings.show_collection_image and collection.image -%}
-      <div class="collection-hero__image-container media gradient">
-        <img
-          srcset="
-            {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
-            {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
-            {%- if collection.image.width >= 535 -%}{{ collection.image | image_url: width: 535 }} 535w,{%- endif -%}
-            {%- if collection.image.width >= 750 -%}{{ collection.image | image_url: width: 750 }} 750w,{%- endif -%}
-            {%- if collection.image.width >= 1070 -%}{{ collection.image | image_url: width: 1070 }} 1070w,{%- endif -%}
-            {%- if collection.image.width >= 1500 -%}{{ collection.image | image_url: width: 1500 }} 1500w,{%- endif -%}
-            {{ collection.image | image_url }} {{ collection.image.width }}w
-          "
-          src="{{ collection.image | image_url: width: 750 }}"
-          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
-          alt="{{ collection.image.alt | escape }}"
-          width="{{ collection.image.width }}"
-          height="{{ collection.image.height }}"
-        >
+  /* ---- SORT ---- */
+  .gwmf-col-sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .gwmf-col-sort__label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a6080;
+    white-space: nowrap;
+  }
+
+  .gwmf-col-sort__btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border: 1.5px solid #d0dce8;
+    border-radius: 50px;
+    background: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a3a6e;
+    cursor: pointer;
+    white-space: nowrap;
+    min-width: 190px;
+    justify-content: space-between;
+    transition: border-color 0.2s;
+    user-select: none;
+  }
+
+  .gwmf-col-sort__btn:hover { border-color: {{ section.settings.title_color }}; }
+
+  .gwmf-col-sort__btn svg {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .gwmf-col-sort__btn.is-open svg { transform: rotate(180deg); }
+
+  .gwmf-col-sort__dd {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0; right: 0;
+    background: #fff;
+    border: 1.5px solid #d0dce8;
+    border-radius: 14px;
+    padding: 6px 0;
+    z-index: 200;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+    display: none;
+  }
+
+  .gwmf-col-sort__dd.is-open { display: block; }
+
+  .gwmf-col-sort__opt {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 9px 16px;
+    border: none;
+    background: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a3a6e;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .gwmf-col-sort__opt:hover { background: #f0f5fb; }
+  .gwmf-col-sort__opt.is-active { font-weight: 700; color: {{ section.settings.title_color }}; }
+
+  @media screen and (max-width: 989px) {
+    .gwmf-col-banner__inner { padding: 24px 32px 20px; }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gwmf-col-banner__inner { padding: 20px 16px 16px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .gwmf-col-sort__btn { min-width: 160px; }
+  }
+</style>
+
+<div class="gwmf-col-banner">
+  <div class="gwmf-col-banner__inner">
+
+    <h1 class="gwmf-col-banner__title">
+      {{- section.settings.custom_title | default: collection.title | upcase -}}
+    </h1>
+
+    {%- if section.settings.show_sort -%}
+      {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+      {%- assign current_sort_name = 'Featured Items' -%}
+      {%- for opt in collection.sort_options -%}
+        {%- if opt.value == current_sort -%}{%- assign current_sort_name = opt.name -%}{%- endif -%}
+      {%- endfor -%}
+
+      <div class="gwmf-col-sort">
+        <span class="gwmf-col-sort__label">Sort By:</span>
+        <div class="gwmf-col-sort__btn" id="gwmf-sort-btn-{{ section.id }}">
+          <span id="gwmf-sort-name-{{ section.id }}">{{ current_sort_name }}</span>
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          <div class="gwmf-col-sort__dd" id="gwmf-sort-dd-{{ section.id }}">
+            {%- for opt in collection.sort_options -%}
+              <button
+                class="gwmf-col-sort__opt{% if opt.value == current_sort %} is-active{% endif %}"
+                data-value="{{ opt.value | escape }}"
+              >{{ opt.name }}</button>
+            {%- endfor -%}
+          </div>
+        </div>
       </div>
     {%- endif -%}
+
   </div>
 </div>
+
+<script>
+(function () {
+  var btn  = document.getElementById('gwmf-sort-btn-{{ section.id }}');
+  var dd   = document.getElementById('gwmf-sort-dd-{{ section.id }}');
+  var lbl  = document.getElementById('gwmf-sort-name-{{ section.id }}');
+  if (!btn || !dd) return;
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    btn.classList.toggle('is-open');
+    dd.classList.toggle('is-open');
+  });
+
+  dd.querySelectorAll('.gwmf-col-sort__opt').forEach(function (opt) {
+    opt.addEventListener('click', function () {
+      lbl.textContent = this.textContent.trim();
+      btn.classList.remove('is-open');
+      dd.classList.remove('is-open');
+      var url = new URL(window.location.href);
+      url.searchParams.set('sort_by', this.getAttribute('data-value'));
+      window.location.href = url.toString();
+    });
+  });
+
+  document.addEventListener('click', function () {
+    btn.classList.remove('is-open');
+    dd.classList.remove('is-open');
+  });
+})();
+</script>
 
 {% schema %}
 {
@@ -51,13 +191,33 @@
   "class": "section",
   "settings": [
     {
-      "type": "paragraph",
-      "content": "t:sections.main-collection-banner.settings.paragraph.content"
+      "type": "text",
+      "id": "custom_title",
+      "label": "Banner title",
+      "info": "Leave blank to use the collection name automatically"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#1a5fbe"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sort",
+      "label": "Show Sort By dropdown",
+      "default": true
     },
     {
       "type": "checkbox",
       "id": "show_collection_description",
-      "default": true,
+      "default": false,
       "label": "t:sections.main-collection-banner.settings.show_collection_description.label"
     },
     {

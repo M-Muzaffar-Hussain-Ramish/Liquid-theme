@@ -1,0 +1,352 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    width: 100% !important;
+    max-width: 100% !important;
+    background-color: {{ section.settings.bg_color }};
+  }
+{%- endstyle -%}
+
+<style>
+  .gwmf-signup {
+    position: relative;
+    width: 100%;
+    background-color: {{ section.settings.bg_color }};
+    overflow: hidden;
+  }
+
+  /* ---- WAVE TOP ---- */
+  .gwmf-signup__wave-top {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .gwmf-signup__wave-top svg {
+    display: block;
+    width: 100%;
+    height: 80px;
+  }
+
+  /* ---- INNER ---- */
+  .gwmf-signup__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 100px 32px 100px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  /* ---- TEXT ---- */
+  .gwmf-signup__eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: {{ section.settings.eyebrow_color }};
+    margin: 0;
+  }
+
+  .gwmf-signup__heading {
+    font-family: 'Dimbo', 'Outfit', sans-serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: {{ section.settings.heading_color }};
+    margin: 0;
+  }
+
+  .gwmf-signup__subtext {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ section.settings.subtext_color }};
+    margin: 0 0 8px;
+    line-height: 1.5;
+  }
+
+  /* ---- FORM ---- */
+  .gwmf-signup__form {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    max-width: 620px;
+    margin-top: 10px;
+  }
+
+  .gwmf-signup__input {
+    flex: 1;
+    padding: 20px 24px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #4a5568;
+    background: #ffffff;
+    border: none;
+    border-radius: 10px 0 0 10px;
+    outline: none;
+    min-width: 0;
+  }
+
+  .gwmf-signup__input::placeholder {
+    color: #8a9ab0;
+  }
+
+  .gwmf-signup__btn {
+    flex-shrink: 0;
+    padding: 20px 32px;
+    background: {{ section.settings.btn_color }};
+    color: {{ section.settings.btn_text_color }};
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+
+  .gwmf-signup__btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+
+  /* Success / error messages */
+  .gwmf-signup__msg {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 4px 0 0;
+    min-height: 20px;
+  }
+
+  /* ---- ANIMATIONS ---- */
+  .gwmf-signup__eyebrow,
+  .gwmf-signup__heading,
+  .gwmf-signup__subtext,
+  .gwmf-signup__form {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .gwmf-signup.is-visible .gwmf-signup__eyebrow {
+    opacity: 1; transform: translateY(0); transition-delay: 0s;
+  }
+  .gwmf-signup.is-visible .gwmf-signup__heading {
+    opacity: 1; transform: translateY(0); transition-delay: 0.1s;
+  }
+  .gwmf-signup.is-visible .gwmf-signup__subtext {
+    opacity: 1; transform: translateY(0); transition-delay: 0.18s;
+  }
+  .gwmf-signup.is-visible .gwmf-signup__form {
+    opacity: 1; transform: translateY(0); transition-delay: 0.28s;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media screen and (max-width: 989px) {
+    .gwmf-signup__inner {
+      padding: 88px 32px 88px;
+    }
+    .gwmf-signup__wave-top svg {
+      height: 56px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gwmf-signup__inner {
+      padding: 72px 20px 72px;
+      gap: 12px;
+    }
+    .gwmf-signup__wave-top svg {
+      height: 40px;
+    }
+    .gwmf-signup__form {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .gwmf-signup__input {
+      border-radius: 10px;
+      text-align: center;
+    }
+    .gwmf-signup__btn {
+      border-radius: 10px;
+      padding: 18px 32px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .gwmf-signup__inner {
+      padding: 60px 16px 60px;
+    }
+  }
+</style>
+
+<section class="gwmf-signup" id="shopify-section-{{ section.id }}">
+  <!-- Wave top: white dips down into blue -->
+  <div class="gwmf-signup__wave-top">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 C480,80 960,80 1440,0 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <div class="gwmf-signup__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="gwmf-signup__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="gwmf-signup__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="gwmf-signup__subtext">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+
+    <!-- Shopify customer email signup form -->
+    {%- form 'customer', id: 'gwmf-signup-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="gwmf-signup__form">
+        <input
+          class="gwmf-signup__input"
+          type="email"
+          name="contact[email]"
+          id="gwmf-signup-email"
+          value="{{ form.email }}"
+          placeholder="{{ section.settings.input_placeholder }}"
+          autocomplete="email"
+          required
+          aria-label="{{ section.settings.input_placeholder }}"
+        >
+        <button type="submit" class="gwmf-signup__btn">
+          {{ section.settings.btn_label }}
+        </button>
+      </div>
+      {%- if form.posted_successfully? -%}
+        <p class="gwmf-signup__msg">{{ section.settings.success_msg }}</p>
+      {%- elsif form.errors -%}
+        <p class="gwmf-signup__msg">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var sec = document.querySelector('#shopify-section-{{ section.id }} .gwmf-signup');
+    if (!sec) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { sec.classList.add('is-visible'); io.disconnect(); }
+    }, { threshold: 0.1 });
+    io.observe(sec);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Email Signup",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#1a6fcc"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext color",
+      "default": "#cde3f7"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Button background color",
+      "default": "#e8430a"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Join the Fun"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get First Dibs on New Designs & Promo Codes"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Join our email list and stay in the loop for fresh drops & holiday deals."
+    },
+    {
+      "type": "text",
+      "id": "input_placeholder",
+      "label": "Input placeholder",
+      "default": "YOUR EMAIL ADDRESS"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button label",
+      "default": "SIGN ME UP!"
+    },
+    {
+      "type": "text",
+      "id": "success_msg",
+      "label": "Success message",
+      "default": "You're in! Thanks for subscribing."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Email Signup"
+    }
+  ]
+}
+{% endschema %}

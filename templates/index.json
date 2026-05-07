@@ -398,15 +398,13 @@
         "btn_link": ""
       }
     },
-    "promo_banner_DwUenU": {
+    "promo_banner_Y7V3zn": {
       "type": "promo-banner",
-      "custom_css": [
-        ".gwmf-promo__image-wrap{margin-bottom: -200px;}"
-      ],
+      "custom_css": [],
       "name": "Promo Banner",
       "settings": {
         "bg_color": "#d8f3fc",
-        "eyebrow_color": "#FFD600",
+        "eyebrow_color": "#ffd600",
         "heading_color": "#121212",
         "body_color": "#334fb4",
         "btn_color": "#e8430a",
@@ -416,6 +414,180 @@
         "btn_label": "Create a Custom Bundle",
         "btn_link": "shopify://collections/all",
         "image": "shopify://shop_images/Group_50399.png"
+      }
+    },
+    "blog_cards_3dntVP": {
+      "type": "blog-cards",
+      "blocks": {
+        "article_card_rMxG4e": {
+          "type": "article_card",
+          "settings": {
+            "article": "",
+            "card_bg_color": "#f5f0eb",
+            "eyebrow_color": "#1a5fbe",
+            "heading_color": "#1a3a6e",
+            "body_color": "#555555",
+            "btn_label": "Order Your Holiday Pair Now",
+            "btn_link": ""
+          }
+        },
+        "article_card_jpaLGt": {
+          "type": "article_card",
+          "settings": {
+            "article": "",
+            "card_bg_color": "#e8f0f8",
+            "eyebrow_color": "#1a5fbe",
+            "heading_color": "#1a3a6e",
+            "body_color": "#555555",
+            "btn_label": "Shop Now",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "article_card_rMxG4e",
+        "article_card_jpaLGt"
+      ],
+      "name": "Blog Cards",
+      "settings": {
+        "bg_color": "#ffffff",
+        "eyebrow_color": "#1a5fbe",
+        "heading_color": "#1a5fbe",
+        "btn_bg_color": "#1a3a6e",
+        "btn_text_color": "#ffffff",
+        "eyebrow": "From Christmas to birthdays – even your pet's face is fair game",
+        "heading": "Other Products"
+      }
+    },
+    "trust_strip_RPtHqm": {
+      "type": "trust-strip",
+      "blocks": {
+        "column_A3EtnA": {
+          "type": "column",
+          "settings": {
+            "style": "feature",
+            "default_icon": "none",
+            "icon_text": "",
+            "heading": "We Print It Right.\nWe Ship It Fast.",
+            "body": "Premium materials. Handmade in the U.S.A.\nDelivered worldwide."
+          }
+        },
+        "column_C4bPar": {
+          "type": "column",
+          "settings": {
+            "style": "feature",
+            "default_icon": "none",
+            "icon_text": "🇺🇸",
+            "heading": "Production Time",
+            "body": "Gift Wrap: Ships in 3 business days\nParty Items: Ships in 5 business days\nAll Products: Custom-made, not mass-produced"
+          }
+        },
+        "column_twqxLb": {
+          "type": "column",
+          "settings": {
+            "style": "feature",
+            "default_icon": "none",
+            "icon_text": "🇺🇸",
+            "heading": "Shipping Time",
+            "body": "Free Standard Shipping: 7-10 business days\nUPS Ground (Fastest): 3-6 business days\nWe Ship Worldwide"
+          }
+        }
+      },
+      "block_order": [
+        "column_A3EtnA",
+        "column_C4bPar",
+        "column_twqxLb"
+      ],
+      "name": "Trust Strip",
+      "settings": {
+        "bg_color": "#ffffff",
+        "card_bg_color": "#eef3f6",
+        "main_heading_color": "#0b4f94",
+        "main_body_color": "#59697a",
+        "feature_heading_color": "#0b4f94",
+        "feature_body_color": "#59697a"
+      }
+    },
+    "ugc_feed_APkzDp": {
+      "type": "ugc-feed",
+      "blocks": {
+        "photo_EVXacy": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_RNUiRQ": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_qAjk3R": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_iYLNNR": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_LRzwmx": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_Ncryti": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "photo_EVXacy",
+        "photo_RNUiRQ",
+        "photo_qAjk3R",
+        "photo_iYLNNR",
+        "photo_LRzwmx",
+        "photo_Ncryti"
+      ],
+      "name": "UGC / Instagram Feed",
+      "settings": {
+        "bg_color": "#ffffff",
+        "eyebrow_color": "#1a5fbe",
+        "heading_color": "#1a3a6e",
+        "heading_accent_color": "#e8430a",
+        "subtext_color": "#4a5568",
+        "hashtag_color": "#e8430a",
+        "eyebrow": "Join the Wrap Party Online!",
+        "heading": "Find Us. <em>Tag Us.</em> Laugh With Us.",
+        "subtext": "Tag us with <strong>#GiftWrapMyFace</strong> and you might just get featured!",
+        "instagram_url": "",
+        "card_size": 290,
+        "scroll_speed": 30
+      }
+    },
+    "email_signup_rbPGUD": {
+      "type": "email-signup",
+      "name": "Email Signup",
+      "settings": {
+        "bg_color": "#1a6fcc",
+        "eyebrow_color": "#ffffff",
+        "heading_color": "#ffffff",
+        "subtext_color": "#cde3f7",
+        "btn_color": "#e8430a",
+        "btn_text_color": "#ffffff",
+        "eyebrow": "Join the Fun",
+        "heading": "Get First Dibs on New Designs & Promo Codes",
+        "subtext": "Join our email list and stay in the loop for fresh drops & holiday deals.",
+        "input_placeholder": "YOUR EMAIL ADDRESS",
+        "btn_label": "SIGN ME UP!",
+        "success_msg": "You're in! Thanks for subscribing."
       }
     }
   },
@@ -427,6 +599,10 @@
     "promo_banner",
     "collection_grid_ygPMJF",
     "collection_grid_TDwdVq",
-    "promo_banner_DwUenU"
+    "promo_banner_Y7V3zn",
+    "blog_cards_3dntVP",
+    "trust_strip_RPtHqm",
+    "ugc_feed_APkzDp",
+    "email_signup_rbPGUD"
   ]
 }

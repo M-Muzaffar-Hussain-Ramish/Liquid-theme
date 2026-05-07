@@ -32,7 +32,7 @@
           "type": "text",
           "settings": {
             "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
           }
         }
       },
@@ -42,13 +42,20 @@
         "footer-2"
       ],
       "settings": {
+        "bg_color": "#ffffff",
+        "heading_color": "#1a3a6e",
+        "link_color": "#4a6080",
+        "social_icon_color": "#334fb4",
+        "border_color": "#dde6f0",
+        "copyright_color": "#8a9ab0",
+        "social_heading": "Share",
+        "payment_enable": true,
+        "copyright_text": "© 2025 All rights reserved. BUILD A HEAD LLC is the owner of giftwrapmyface.com, the Gift Wrap My Face ® © Custom Gift Wrap Starring Your Face™ Trademarks, logos, all related product & category names and designs, image copyrights, and other intellectual property.",
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
         "show_social": true,
         "enable_country_selector": false,
         "enable_language_selector": false,
-        "payment_enable": true,
         "show_policy": false,
         "margin_top": 48,
         "padding_top": 36,
