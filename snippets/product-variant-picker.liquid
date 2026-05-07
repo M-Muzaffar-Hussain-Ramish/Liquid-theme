@@ -8,6 +8,64 @@
   Usage:
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
+<style>
+  /* ---- Image-based variant swatches ---- */
+  .product-form__input--pill {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .product-form__input--pill .gwmf-img-swatch {
+    display: inline-flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    border: 2px solid #e0e7f0 !important;
+    border-radius: 12px !important;
+    padding: 6px 6px 8px !important;
+    background: #fff;
+    width: 106px;
+    height: auto !important;
+    min-height: unset !important;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-align: center;
+    color: inherit;
+  }
+
+  .product-form__input--pill .gwmf-img-swatch img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .gwmf-img-swatch__name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2a4a7a;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .product-form__input--pill .gwmf-img-swatch:hover {
+    border-color: #1a5fbe !important;
+  }
+
+  .product-form__input input[type='radio']:checked + .gwmf-img-swatch {
+    border-color: #1a5fbe !important;
+    box-shadow: 0 0 0 1px #1a5fbe !important;
+  }
+
+  .product-form__input input[type='radio'].disabled + .gwmf-img-swatch {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+</style>
+
 {%- unless product.has_only_default_variant -%}
   <variant-selects
     id="variant-selects-{{ section.id }}"
@@ -25,6 +83,27 @@
           else
             assign picker_type = 'swatch'
           endif
+        endif
+
+        comment
+          Force button picker so variant images always render as image swatches.
+          This overrides the theme editor "Dropdown" setting for visual options.
+        endcomment
+        assign has_variant_images = false
+        for variant in product.variants
+          if option.position == 1 and variant.option1 == option.values.first and variant.featured_image
+            assign has_variant_images = true
+            break
+          elsif option.position == 2 and variant.option2 == option.values.first and variant.featured_image
+            assign has_variant_images = true
+            break
+          elsif option.position == 3 and variant.option3 == option.values.first and variant.featured_image
+            assign has_variant_images = true
+            break
+          endif
+        endfor
+        if has_variant_images
+          assign picker_type = 'button'
         endif
       -%}
       {%- if picker_type == 'swatch' -%}

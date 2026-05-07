@@ -119,11 +119,11 @@
         "color_scheme": "",
         "media_size": "large",
         "constrain_to_viewport": true,
-        "media_fit": "cover",
-        "gallery_layout": "thumbnail_slider",
-        "mobile_thumbnails": "columns",
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
         "media_position": "left",
-        "image_zoom": "lightbox",
+        "image_zoom": "hover",
         "hide_variants": true,
         "enable_video_looping": false,
         "promo_badge_text": "BUY 3, GET 1 FREE",
@@ -132,7 +132,7 @@
         "padding_bottom": 12
       }
     },
-    "promo_banner_7iRDeL": {
+    "promo_banner_wetLhG": {
       "type": "promo-banner",
       "name": "Promo Banner",
       "settings": {
@@ -212,7 +212,7 @@
   },
   "order": [
     "main",
-    "promo_banner_7iRDeL",
+    "promo_banner_wetLhG",
     "multicolumn",
     "related-products"
   ]
