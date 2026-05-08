@@ -351,23 +351,22 @@
                           <div class="gwmf-swatches">
                             {%- assign seen_colors = '' -%}
                             {%- for variant in product.variants -%}
+                              {%- unless variant.featured_image -%}{%- continue -%}{%- endunless -%}
                               {%- assign color_val = variant.options[color_option_index] -%}
-                              {%- assign color_key = color_val | handle -%}
+                              {%- assign color_key = color_val | handle | append: ',' -%}
                               {%- unless seen_colors contains color_key -%}
-                                {%- assign seen_colors = seen_colors | append: color_key | append: ',' -%}
+                                {%- assign seen_colors = seen_colors | append: color_key -%}
                                 <a
                                   href="{{ product.url }}?variant={{ variant.id }}"
                                   class="gwmf-swatch"
                                   title="{{ color_val | escape }}"
                                 >
-                                  {%- if variant.featured_image -%}
-                                    <img
-                                      src="{{ variant.featured_image | image_url: width: 60 }}"
-                                      alt="{{ color_val | escape }}"
-                                      width="24" height="24"
-                                      loading="lazy"
-                                    >
-                                  {%- endif -%}
+                                  <img
+                                    src="{{ variant.featured_image | image_url: width: 60 }}"
+                                    alt="{{ color_val | escape }}"
+                                    width="24" height="24"
+                                    loading="lazy"
+                                  >
                                 </a>
                               {%- endunless -%}
                             {%- endfor -%}
