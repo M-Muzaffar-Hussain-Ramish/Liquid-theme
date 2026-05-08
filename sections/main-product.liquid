@@ -256,6 +256,85 @@
       .gwmf-tab__btn { padding: 14px 16px; font-size: 13px; }
       .gwmf-tab__panel { padding: 24px 0 36px; }
     }
+
+    /* ---- Photo Upload ---- */
+    .gwmf-upload-wrap { margin: 4px 0 12px; }
+    .gwmf-upload__heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a2e4a;
+      margin: 0 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gwmf-upload__heading svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .gwmf-upload__zone {
+      border: 2px dashed #c0d0e0;
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: #f8fbff;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gwmf-upload__zone:hover,
+    .gwmf-upload__zone.is-dragging { border-color: #1a5fbe; background: #f0f5fb; }
+    .gwmf-upload__placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+    }
+    .gwmf-upload__placeholder svg { width: 34px; height: 34px; color: #8aabcc; }
+    .gwmf-upload__placeholder strong { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: #1a3a6e; }
+    .gwmf-upload__placeholder span { font-family: 'Outfit', sans-serif; font-size: 12px; color: #8a9bb0; }
+    .gwmf-upload__preview {
+      display: none;
+      position: relative;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .gwmf-upload__preview img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #d0e4f5;
+    }
+    .gwmf-upload__remove {
+      position: absolute;
+      top: -8px;
+      right: calc(50% - 58px);
+      width: 24px;
+      height: 24px;
+      background: #e53e2f;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gwmf-upload__status {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      margin: 6px 0 0;
+      min-height: 18px;
+    }
+    .gwmf-upload__status.is-error { color: #e53e2f; }
+    .gwmf-upload__status.is-success { color: #2a8a5f; }
+    .gwmf-upload__status.is-uploading { color: #8a9bb0; }
   </style>
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -618,6 +697,36 @@
                 </div>
           {%- endif -%}
 
+          {%- comment -%} ── PHOTO UPLOAD ── {%- endcomment -%}
+          {%- if section.settings.enable_photo_upload and section.settings.cloudinary_cloud_name != blank and section.settings.cloudinary_upload_preset != blank -%}
+            <div class="gwmf-upload-wrap">
+              <p class="gwmf-upload__heading">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                {{ section.settings.upload_label | default: 'Upload Your Face Photo' }}
+              </p>
+              <div class="gwmf-upload__zone" id="gwmf-upload-zone-{{ section.id }}">
+                <input type="file" id="gwmf-file-input-{{ section.id }}" accept="image/*" style="display:none">
+                <div class="gwmf-upload__placeholder" id="gwmf-upload-placeholder-{{ section.id }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <strong>Click to upload or drag &amp; drop</strong>
+                  <span>JPG, PNG, HEIC &mdash; max 10MB</span>
+                </div>
+                <div class="gwmf-upload__preview" id="gwmf-upload-preview-{{ section.id }}">
+                  <img id="gwmf-preview-img-{{ section.id }}" src="" alt="Your uploaded photo" width="100" height="100">
+                  <button type="button" class="gwmf-upload__remove" id="gwmf-remove-photo-{{ section.id }}" aria-label="Remove photo">&#x2715;</button>
+                </div>
+              </div>
+              <p class="gwmf-upload__status" id="gwmf-upload-status-{{ section.id }}"></p>
+              <input
+                type="hidden"
+                name="properties[Customer Photo]"
+                id="gwmf-photo-url-{{ section.id }}"
+                value=""
+                form="{{ product_form_id }}"
+              >
+            </div>
+          {%- endif -%}
+
           {%- comment -%} ── 9. BUY BUTTONS ── {%- endcomment -%}
           {%- assign buy_block = section.blocks | where: 'type', 'buy_buttons' | first -%}
           {%- if buy_block -%}
@@ -909,6 +1018,102 @@
       {{ product | structured_data }}
     </script>
   </div>
+
+  {%- if section.settings.enable_photo_upload and section.settings.cloudinary_cloud_name != blank and section.settings.cloudinary_upload_preset != blank -%}
+  <script>
+  (function () {
+    var sid          = '{{ section.id }}';
+    var cloudName    = '{{ section.settings.cloudinary_cloud_name | escape }}';
+    var uploadPreset = '{{ section.settings.cloudinary_upload_preset | escape }}';
+
+    var zone        = document.getElementById('gwmf-upload-zone-' + sid);
+    var fileInput   = document.getElementById('gwmf-file-input-' + sid);
+    var placeholder = document.getElementById('gwmf-upload-placeholder-' + sid);
+    var preview     = document.getElementById('gwmf-upload-preview-' + sid);
+    var previewImg  = document.getElementById('gwmf-preview-img-' + sid);
+    var photoUrl    = document.getElementById('gwmf-photo-url-' + sid);
+    var status      = document.getElementById('gwmf-upload-status-' + sid);
+    var removeBtn   = document.getElementById('gwmf-remove-photo-' + sid);
+
+    if (!zone) return;
+
+    zone.addEventListener('click', function (e) {
+      if (!e.target.closest('.gwmf-upload__remove')) fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function () {
+      if (this.files[0]) uploadFile(this.files[0]);
+    });
+
+    zone.addEventListener('dragover', function (e) {
+      e.preventDefault();
+      zone.classList.add('is-dragging');
+    });
+    zone.addEventListener('dragleave', function () {
+      zone.classList.remove('is-dragging');
+    });
+    zone.addEventListener('drop', function (e) {
+      e.preventDefault();
+      zone.classList.remove('is-dragging');
+      var file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) uploadFile(file);
+    });
+
+    removeBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      reset();
+    });
+
+    function reset() {
+      photoUrl.value  = '';
+      fileInput.value = '';
+      preview.style.display     = 'none';
+      placeholder.style.display = 'flex';
+      setStatus('', '');
+    }
+
+    function uploadFile(file) {
+      if (file.size > 10 * 1024 * 1024) {
+        setStatus('File too large — max 10MB.', 'is-error');
+        return;
+      }
+      placeholder.style.display = 'none';
+      preview.style.display     = 'flex';
+      previewImg.src = URL.createObjectURL(file);
+      setStatus('Uploading...', 'is-uploading');
+
+      var fd = new FormData();
+      fd.append('file', file);
+      fd.append('upload_preset', uploadPreset);
+
+      fetch('https://api.cloudinary.com/v1_1/' + cloudName + '/image/upload', {
+        method: 'POST',
+        body: fd
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.secure_url) {
+          photoUrl.value = data.secure_url;
+          previewImg.src = data.secure_url;
+          setStatus('✓ Photo uploaded successfully!', 'is-success');
+        } else {
+          reset();
+          setStatus('Upload failed — please try again.', 'is-error');
+        }
+      })
+      .catch(function () {
+        reset();
+        setStatus('Upload failed — check your connection.', 'is-error');
+      });
+    }
+
+    function setStatus(msg, cls) {
+      status.textContent = msg;
+      status.className = 'gwmf-upload__status' + (cls ? ' ' + cls : '');
+    }
+  })();
+  </script>
+  {%- endif -%}
 </product-info>
 
 {% schema %}
@@ -2465,6 +2670,35 @@
       "type": "url",
       "id": "promo_badge_url",
       "label": "Badge link URL"
+    },
+    {
+      "type": "header",
+      "content": "Photo Upload"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_photo_upload",
+      "label": "Enable photo upload",
+      "default": true,
+      "info": "Customers upload a face photo when ordering. Requires a free Cloudinary account."
+    },
+    {
+      "type": "text",
+      "id": "upload_label",
+      "label": "Upload field heading",
+      "default": "Upload Your Face Photo"
+    },
+    {
+      "type": "text",
+      "id": "cloudinary_cloud_name",
+      "label": "Cloudinary cloud name",
+      "info": "Found at cloudinary.com → Dashboard (e.g. \"my-store\")"
+    },
+    {
+      "type": "text",
+      "id": "cloudinary_upload_preset",
+      "label": "Cloudinary upload preset",
+      "info": "Create an unsigned preset: cloudinary.com → Settings → Upload → Upload presets"
     },
     {
       "type": "header",
