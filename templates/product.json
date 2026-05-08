@@ -137,7 +137,7 @@
       "name": "Promo Banner",
       "settings": {
         "bg_color": "#1e6b2e",
-        "eyebrow_color": "#FFD600",
+        "eyebrow_color": "#ffd600",
         "heading_color": "#ffffff",
         "body_color": "#e8e8e8",
         "btn_color": "#e8430a",
@@ -145,7 +145,37 @@
         "heading": "Buy any 3 products\nGet 1 free",
         "body": "Get exclusive savings when you bundle multiple face wraps. Great for families, parties, or coworkers!",
         "btn_label": "Create a Custom Bundle",
-        "btn_link": "shopify://collections/all"
+        "btn_link": "shopify://collections/all",
+        "image": "shopify://shop_images/ChristmasRolls_600x600px_1.png"
+      }
+    },
+    "featured_collection_VPqfQ8": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "",
+        "products_to_show": 4,
+        "title": "Featured collection",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "multicolumn": {
@@ -213,6 +243,7 @@
   "order": [
     "main",
     "promo_banner_7iRDeL",
+    "featured_collection_VPqfQ8",
     "multicolumn",
     "related-products"
   ]
