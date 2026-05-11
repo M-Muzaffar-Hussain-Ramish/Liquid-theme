@@ -15,6 +15,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'gwmf-product.css' | asset_url | stylesheet_tag }}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -39,20 +40,19 @@
   {%- endstyle -%}
 
   <style>
-    /* ---- Product grid: true 50/50 split ---- */
+    /* 50/50 product grid — section-scoped to avoid affecting other layouts */
     @media screen and (min-width: 750px) {
       #MainProduct-{{ section.id }} .product.grid--2-col-tablet {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         column-gap: 3rem;
       }
-      /* Remove Dawn's bleed-to-edge offset on the gallery first slide */
       #MainProduct-{{ section.id }} .slider__slide:first-child {
         margin-left: 0 !important;
         scroll-margin-left: 0 !important;
       }
       #MainProduct-{{ section.id }} .product__info-wrapper {
         width: 50% !important;
-        max-width: 45% !important;
+        max-width: 50% !important;
         padding: 0 !important;
       }
       #MainProduct-{{ section.id }} .product__media-wrapper {
@@ -60,220 +60,8 @@
         max-width: 50% !important;
       }
     }
-
-    /* ---- Title ---- */
-    .product__title h1,
-    .product__title .h1 {
-      font-family: 'Dimbo', 'Outfit', sans-serif;
-      font-size: clamp(20px, 2.6vw, 34px);
-      font-weight: 800;
-      text-transform: uppercase;
-      color: #1a2e4a;
-      letter-spacing: 0.02em;
-      line-height: 1.15;
-    }
-
-    /* ---- Price row ---- */
-    .gwmf-price-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .price--large .price-item--sale {
-      font-family: 'Outfit', sans-serif;
-      font-size: 28px !important;
-      font-weight: 800;
-      color: #1a2e4a;
-    }
-    .price--large .price__sale s,
-    .price--large s.price-item--regular {
-      font-size: 18px !important;
-      color: #8a9bb0 !important;
-      font-weight: 500;
-      text-decoration: line-through;
-    }
-    .price--large .price__regular .price-item--regular {
-      font-family: 'Outfit', sans-serif;
-      font-size: 28px !important;
-      font-weight: 800;
-      color: #1a2e4a;
-    }
-
-    /* ---- Promo badge ("BUY 3, GET 1 FREE") ---- */
-    .gwmf-promo-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: #1a5fbe;
-      color: #fff;
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 9px 18px;
-      border-radius: 50px;
-      text-decoration: none;
-      white-space: nowrap;
-      letter-spacing: 0.03em;
-      transition: background 0.2s;
-    }
-    .gwmf-promo-badge:hover { background: #154ea0; color: #fff; }
-    .gwmf-promo-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
-
-    /* ---- Rating ---- */
-    .rating-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    /* ---- Variant label ---- */
-    .product-form__input .form__label {
-      font-family: 'Outfit', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: #5a6e88;
-    }
-    .product-form__input .form__label [data-selected-value] {
-      font-weight: 700;
-      color: #1a3a6e;
-    }
-
-    /* ---- Action buttons (Choose a Photo / Add Another Face) ---- */
-    .gwmf-action-btns {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .gwmf-action-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 13px 24px;
-      border-radius: 50px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.18s, border-color 0.18s, color 0.18s;
-      text-decoration: none;
-      white-space: nowrap;
-      letter-spacing: 0.02em;
-      border: 2px solid transparent;
-    }
-    .gwmf-action-btn--dark {
-      background: #1a2e4a;
-      color: #fff;
-      border-color: #1a2e4a;
-    }
-    .gwmf-action-btn--dark:hover { background: #0e1e32; border-color: #0e1e32; color: #fff; }
-    .gwmf-action-btn--outline {
-      background: #fff;
-      color: #1a2e4a;
-      border-color: #1a2e4a;
-    }
-    .gwmf-action-btn--outline:hover { background: #f0f5fb; color: #1a2e4a; }
-    .gwmf-more-link {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      color: #1a5fbe;
-      text-decoration: none;
-      margin-top: 2px;
-    }
-    .gwmf-more-link:hover { text-decoration: underline; }
-    .gwmf-more-link svg { width: 14px; height: 14px; }
-
-    /* ---- Quantity selector ---- */
-    .quantity { border-radius: 50px !important; }
-    .quantity__button { border-radius: 50% !important; }
-
-    /* ---- Add to cart button ---- */
-    .product-form__submit,
-    .product-form__submit.button--full-width {
-      background-color: #e53e2f !important;
-      border-color: #e53e2f !important;
-      border-radius: 50px !important;
-      font-family: 'Outfit', sans-serif !important;
-      font-size: 15px !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.04em !important;
-      min-height: 52px !important;
-    }
-    .product-form__submit:hover {
-      background-color: #c93420 !important;
-      border-color: #c93420 !important;
-    }
-
-    /* ---- Vendor ---- */
-    .gwmf-product__vendor {
-      font-family: 'Outfit', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #8a9bb0;
-      margin: 0 0 6px;
-    }
-
-    /* ---- Hide "Buy it now" ---- */
-    .shopify-payment-button { display: none !important; }
-
-    /* ---- Remove "View full details" link ---- */
-    .product__view-details { display: none !important; }
-
-    /* ---- Horizontal tabs (below product grid) ---- */
-    .gwmf-product-tabs {
-      border-top: 1px solid #e8edf4;
-      margin-top: 48px;
-      padding-top: 0;
-    }
-    .gwmf-tabs__nav {
-      display: flex;
-      border-bottom: 2px solid #e8edf4;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .gwmf-tabs__nav::-webkit-scrollbar { display: none; }
-    .gwmf-tab__btn {
-      flex-shrink: 0;
-      padding: 16px 24px;
-      background: none;
-      border: none;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: #6a7f99;
-      cursor: pointer;
-      transition: color 0.15s, border-color 0.15s;
-      white-space: nowrap;
-    }
-    .gwmf-tab__btn:hover { color: #1a3a6e; }
-    .gwmf-tab__btn.is-active {
-      color: #1a5fbe;
-      border-bottom-color: #1a5fbe;
-      font-weight: 700;
-    }
-    .gwmf-tab__panel {
-      padding: 32px 0 48px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 15px;
-      line-height: 1.7;
-      color: #2a3a50;
-      max-width: 860px;
-    }
-    @media screen and (max-width: 749px) {
-      .gwmf-action-btns { flex-direction: column; }
-      .gwmf-action-btn { justify-content: center; }
-      .gwmf-tab__btn { padding: 14px 16px; font-size: 13px; }
-      .gwmf-tab__panel { padding: 24px 0 36px; }
-    }
+    /* Scoped to this section so other product forms are unaffected */
+    #MainProduct-{{ section.id }} .shopify-payment-button { display: none !important; }
   </style>
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -331,30 +119,30 @@
           </div>
 
           {%- comment -%} ── 2. PRICE + PROMO BADGE ── {%- endcomment -%}
-          <div id="price-{{ section.id }}" role="status">
-            <div class="gwmf-price-row">
+          <div class="gwmf-price-row">
+            <div id="price-{{ section.id }}" role="status">
               {%- render 'price',
                 product: product,
                 use_variant: true,
                 show_badges: true,
                 price_class: 'price--large'
               -%}
-              {%- if section.settings.promo_badge_text != blank -%}
-                <a href="{{ section.settings.promo_badge_url | default: '#' }}" class="gwmf-promo-badge">
-                  {{ section.settings.promo_badge_text }}
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/>
-                  </svg>
-                </a>
-              {%- endif -%}
             </div>
+            {%- if section.settings.promo_badge_text != blank -%}
+              <a href="{{ section.settings.promo_badge_url | default: '#' }}" class="gwmf-promo-badge">
+                {{ section.settings.promo_badge_text }}
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/>
+                </svg>
+              </a>
+            {%- endif -%}
           </div>
 
           {%- comment -%} ── 3. RATING ── {%- endcomment -%}
@@ -386,9 +174,11 @@
                   {{ product.metafields.reviews.rating.value.scale_max -}}
                 </span>
               </p>
-              <p class="rating-count caption">
-                <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
-              </p>
+              {%- if product.metafields.reviews.rating_count != blank -%}
+                <p class="rating-count caption">
+                  <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
+                </p>
+              {%- endif -%}
             </div>
           {%- endif -%}
 
@@ -886,10 +676,11 @@
     {%- comment -%} Full-width horizontal tabs {%- endcomment -%}
     {%- assign tab_blocks = section.blocks | where: 'type', 'collapsible_tab' -%}
     {%- if tab_blocks.size > 0 -%}
-      <div class="gwmf-product-tabs">
+      <div id="gwmf-tabs-{{ section.id }}" class="gwmf-product-tabs">
         <nav class="gwmf-tabs__nav" role="tablist" aria-label="Product information tabs">
           {%- for block in tab_blocks -%}
             <button
+              type="button"
               class="gwmf-tab__btn{% if forloop.first %} is-active{% endif %}"
               role="tab"
               id="gwmf-tab-btn-{{ block.id }}"
@@ -920,8 +711,9 @@
       </div>
       <script>
         (function () {
-          var btns = document.querySelectorAll('.gwmf-tab__btn');
-          var panels = document.querySelectorAll('.gwmf-tab__panel');
+          var container = document.getElementById('gwmf-tabs-{{ section.id }}');
+          var btns = container.querySelectorAll('.gwmf-tab__btn');
+          var panels = container.querySelectorAll('.gwmf-tab__panel');
           btns.forEach(function (btn) {
             btn.addEventListener('click', function () {
               var target = document.getElementById(this.getAttribute('aria-controls'));
