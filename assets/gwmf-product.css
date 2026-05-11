@@ -140,8 +140,8 @@
 /* ---- Add to cart button ---- */
 .product-form__submit,
 .product-form__submit.button--full-width {
-  background-color: #e53e2f !important;
-  border-color: #e53e2f !important;
+  background-color: #0056A3 !important;
+  border-color: #0056A3 !important;
   border-radius: 50px !important;
   font-family: 'Outfit', sans-serif !important;
   font-size: 15px !important;
@@ -150,8 +150,8 @@
   min-height: 52px !important;
 }
 .product-form__submit:hover {
-  background-color: #c93420 !important;
-  border-color: #c93420 !important;
+  background-color: #004080 !important;
+  border-color: #004080 !important;
 }
 
 /* ---- Hide "View full details" link (quick-add artifact) ---- */
