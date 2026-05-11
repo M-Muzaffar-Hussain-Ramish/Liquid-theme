@@ -140,19 +140,22 @@
 /* ---- Add to cart button ---- */
 .product-form__submit,
 .product-form__submit.button--full-width {
-  background-color: #0056A3 !important;
-  border-color: #0056A3 !important;
+  background-color: #EE021A !important;
+  border: 2px solid #EE021A !important;
   border-radius: 50px !important;
   font-family: 'Outfit', sans-serif !important;
   font-size: 15px !important;
   font-weight: 700 !important;
   letter-spacing: 0.04em !important;
   min-height: 52px !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 .product-form__submit:hover {
-  background-color: #004080 !important;
-  border-color: #004080 !important;
+  background-color: #c40016 !important;
+  border-color: #c40016 !important;
 }
+.product-form__submit::after { box-shadow: none !important; }
 
 /* ---- Hide "View full details" link (quick-add artifact) ---- */
 .product__view-details { display: none !important; }

@@ -243,12 +243,7 @@
             </div>
           {%- endif -%}
 
-          {%- comment -%} ── 7. APP BLOCKS ── {%- endcomment -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
-          {%- endfor -%}
-
-          {%- comment -%} ── 8. QUANTITY SELECTOR ── {%- endcomment -%}
+          {%- comment -%} ── 7. QUANTITY SELECTOR ── {%- endcomment -%}
           {%- assign qty_block = section.blocks | where: 'type', 'quantity_selector' | first -%}
           {%- if qty_block -%}
             <div
@@ -483,6 +478,11 @@
               show_pickup_availability: true
             -%}
           {%- endif -%}
+
+          {%- comment -%} ── 9. APP BLOCKS ── {%- endcomment -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+          {%- endfor -%}
 
           {%- comment -%} ── REMAINING BLOCKS (share, complementary, custom_liquid, etc.) ── {%- endcomment -%}
           {%- for block in section.blocks -%}
