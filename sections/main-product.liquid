@@ -703,8 +703,20 @@
                 hidden
               {% endunless %}
             >
-              {{ block.settings.content }}
-              {{ block.settings.page.content }}
+              {%- liquid
+                assign mf_key = block.settings.metafield_key | strip
+                assign mf_content = nil
+                if mf_key != blank
+                  assign mf_content = product.metafields.custom[mf_key].value
+                endif
+              -%}
+              {%- if mf_content != blank -%}
+                {{ mf_content }}
+              {%- elsif block.settings.content != blank -%}
+                {{ block.settings.content }}
+              {%- elsif block.settings.page.content != blank -%}
+                {{ block.settings.page.content }}
+              {%- endif -%}
             </div>
           {%- endfor -%}
         </div>
@@ -1200,6 +1212,12 @@
           ],
           "default": "check_mark",
           "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
+        },
+        {
+          "type": "text",
+          "id": "metafield_key",
+          "label": "Product metafield key (custom.*)",
+          "info": "Enter the key of a custom.* metafield to show per-product content. E.g. tab_materials. Overrides the Content field below when filled in on the product."
         },
         {
           "type": "richtext",
