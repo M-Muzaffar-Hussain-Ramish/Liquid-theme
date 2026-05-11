@@ -705,10 +705,17 @@
             >
               {%- liquid
                 assign mf_key = block.settings.metafield_key | strip
-                assign mf_content = nil
-                if mf_key != blank
-                  assign mf_content = product.metafields.custom[mf_key].value
-                endif
+                assign mf_content = ''
+                case mf_key
+                  when 'materials'
+                    assign mf_content = product.metafields.custom.materials.value
+                  when 'shipping'
+                    assign mf_content = product.metafields.custom.shipping.value
+                  when 'refunds_returns'
+                    assign mf_content = product.metafields.custom.refunds_returns.value
+                  when 'buy_3_get_1_free'
+                    assign mf_content = product.metafields.custom.buy_3_get_1_free.value
+                endcase
               -%}
               {%- if mf_content != blank -%}
                 {{ mf_content }}
