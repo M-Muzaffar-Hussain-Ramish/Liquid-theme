@@ -1,163 +1,176 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    width: 100% !important;
-    max-width: 100% !important;
-    background-color: {{ section.settings.bg_color }};
+    width: 100% !important; max-width: 100% !important;
+    /* Colors */
+    --trust-bg:          {{ section.settings.bg_color }};
+    --trust-card-bg:     {{ section.settings.card_bg_color }};
+    --trust-mh-color:    {{ section.settings.main_heading_color }};
+    --trust-mb-color:    {{ section.settings.main_body_color }};
+    --trust-fh-color:    {{ section.settings.feature_heading_color }};
+    --trust-fb-color:    {{ section.settings.feature_body_color }};
+    /* Main Heading */
+    --trust-mh-font:      {{ section.settings.mh_font }};
+    --trust-mh-size:      {{ section.settings.mh_size }}px;
+    --trust-mh-weight:    {{ section.settings.mh_weight }};
+    --trust-mh-transform: {{ section.settings.mh_transform }};
+    --trust-mh-ls:        {{ section.settings.mh_ls | times: 0.1 }}px;
+    --trust-mh-lh:        {{ section.settings.mh_lh | divided_by: 10.0 }};
+    --trust-mh-style:      {{ section.settings.mh_style }};
+    --trust-mh-decoration: {{ section.settings.mh_decoration }};
+    /* Main Body */
+    --trust-mb-font:       {{ section.settings.mb_font }};
+    --trust-mb-size:       {{ section.settings.mb_size }}px;
+    --trust-mb-weight:     {{ section.settings.mb_weight }};
+    --trust-mb-transform:  {{ section.settings.mb_transform }};
+    --trust-mb-ls:         {{ section.settings.mb_ls | times: 0.1 }}px;
+    --trust-mb-lh:         {{ section.settings.mb_lh | divided_by: 10.0 }};
+    --trust-mb-style:      {{ section.settings.mb_style }};
+    --trust-mb-decoration: {{ section.settings.mb_decoration }};
+    /* Feature Heading */
+    --trust-fh-font:       {{ section.settings.fh_font }};
+    --trust-fh-size:       {{ section.settings.fh_size }}px;
+    --trust-fh-weight:     {{ section.settings.fh_weight }};
+    --trust-fh-transform:  {{ section.settings.fh_transform }};
+    --trust-fh-ls:         {{ section.settings.fh_ls | times: 0.1 }}px;
+    --trust-fh-lh:         {{ section.settings.fh_lh | divided_by: 10.0 }};
+    --trust-fh-style:      {{ section.settings.fh_style }};
+    --trust-fh-decoration: {{ section.settings.fh_decoration }};
+    /* Feature Body */
+    --trust-fb-font:       {{ section.settings.fb_font }};
+    --trust-fb-size:       {{ section.settings.fb_size }}px;
+    --trust-fb-weight:     {{ section.settings.fb_weight }};
+    --trust-fb-transform:  {{ section.settings.fb_transform }};
+    --trust-fb-ls:         {{ section.settings.fb_ls | times: 0.1 }}px;
+    --trust-fb-lh:         {{ section.settings.fb_lh | divided_by: 10.0 }};
+    --trust-fb-style:      {{ section.settings.fb_style }};
+    --trust-fb-decoration: {{ section.settings.fb_decoration }};
+    /* Layout */
+    --trust-card-radius:  {{ section.settings.card_radius }}px;
+    --trust-card-pad:     {{ section.settings.card_padding }}px;
+    --trust-card-gap:     {{ section.settings.card_gap }}px;
+    --trust-pt:           {{ section.settings.section_pt }}px;
+    --trust-pb:           {{ section.settings.section_pb }}px;
+    /* Alignment & Container */
+    --trust-align: {{ section.settings.content_align }};
+    --trust-maxw:  {{ section.settings.content_max_width }}px;
+    --trust-pl:    {{ section.settings.section_pl }}px;
+    --trust-pr:    {{ section.settings.section_pr }}px;
+    --trust-minh:  {{ section.settings.section_minh }}px;
+    background-color: var(--trust-bg);
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      --trust-mh-size: {{ section.settings.mh_size_mobile }}px;
+      --trust-mb-size: {{ section.settings.mb_size_mobile }}px;
+      --trust-fh-size: {{ section.settings.fh_size_mobile }}px;
+      --trust-fb-size: {{ section.settings.fb_size_mobile }}px;
+    }
   }
 {%- endstyle -%}
 
 <style>
   .gwmf-trust {
     width: 100%;
-    background-color: {{ section.settings.bg_color }};
-    padding: 0px 0px;
+    background-color: var(--trust-bg);
+    padding: var(--trust-pt) 0 var(--trust-pb);
   }
 
   .gwmf-trust__card {
-    max-width: 1200px;
+    max-width: var(--trust-maxw);
     margin: 0 auto;
-    background: {{ section.settings.card_bg_color }};
-    border-radius: 24px;
-    padding: 60px;
+    background: var(--trust-card-bg);
+    border-radius: var(--trust-card-radius);
+    padding: var(--trust-card-pad);
     display: grid;
     grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 50px;
+    gap: var(--trust-card-gap);
     align-items: center;
+    min-height: var(--trust-minh);
+    text-align: left;
   }
 
-  /* ---- LEFT COLUMN ---- */
-  .gwmf-trust__main-icon {
-    font-size: 34px;
-    color: {{ section.settings.main_heading_color }};
-    font-weight: bold;
-    line-height: 1;
-    margin-bottom: 20px;
-    display: block;
-  }
+  .gwmf-trust__col { display: flex; flex-direction: column; align-items: flex-start; }
 
-  .gwmf-trust__main-icon img {
-    width: 52px;
-    height: auto;
-    display: block;
-  }
-
-  .gwmf-trust__main-icon svg {
-    display: block;
-  }
+  .gwmf-trust__main-icon { font-size: 34px; color: var(--trust-mh-color); font-weight: bold; line-height: 1; margin-bottom: 20px; display: block; }
+  .gwmf-trust__main-icon img { width: 52px; height: auto; display: block; }
+  .gwmf-trust__main-icon svg { display: block; }
 
   .gwmf-trust__main-heading {
-    font-family: 'Dimbo', 'Outfit', sans-serif;
-    font-size: clamp(28px, 3vw, 48px);
-    font-weight: 800;
-    line-height: 1.1;
-    color: {{ section.settings.main_heading_color }};
+    font-family: var(--trust-mh-font);
+    font-size: var(--trust-mh-size);
+    font-weight: var(--trust-mh-weight);
+    text-transform: var(--trust-mh-transform);
+    letter-spacing: var(--trust-mh-ls);
+    line-height: var(--trust-mh-lh);
+    font-style: var(--trust-mh-style);
+    text-decoration: var(--trust-mh-decoration);
+    color: var(--trust-mh-color);
     margin: 0 0 16px;
     white-space: pre-line;
   }
 
   .gwmf-trust__main-body {
-    font-family: 'Outfit', sans-serif;
-    font-size: 16px;
-    line-height: 1.8;
-    color: {{ section.settings.main_body_color }};
+    font-family: var(--trust-mb-font);
+    font-size: var(--trust-mb-size);
+    font-weight: var(--trust-mb-weight);
+    text-transform: var(--trust-mb-transform);
+    letter-spacing: var(--trust-mb-ls);
+    line-height: var(--trust-mb-lh);
+    font-style: var(--trust-mb-style);
+    text-decoration: var(--trust-mb-decoration);
+    color: var(--trust-mb-color);
     margin: 0;
   }
 
-  /* ---- FEATURE COLUMNS ---- */
-  .gwmf-trust__item-icon {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    display: block;
-    margin-bottom: 22px;
-  }
-
-  .gwmf-trust__item-icon-svg {
-    width: 90px;
-    height: 90px;
-    margin-bottom: 22px;
-    display: block;
-  }
+  .gwmf-trust__item-icon { object-fit: contain; display: block; margin-bottom: 22px; margin-left: 0; }
+  .gwmf-trust__item-icon-svg { margin-bottom: 22px; display: block; margin-left: 0; }
 
   .gwmf-trust__item-heading {
-    font-family: 'Outfit', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: {{ section.settings.feature_heading_color }};
+    font-family: var(--trust-fh-font);
+    font-size: var(--trust-fh-size);
+    font-weight: var(--trust-fh-weight);
+    text-transform: var(--trust-fh-transform);
+    letter-spacing: var(--trust-fh-ls);
+    line-height: var(--trust-fh-lh);
+    font-style: var(--trust-fh-style);
+    text-decoration: var(--trust-fh-decoration);
+    color: var(--trust-fh-color);
     margin: 0 0 16px;
-    line-height: 1.2;
   }
 
   .gwmf-trust__item-body {
-    font-family: 'Outfit', sans-serif;
-    font-size: 15px;
-    line-height: 1.8;
-    color: {{ section.settings.feature_body_color }};
+    font-family: var(--trust-fb-font);
+    font-size: var(--trust-fb-size);
+    font-weight: var(--trust-fb-weight);
+    text-transform: var(--trust-fb-transform);
+    letter-spacing: var(--trust-fb-ls);
+    line-height: var(--trust-fb-lh);
+    font-style: var(--trust-fb-style);
+    text-decoration: var(--trust-fb-decoration);
+    color: var(--trust-fb-color);
     margin: 0;
     white-space: pre-line;
   }
 
-  /* ---- ANIMATIONS ---- */
-  .gwmf-trust__col {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
+  .gwmf-trust__col { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .gwmf-trust.is-visible .gwmf-trust__col:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+  .gwmf-trust.is-visible .gwmf-trust__col:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+  .gwmf-trust.is-visible .gwmf-trust__col:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
 
-  .gwmf-trust.is-visible .gwmf-trust__col:nth-child(1) {
-    opacity: 1; transform: translateY(0); transition-delay: 0s;
-  }
-  .gwmf-trust.is-visible .gwmf-trust__col:nth-child(2) {
-    opacity: 1; transform: translateY(0); transition-delay: 0.15s;
-  }
-  .gwmf-trust.is-visible .gwmf-trust__col:nth-child(3) {
-    opacity: 1; transform: translateY(0); transition-delay: 0.3s;
-  }
-
-  /* ---- RESPONSIVE ---- */
   @media screen and (max-width: 989px) {
-    .gwmf-trust__card {
-      grid-template-columns: 1fr;
-      padding: 40px 28px;
-      gap: 40px;
-      text-align: center;
-    }
-    .gwmf-trust__item-icon,
-    .gwmf-trust__item-icon-svg {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .gwmf-trust__main-icon {
-      display: flex;
-      justify-content: center;
-    }
-    .gwmf-trust__main-heading {
-      font-size: clamp(28px, 8vw, 40px);
-    }
+    .gwmf-trust__card { grid-template-columns: 1fr; padding: calc(var(--trust-card-pad)*0.67) calc(var(--trust-card-pad)*0.47); gap: calc(var(--trust-card-gap)*0.8); text-align: left; }
+    .gwmf-trust__item-icon, .gwmf-trust__item-icon-svg { margin-left: 0; margin-right: auto; }
+    .gwmf-trust__main-icon { display: block; }
   }
 
   @media screen and (max-width: 749px) {
-    .gwmf-trust {
-      padding: 40px 14px;
-    }
-    .gwmf-trust__card {
-      padding: 36px 20px;
-      gap: 36px;
-      border-radius: 18px;
-    }
-    .gwmf-trust__item-heading {
-      font-size: 20px;
-    }
+    .gwmf-trust { padding: calc(var(--trust-pt)*0.56) 14px calc(var(--trust-pb)*0.56); }
+    .gwmf-trust__card { padding: calc(var(--trust-card-pad)*0.6) calc(var(--trust-card-pad)*0.33); gap: calc(var(--trust-card-gap)*0.72); border-radius: calc(var(--trust-card-radius)*0.75); }
   }
 
   @media screen and (max-width: 480px) {
-    .gwmf-trust {
-      padding: 32px 10px;
-    }
-    .gwmf-trust__card {
-      padding: 28px 16px;
-      border-radius: 14px;
-    }
+    .gwmf-trust { padding: calc(var(--trust-pt)*0.44) 10px calc(var(--trust-pb)*0.44); }
+    .gwmf-trust__card { padding: calc(var(--trust-card-pad)*0.47) calc(var(--trust-card-pad)*0.27); border-radius: calc(var(--trust-card-radius)*0.58); }
   }
 </style>
 
@@ -165,114 +178,33 @@
   <div class="gwmf-trust__card">
     {%- for block in section.blocks -%}
       {%- if block.settings.style == 'main' -%}
-        {%- comment -%} LEFT COLUMN {%- endcomment -%}
         <div class="gwmf-trust__col" {{ block.shopify_attributes }}>
-          {%- comment -%} Icon: uploaded image → default SVG flag {%- endcomment -%}
           <span class="gwmf-trust__main-icon">
             {%- if block.settings.icon != blank -%}
-              {%- assign icon_alt = block.settings.icon.alt | default: '' | escape -%}
-              {{ block.settings.icon | image_url: width: 160 | image_tag: alt: icon_alt, loading: 'lazy' }}
+              {{ block.settings.icon | image_url: width: 160 | image_tag: alt: block.settings.icon.alt, loading: 'lazy' }}
             {%- elsif block.settings.default_icon == 'flag' -%}
-              <svg width="52" height="36" viewBox="0 0 52 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="52" height="36" rx="3" fill="#B22234"/>
-                <rect y="2.77" width="52" height="2.77" fill="#FFF"/>
-                <rect y="8.31" width="52" height="2.77" fill="#FFF"/>
-                <rect y="13.85" width="52" height="2.77" fill="#FFF"/>
-                <rect y="19.38" width="52" height="2.77" fill="#FFF"/>
-                <rect y="24.92" width="52" height="2.77" fill="#FFF"/>
-                <rect y="30.46" width="52" height="2.77" fill="#FFF"/>
-                <rect width="20.8" height="19.38" fill="#3C3B6E"/>
-                <circle cx="2.6" cy="2.4" r="1.1" fill="#FFF"/>
-                <circle cx="6.5" cy="2.4" r="1.1" fill="#FFF"/>
-                <circle cx="10.4" cy="2.4" r="1.1" fill="#FFF"/>
-                <circle cx="14.3" cy="2.4" r="1.1" fill="#FFF"/>
-                <circle cx="18.2" cy="2.4" r="1.1" fill="#FFF"/>
-                <circle cx="4.55" cy="5.55" r="1.1" fill="#FFF"/>
-                <circle cx="8.45" cy="5.55" r="1.1" fill="#FFF"/>
-                <circle cx="12.35" cy="5.55" r="1.1" fill="#FFF"/>
-                <circle cx="16.25" cy="5.55" r="1.1" fill="#FFF"/>
-                <circle cx="2.6" cy="8.7" r="1.1" fill="#FFF"/>
-                <circle cx="6.5" cy="8.7" r="1.1" fill="#FFF"/>
-                <circle cx="10.4" cy="8.7" r="1.1" fill="#FFF"/>
-                <circle cx="14.3" cy="8.7" r="1.1" fill="#FFF"/>
-                <circle cx="18.2" cy="8.7" r="1.1" fill="#FFF"/>
-                <circle cx="4.55" cy="11.85" r="1.1" fill="#FFF"/>
-                <circle cx="8.45" cy="11.85" r="1.1" fill="#FFF"/>
-                <circle cx="12.35" cy="11.85" r="1.1" fill="#FFF"/>
-                <circle cx="16.25" cy="11.85" r="1.1" fill="#FFF"/>
-                <circle cx="2.6" cy="15.0" r="1.1" fill="#FFF"/>
-                <circle cx="6.5" cy="15.0" r="1.1" fill="#FFF"/>
-                <circle cx="10.4" cy="15.0" r="1.1" fill="#FFF"/>
-                <circle cx="14.3" cy="15.0" r="1.1" fill="#FFF"/>
-                <circle cx="18.2" cy="15.0" r="1.1" fill="#FFF"/>
-                <circle cx="4.55" cy="18.15" r="1.1" fill="#FFF"/>
-                <circle cx="8.45" cy="18.15" r="1.1" fill="#FFF"/>
-                <circle cx="12.35" cy="18.15" r="1.1" fill="#FFF"/>
-                <circle cx="16.25" cy="18.15" r="1.1" fill="#FFF"/>
-              </svg>
+              <svg width="52" height="36" viewBox="0 0 52 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="36" rx="3" fill="#B22234"/><rect y="2.77" width="52" height="2.77" fill="#FFF"/><rect y="8.31" width="52" height="2.77" fill="#FFF"/><rect y="13.85" width="52" height="2.77" fill="#FFF"/><rect y="19.38" width="52" height="2.77" fill="#FFF"/><rect y="24.92" width="52" height="2.77" fill="#FFF"/><rect y="30.46" width="52" height="2.77" fill="#FFF"/><rect width="20.8" height="19.38" fill="#3C3B6E"/><circle cx="2.6" cy="2.4" r="1.1" fill="#FFF"/><circle cx="6.5" cy="2.4" r="1.1" fill="#FFF"/><circle cx="10.4" cy="2.4" r="1.1" fill="#FFF"/><circle cx="14.3" cy="2.4" r="1.1" fill="#FFF"/><circle cx="18.2" cy="2.4" r="1.1" fill="#FFF"/><circle cx="4.55" cy="5.55" r="1.1" fill="#FFF"/><circle cx="8.45" cy="5.55" r="1.1" fill="#FFF"/><circle cx="12.35" cy="5.55" r="1.1" fill="#FFF"/><circle cx="16.25" cy="5.55" r="1.1" fill="#FFF"/><circle cx="2.6" cy="8.7" r="1.1" fill="#FFF"/><circle cx="6.5" cy="8.7" r="1.1" fill="#FFF"/><circle cx="10.4" cy="8.7" r="1.1" fill="#FFF"/><circle cx="14.3" cy="8.7" r="1.1" fill="#FFF"/><circle cx="18.2" cy="8.7" r="1.1" fill="#FFF"/><circle cx="4.55" cy="11.85" r="1.1" fill="#FFF"/><circle cx="8.45" cy="11.85" r="1.1" fill="#FFF"/><circle cx="12.35" cy="11.85" r="1.1" fill="#FFF"/><circle cx="16.25" cy="11.85" r="1.1" fill="#FFF"/><circle cx="2.6" cy="15.0" r="1.1" fill="#FFF"/><circle cx="6.5" cy="15.0" r="1.1" fill="#FFF"/><circle cx="10.4" cy="15.0" r="1.1" fill="#FFF"/><circle cx="14.3" cy="15.0" r="1.1" fill="#FFF"/><circle cx="18.2" cy="15.0" r="1.1" fill="#FFF"/><circle cx="4.55" cy="18.15" r="1.1" fill="#FFF"/><circle cx="8.45" cy="18.15" r="1.1" fill="#FFF"/><circle cx="12.35" cy="18.15" r="1.1" fill="#FFF"/><circle cx="16.25" cy="18.15" r="1.1" fill="#FFF"/></svg>
             {%- elsif block.settings.icon_text != blank -%}
               {{ block.settings.icon_text }}
             {%- endif -%}
           </span>
-
-          {%- if block.settings.heading != blank -%}
-            <p class="gwmf-trust__main-heading">{{- block.settings.heading -}}</p>
-          {%- endif -%}
-
-          {%- if block.settings.body != blank -%}
-            <p class="gwmf-trust__main-body">{{- block.settings.body -}}</p>
-          {%- endif -%}
+          {%- if block.settings.heading != blank -%}<p class="gwmf-trust__main-heading">{{- block.settings.heading -}}</p>{%- endif -%}
+          {%- if block.settings.body != blank -%}<p class="gwmf-trust__main-body">{{- block.settings.body -}}</p>{%- endif -%}
         </div>
-
       {%- else -%}
-        {%- comment -%} FEATURE COLUMNS {%- endcomment -%}
         <div class="gwmf-trust__col" {{ block.shopify_attributes }}>
+          {%- assign icon_w = block.settings.icon_width | default: 90 -%}
+          {%- assign icon_h = block.settings.icon_height | default: 90 -%}
+          {%- assign icon_style = 'width:' | append: icon_w | append: 'px;height:' | append: icon_h | append: 'px' -%}
           {%- if block.settings.icon != blank -%}
-            {%- assign icon_alt = block.settings.icon.alt | default: '' | escape -%}
-            {{
-              block.settings.icon
-              | image_url: width: 180
-              | image_tag: alt: icon_alt, loading: 'lazy', class: 'gwmf-trust__item-icon'
-            }}
-
+            {{ block.settings.icon | image_url: width: 360 | image_tag: alt: block.settings.icon.alt, loading: 'lazy', class: 'gwmf-trust__item-icon', style: icon_style }}
           {%- elsif block.settings.default_icon == 'production' -%}
-            <svg class="gwmf-trust__item-icon-svg" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="9" y="42" width="72" height="27" rx="7" fill="#d4e4f7" stroke="#1a5fbe" stroke-width="2.5"/>
-              <rect x="20" y="22" width="50" height="25" rx="4" fill="white" stroke="#1a5fbe" stroke-width="2"/>
-              <circle cx="30" cy="30" r="2.2" fill="#1a5fbe"/>
-              <circle cx="38" cy="30" r="2.2" fill="#1a5fbe"/>
-              <circle cx="46" cy="30" r="2.2" fill="#1a5fbe"/>
-              <circle cx="54" cy="30" r="2.2" fill="#1a5fbe"/>
-              <circle cx="62" cy="30" r="2.2" fill="#1a5fbe"/>
-              <circle cx="30" cy="38" r="2.2" fill="#1a5fbe"/>
-              <circle cx="38" cy="38" r="2.2" fill="#1a5fbe"/>
-              <circle cx="46" cy="38" r="2.2" fill="#1a5fbe"/>
-              <circle cx="54" cy="38" r="2.2" fill="#1a5fbe"/>
-              <rect x="20" y="47" width="50" height="3.5" rx="1.75" fill="#1a5fbe" opacity="0.35"/>
-              <path d="M77 18 L78.5 13 L80 18 L85 19.5 L80 21 L78.5 26 L77 21 L72 19.5 Z" fill="#1a5fbe" opacity="0.6"/>
-              <circle cx="11" cy="34" r="2.8" fill="#1a5fbe" opacity="0.3"/>
-            </svg>
-
+            <svg class="gwmf-trust__item-icon-svg" style="{{ icon_style }}" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="42" width="72" height="27" rx="7" fill="#d4e4f7" stroke="#1a5fbe" stroke-width="2.5"/><rect x="20" y="22" width="50" height="25" rx="4" fill="white" stroke="#1a5fbe" stroke-width="2"/><circle cx="30" cy="30" r="2.2" fill="#1a5fbe"/><circle cx="38" cy="30" r="2.2" fill="#1a5fbe"/><circle cx="46" cy="30" r="2.2" fill="#1a5fbe"/><circle cx="54" cy="30" r="2.2" fill="#1a5fbe"/><circle cx="62" cy="30" r="2.2" fill="#1a5fbe"/><circle cx="30" cy="38" r="2.2" fill="#1a5fbe"/><circle cx="38" cy="38" r="2.2" fill="#1a5fbe"/><circle cx="46" cy="38" r="2.2" fill="#1a5fbe"/><circle cx="54" cy="38" r="2.2" fill="#1a5fbe"/><rect x="20" y="47" width="50" height="3.5" rx="1.75" fill="#1a5fbe" opacity="0.35"/></svg>
           {%- elsif block.settings.default_icon == 'shipping' -%}
-            <svg class="gwmf-trust__item-icon-svg" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M45 11 C25 11 13 27 13 38 L45 38 L77 38 C77 27 65 11 45 11 Z" fill="#d4e4f7" stroke="#1a5fbe" stroke-width="2"/>
-              <line x1="45" y1="38" x2="45" y2="11" stroke="#1a5fbe" stroke-width="1.5" opacity="0.35"/>
-              <line x1="20" y1="38" x2="33" y2="58" stroke="#1a5fbe" stroke-width="2"/>
-              <line x1="70" y1="38" x2="57" y2="58" stroke="#1a5fbe" stroke-width="2"/>
-              <line x1="45" y1="38" x2="45" y2="58" stroke="#1a5fbe" stroke-width="2"/>
-              <rect x="30" y="58" width="30" height="22" rx="4" fill="#1a5fbe"/>
-              <line x1="45" y1="58" x2="45" y2="80" stroke="white" stroke-width="1.5" opacity="0.5"/>
-              <line x1="30" y1="67" x2="60" y2="67" stroke="white" stroke-width="1.5" opacity="0.5"/>
-            </svg>
+            <svg class="gwmf-trust__item-icon-svg" style="{{ icon_style }}" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M45 11 C25 11 13 27 13 38 L45 38 L77 38 C77 27 65 11 45 11 Z" fill="#d4e4f7" stroke="#1a5fbe" stroke-width="2"/><line x1="45" y1="38" x2="45" y2="11" stroke="#1a5fbe" stroke-width="1.5" opacity="0.35"/><line x1="20" y1="38" x2="33" y2="58" stroke="#1a5fbe" stroke-width="2"/><line x1="70" y1="38" x2="57" y2="58" stroke="#1a5fbe" stroke-width="2"/><line x1="45" y1="38" x2="45" y2="58" stroke="#1a5fbe" stroke-width="2"/><rect x="30" y="58" width="30" height="22" rx="4" fill="#1a5fbe"/></svg>
           {%- endif -%}
-
-          {%- if block.settings.heading != blank -%}
-            <h3 class="gwmf-trust__item-heading">{{ block.settings.heading }}</h3>
-          {%- endif -%}
-
-          {%- if block.settings.body != blank -%}
-            <p class="gwmf-trust__item-body">{{- block.settings.body -}}</p>
-          {%- endif -%}
+          {%- if block.settings.heading != blank -%}<h3 class="gwmf-trust__item-heading">{{ block.settings.heading }}</h3>{%- endif -%}
+          {%- if block.settings.body != blank -%}<p class="gwmf-trust__item-body">{{- block.settings.body -}}</p>{%- endif -%}
         </div>
       {%- endif -%}
     {%- endfor -%}
@@ -283,15 +215,9 @@
   (function () {
     var sec = document.querySelector('#shopify-section-{{ section.id }} .gwmf-trust');
     if (!sec) return;
-    var io = new IntersectionObserver(
-      function (entries) {
-        if (entries[0].isIntersecting) {
-          sec.classList.add('is-visible');
-          io.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { sec.classList.add('is-visible'); io.disconnect(); }
+    }, { threshold: 0.1 });
     io.observe(sec);
   })();
 </script>
@@ -301,96 +227,86 @@
   "name": "Trust Strip",
   "tag": "section",
   "settings": [
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Section background color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "card_bg_color",
-      "label": "Card background color",
-      "default": "#eef3f6"
-    },
-    {
-      "type": "color",
-      "id": "main_heading_color",
-      "label": "Left column heading color",
-      "default": "#0b4f94"
-    },
-    {
-      "type": "color",
-      "id": "main_body_color",
-      "label": "Left column body color",
-      "default": "#59697a"
-    },
-    {
-      "type": "color",
-      "id": "feature_heading_color",
-      "label": "Feature column heading color",
-      "default": "#0b4f94"
-    },
-    {
-      "type": "color",
-      "id": "feature_body_color",
-      "label": "Feature column body color",
-      "default": "#59697a"
-    }
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#ffffff" },
+    { "type": "color", "id": "card_bg_color", "label": "Card background", "default": "#eef3f6" },
+    { "type": "color", "id": "main_heading_color", "label": "Left column heading color", "default": "#0b4f94" },
+    { "type": "color", "id": "main_body_color", "label": "Left column body color", "default": "#59697a" },
+    { "type": "color", "id": "feature_heading_color", "label": "Feature heading color", "default": "#0b4f94" },
+    { "type": "color", "id": "feature_body_color", "label": "Feature body color", "default": "#59697a" },
+
+    { "type": "header", "content": "Typography — Left Heading" },
+    { "type": "select", "id": "mh_font", "label": "Font family", "options": [{ "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }, { "value": "Outfit, sans-serif", "label": "Outfit (Body)" }], "default": "Dimbo, Outfit, sans-serif" },
+    { "type": "range", "id": "mh_size", "label": "Size — desktop (px)", "min": 20, "max": 220, "step": 2, "default": 48 },
+    { "type": "select", "id": "mh_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }, { "value": "900", "label": "900" }], "default": "800" },
+    { "type": "select", "id": "mh_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "mh_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "mh_lh", "label": "Line height (÷10)", "min": 6, "max": 50, "step": 1, "default": 11 },
+    { "type": "select", "id": "mh_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "mh_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Left Body" },
+    { "type": "select", "id": "mb_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "mb_size", "label": "Size (px)", "min": 12, "max": 112, "step": 1, "default": 16 },
+    { "type": "select", "id": "mb_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }], "default": "400" },
+    { "type": "select", "id": "mb_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "mb_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "mb_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 18 },
+    { "type": "select", "id": "mb_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "mb_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Feature Heading" },
+    { "type": "select", "id": "fh_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "fh_size", "label": "Size (px)", "min": 14, "max": 114, "step": 1, "default": 24 },
+    { "type": "select", "id": "fh_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "700" },
+    { "type": "select", "id": "fh_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "fh_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "fh_lh", "label": "Line height (÷10)", "min": 6, "max": 50, "step": 1, "default": 12 },
+    { "type": "select", "id": "fh_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "fh_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Feature Body" },
+    { "type": "select", "id": "fb_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "fb_size", "label": "Size (px)", "min": 12, "max": 100, "step": 1, "default": 15 },
+    { "type": "select", "id": "fb_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }], "default": "400" },
+    { "type": "select", "id": "fb_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "fb_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "fb_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 18 },
+    { "type": "select", "id": "fb_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "fb_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Spacing & Layout" },
+    { "type": "range", "id": "section_pt", "label": "Section padding top (px)", "min": 0, "max": 400, "step": 4, "default": 0 },
+    { "type": "range", "id": "section_pb", "label": "Section padding bottom (px)", "min": 0, "max": 400, "step": 4, "default": 0 },
+
+    { "type": "header", "content": "Mobile Sizes" },
+    { "type": "range", "id": "mh_size_mobile", "label": "Left heading size — mobile (px)",  "min": 20, "max": 220, "step": 2, "default": 40 },
+    { "type": "range", "id": "mb_size_mobile", "label": "Left body size — mobile (px)",     "min": 12, "max": 112, "step": 1, "default": 14 },
+    { "type": "range", "id": "fh_size_mobile", "label": "Feature heading size — mobile (px)","min": 14, "max": 114, "step": 1, "default": 20 },
+    { "type": "range", "id": "fb_size_mobile", "label": "Feature body size — mobile (px)",  "min": 12, "max": 100, "step": 1, "default": 13 },
+
+    { "type": "header", "content": "Alignment & Container" },
+    { "type": "select", "id": "content_align", "label": "Text alignment", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default": "left" },
+    { "type": "range", "id": "content_max_width", "label": "Container max width (px)", "min": 400, "max": 1600, "step": 20, "default": 1200 },
+    { "type": "range", "id": "section_pl", "label": "Padding left (px)", "min": 0, "max": 200, "step": 4, "default": 0 },
+    { "type": "range", "id": "section_pr", "label": "Padding right (px)", "min": 0, "max": 200, "step": 4, "default": 0 },
+    { "type": "range", "id": "section_minh", "label": "Min height (px)", "min": 0, "max": 800, "step": 8, "default": 0 },
+    { "type": "range", "id": "card_padding", "label": "Card inner padding (px)", "min": 20, "max": 400, "step": 4, "default": 60 },
+    { "type": "range", "id": "card_gap", "label": "Column gap (px)", "min": 16, "max": 400, "step": 4, "default": 48 },
+    { "type": "range", "id": "card_radius", "label": "Card border radius (px)", "min": 0, "max": 200, "step": 2, "default": 24 }
   ],
   "blocks": [
     {
-      "type": "column",
-      "name": "Column",
+      "type": "column", "name": "Column",
       "settings": [
-        {
-          "type": "select",
-          "id": "style",
-          "label": "Column style",
-          "options": [
-            { "value": "main", "label": "Main (left — large heading)" },
-            { "value": "feature", "label": "Feature (right — icon + heading)" }
-          ],
-          "default": "feature"
-        },
-        {
-          "type": "select",
-          "id": "default_icon",
-          "label": "Default icon (shown when no image uploaded)",
-          "options": [
-            { "value": "none", "label": "None" },
-            { "value": "flag", "label": "US Flag" },
-            { "value": "production", "label": "Production / Printer" },
-            { "value": "shipping", "label": "Shipping / Delivery" }
-          ],
-          "default": "none"
-        },
-        {
-          "type": "text",
-          "id": "icon_text",
-          "label": "Icon text / emoji (Main style fallback)"
-        },
-        {
-          "type": "image_picker",
-          "id": "icon",
-          "label": "Icon image (overrides default icon)"
-        },
-        {
-          "type": "textarea",
-          "id": "heading",
-          "label": "Heading",
-          "default": "We Print It Right.\nWe Ship It Fast."
-        },
-        {
-          "type": "textarea",
-          "id": "body",
-          "label": "Body text",
-          "default": "Premium materials. Handmade in the U.S.A.\nDelivered worldwide."
-        }
+        { "type": "select", "id": "style", "label": "Column style", "options": [{ "value": "main", "label": "Main (left)" }, { "value": "feature", "label": "Feature (right)" }], "default": "feature" },
+        { "type": "select", "id": "default_icon", "label": "Default icon", "options": [{ "value": "none", "label": "None" }, { "value": "flag", "label": "US Flag" }, { "value": "production", "label": "Production" }, { "value": "shipping", "label": "Shipping" }], "default": "none" },
+        { "type": "text", "id": "icon_text", "label": "Icon text / emoji (Main fallback)" },
+        { "type": "image_picker", "id": "icon", "label": "Icon image (overrides default)" },
+        { "type": "range", "id": "icon_width", "label": "Icon width (px)", "min": 20, "max": 220, "step": 2, "default": 90 },
+        { "type": "range", "id": "icon_height", "label": "Icon height (px)", "min": 20, "max": 220, "step": 2, "default": 90 },
+        { "type": "textarea", "id": "heading", "label": "Heading", "default": "We Print It Right.\nWe Ship It Fast." },
+        { "type": "textarea", "id": "body", "label": "Body text", "default": "Premium materials. Handmade in the U.S.A.\nDelivered worldwide." }
       ]
     }
   ],
@@ -398,33 +314,9 @@
     {
       "name": "Trust Strip",
       "blocks": [
-        {
-          "type": "column",
-          "settings": {
-            "style": "main",
-            "default_icon": "flag",
-            "heading": "We Print It Right.\nWe Ship It Fast.",
-            "body": "Premium materials. Handmade in the U.S.A.\nDelivered worldwide."
-          }
-        },
-        {
-          "type": "column",
-          "settings": {
-            "style": "feature",
-            "default_icon": "production",
-            "heading": "Production Time",
-            "body": "Gift Wrap: Ships in 3 business days\nParty Items: Ships in 5 business days\nAll Products: Custom-made, not mass-produced"
-          }
-        },
-        {
-          "type": "column",
-          "settings": {
-            "style": "feature",
-            "default_icon": "shipping",
-            "heading": "Shipping Time",
-            "body": "Free Standard Shipping: 7-10 business days\nUPS Ground (Fastest): 3-6 business days\nWe Ship Worldwide"
-          }
-        }
+        { "type": "column", "settings": { "style": "main", "default_icon": "flag", "heading": "We Print It Right.\nWe Ship It Fast.", "body": "Premium materials. Handmade in the U.S.A.\nDelivered worldwide." } },
+        { "type": "column", "settings": { "style": "feature", "default_icon": "production", "heading": "Production Time", "body": "Gift Wrap: Ships in 3 business days\nParty Items: Ships in 5 business days\nAll Products: Custom-made, not mass-produced" } },
+        { "type": "column", "settings": { "style": "feature", "default_icon": "shipping", "heading": "Shipping Time", "body": "Free Standard Shipping: 7-10 business days\nUPS Ground (Fastest): 3-6 business days\nWe Ship Worldwide" } }
       ]
     }
   ]

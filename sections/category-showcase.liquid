@@ -1,70 +1,160 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    --cats-bg:          {{ section.settings.bg_color }};
-    --cats-eyebrow:     {{ section.settings.eyebrow_color }};
-    --cats-heading:     {{ section.settings.heading_color }};
-    --cats-subtitle:    {{ section.settings.subtitle_color }};
-    --cats-label:       {{ section.settings.label_color }};
-    --cats-card-sub:    {{ section.settings.card_subtitle_color }};
-    --cats-btn-bg:      {{ section.settings.btn_bg_color }};
-    --cats-btn-text:    {{ section.settings.btn_text_color }};
+    /* Colors */
+    --cats-bg:       {{ section.settings.bg_color }};
+    --cats-eyebrow:  {{ section.settings.eyebrow_color }};
+    --cats-heading:  {{ section.settings.heading_color }};
+    --cats-subtitle: {{ section.settings.subtitle_color }};
+    --cats-label:    {{ section.settings.label_color }};
+    --cats-cardsub:  {{ section.settings.card_subtitle_color }};
+    --cats-btn-bg:   {{ section.settings.btn_bg_color }};
+    --cats-btn-text: {{ section.settings.btn_text_color }};
+    --cats-btn-bc:   {{ section.settings.btn_border_color }};
+    /* Eyebrow */
+    --cats-eye-font:      {{ section.settings.eye_font }};
+    --cats-eye-size:      {{ section.settings.eye_size }}px;
+    --cats-eye-weight:    {{ section.settings.eye_weight }};
+    --cats-eye-transform: {{ section.settings.eye_transform }};
+    --cats-eye-ls:        {{ section.settings.eye_ls | times: 0.1 }}px;
+    --cats-eye-lh:        {{ section.settings.eye_lh | divided_by: 10.0 }};
+    --cats-eye-style:      {{ section.settings.eye_style }};
+    --cats-eye-decoration: {{ section.settings.eye_decoration }};
+    /* Section Heading */
+    --cats-head-font:       {{ section.settings.head_font }};
+    --cats-head-size:       {{ section.settings.head_size }}px;
+    --cats-head-weight:     {{ section.settings.head_weight }};
+    --cats-head-transform:  {{ section.settings.head_transform }};
+    --cats-head-ls:         {{ section.settings.head_ls | times: 0.1 }}px;
+    --cats-head-lh:         {{ section.settings.head_lh | divided_by: 10.0 }};
+    --cats-head-style:      {{ section.settings.head_style }};
+    --cats-head-decoration: {{ section.settings.head_decoration }};
+    /* Subtitle */
+    --cats-sub-font:       {{ section.settings.sub_font }};
+    --cats-sub-size:       {{ section.settings.sub_size }}px;
+    --cats-sub-weight:     {{ section.settings.sub_weight }};
+    --cats-sub-transform:  {{ section.settings.sub_transform }};
+    --cats-sub-ls:         {{ section.settings.sub_ls | times: 0.1 }}px;
+    --cats-sub-lh:         {{ section.settings.sub_lh | divided_by: 10.0 }};
+    --cats-sub-style:      {{ section.settings.sub_style }};
+    --cats-sub-decoration: {{ section.settings.sub_decoration }};
+    /* Card Label */
+    --cats-lbl-font:       {{ section.settings.lbl_font }};
+    --cats-lbl-size:       {{ section.settings.lbl_size }}px;
+    --cats-lbl-weight:     {{ section.settings.lbl_weight }};
+    --cats-lbl-transform:  {{ section.settings.lbl_transform }};
+    --cats-lbl-ls:         {{ section.settings.lbl_ls | times: 0.1 }}px;
+    --cats-lbl-lh:         {{ section.settings.lbl_lh | divided_by: 10.0 }};
+    --cats-lbl-style:      {{ section.settings.lbl_style }};
+    --cats-lbl-decoration: {{ section.settings.lbl_decoration }};
+    /* Card Subtitle */
+    --cats-csub-font:       {{ section.settings.csub_font }};
+    --cats-csub-size:       {{ section.settings.csub_size }}px;
+    --cats-csub-weight:     {{ section.settings.csub_weight }};
+    --cats-csub-transform:  {{ section.settings.csub_transform }};
+    --cats-csub-ls:         {{ section.settings.csub_ls | times: 0.1 }}px;
+    --cats-csub-lh:         {{ section.settings.csub_lh | divided_by: 10.0 }};
+    --cats-csub-style:      {{ section.settings.csub_style }};
+    --cats-csub-decoration: {{ section.settings.csub_decoration }};
+    /* Button */
+    --cats-btn-font:       {{ section.settings.btn_font }};
+    --cats-btn-size:       {{ section.settings.btn_size }}px;
+    --cats-btn-weight:     {{ section.settings.btn_weight }};
+    --cats-btn-transform:  {{ section.settings.btn_transform }};
+    --cats-btn-ls:         {{ section.settings.btn_ls | times: 0.1 }}px;
+    --cats-btn-lh:         {{ section.settings.btn_lh | divided_by: 10.0 }};
+    --cats-btn-style:      {{ section.settings.btn_style }};
+    --cats-btn-decoration: {{ section.settings.btn_decoration }};
+    --cats-btn-pv:         {{ section.settings.btn_pv }}px;
+    --cats-btn-ph:         {{ section.settings.btn_ph }}px;
+    --cats-btn-radius:     {{ section.settings.btn_radius }}px;
+    --cats-btn-bw:         {{ section.settings.btn_border_width }}px;
+    --cats-btn-minw:       {{ section.settings.btn_min_width }}px;
+    /* Layout */
+    --cats-img-radius: {{ section.settings.image_radius }}px;
+    --cats-card-gap:   {{ section.settings.card_gap }}px;
+    --cats-pt:         {{ section.settings.section_pt }}px;
+    --cats-pb:         {{ section.settings.section_pb }}px;
+    /* Alignment & Container */
+    --cats-align: {{ section.settings.content_align }};
+    --cats-maxw:  {{ section.settings.content_max_width }}px;
+    --cats-pl:    {{ section.settings.section_pl }}px;
+    --cats-pr:    {{ section.settings.section_pr }}px;
+    --cats-minh:  {{ section.settings.section_minh }}px;
     background-color: var(--cats-bg);
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      --cats-eye-size:  {{ section.settings.eye_size_mobile }}px;
+      --cats-head-size: {{ section.settings.head_size_mobile }}px;
+      --cats-sub-size:  {{ section.settings.sub_size_mobile }}px;
+      --cats-lbl-size:  {{ section.settings.lbl_size_mobile }}px;
+      --cats-csub-size: {{ section.settings.csub_size_mobile }}px;
+      --cats-btn-size:  {{ section.settings.btn_size_mobile }}px;
+      --cats-pt: {{ section.settings.section_pt_mobile }}px;
+      --cats-pb: {{ section.settings.section_pb_mobile }}px;
+      --cats-pl: {{ section.settings.section_pl_mobile }}px;
+      --cats-pr: {{ section.settings.section_pr_mobile }}px;
+    }
   }
 {%- endstyle -%}
 
 <style>
-  .gwmf-cats {
-    width: 100%;
-  }
+  .gwmf-cats { width: 100%; }
 
   .gwmf-cats__inner {
-    max-width: 1400px;
+    max-width: var(--cats-maxw);
     margin: 0 auto;
-    padding: 72px 64px 80px;
-    text-align: center;
+    padding: var(--cats-pt) var(--cats-pr) var(--cats-pb) var(--cats-pl);
+    min-height: var(--cats-minh);
+    text-align: var(--cats-align);
   }
 
   .gwmf-cats__eyebrow {
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
+    font-family: var(--cats-eye-font);
+    font-size: var(--cats-eye-size);
+    font-weight: var(--cats-eye-weight);
+    text-transform: var(--cats-eye-transform);
+    letter-spacing: var(--cats-eye-ls);
+    line-height: var(--cats-eye-lh);
+    font-style: var(--cats-eye-style);
+    text-decoration: var(--cats-eye-decoration);
     color: var(--cats-eyebrow);
     margin: 0 0 16px;
   }
 
   .gwmf-cats__heading {
-    font-family: 'Dimbo', 'Outfit', sans-serif;
-    font-size: clamp(36px, 4.5vw, 62px);
-    font-weight: 800;
+    font-family: var(--cats-head-font);
+    font-size: var(--cats-head-size);
+    font-weight: var(--cats-head-weight);
+    text-transform: var(--cats-head-transform);
+    letter-spacing: var(--cats-head-ls);
+    line-height: var(--cats-head-lh);
+    font-style: var(--cats-head-style);
+    text-decoration: var(--cats-head-decoration);
     color: var(--cats-heading);
-    line-height: 1.05;
-    margin: 0 0 18px;
+    margin: 0 auto 18px;
     max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .gwmf-cats__subtitle {
-    font-family: 'Outfit', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
+    font-family: var(--cats-sub-font);
+    font-size: var(--cats-sub-size);
+    font-weight: var(--cats-sub-weight);
+    text-transform: var(--cats-sub-transform);
+    letter-spacing: var(--cats-sub-ls);
+    line-height: var(--cats-sub-lh);
+    font-style: var(--cats-sub-style);
+    text-decoration: var(--cats-sub-decoration);
     color: var(--cats-subtitle);
     margin: 0 0 52px;
-    line-height: 1.5;
   }
 
-  /* ---- CAROUSEL WRAP ---- */
-  .gwmf-cats__carousel-wrap {
-    position: relative;
-  }
+  .gwmf-cats__carousel-wrap { position: relative; }
 
-  /* ---- GRID (desktop: 3-col) ---- */
   .gwmf-cats__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+    gap: var(--cats-card-gap);
   }
 
   .gwmf-cats__card {
@@ -76,10 +166,10 @@
 
   .gwmf-cats__img-wrap {
     width: 100%;
-    border-radius: 20px;
+    border-radius: var(--cats-img-radius);
     overflow: hidden;
     aspect-ratio: 4/3;
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(255,255,255,0.07);
   }
 
   .gwmf-cats__img-wrap img {
@@ -90,9 +180,7 @@
     transition: transform 0.4s ease;
   }
 
-  .gwmf-cats__card:hover .gwmf-cats__img-wrap img {
-    transform: scale(1.04);
-  }
+  .gwmf-cats__card:hover .gwmf-cats__img-wrap img { transform: scale(1.04); }
 
   .gwmf-cats__img-placeholder {
     width: 100%;
@@ -100,24 +188,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255,255,255,0.3);
   }
 
   .gwmf-cats__label {
-    font-family: 'Dimbo', sans-serif;
-    font-size: 42px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-family: var(--cats-lbl-font);
+    font-size: var(--cats-lbl-size);
+    font-weight: var(--cats-lbl-weight);
+    text-transform: var(--cats-lbl-transform);
+    letter-spacing: var(--cats-lbl-ls);
+    line-height: var(--cats-lbl-lh);
+    font-style: var(--cats-lbl-style);
+    text-decoration: var(--cats-lbl-decoration);
     color: var(--cats-label);
   }
 
   .gwmf-cats__card-subtitle {
-    font-family: 'Dimbo', sans-serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--cats-card-sub);
-    line-height: 1.5;
+    font-family: var(--cats-csub-font);
+    font-size: var(--cats-csub-size);
+    font-weight: var(--cats-csub-weight);
+    text-transform: var(--cats-csub-transform);
+    letter-spacing: var(--cats-csub-ls);
+    line-height: var(--cats-csub-lh);
+    font-style: var(--cats-csub-style);
+    text-decoration: var(--cats-csub-decoration);
+    color: var(--cats-cardsub);
     margin: 0;
     text-align: center;
   }
@@ -126,236 +221,75 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 28px;
+    padding: var(--cats-btn-pv) var(--cats-btn-ph);
     background: var(--cats-btn-bg);
     color: var(--cats-btn-text);
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    border-radius: 8px;
+    font-family: var(--cats-btn-font);
+    font-size: var(--cats-btn-size);
+    font-weight: var(--cats-btn-weight);
+    text-transform: var(--cats-btn-transform);
+    letter-spacing: var(--cats-btn-ls);
+    line-height: var(--cats-btn-lh);
+    font-style: var(--cats-btn-style);
+    text-decoration: var(--cats-btn-decoration);
+    border-radius: var(--cats-btn-radius);
+    border: var(--cats-btn-bw) solid var(--cats-btn-bc);
+    min-width: var(--cats-btn-minw);
     transition: filter 0.2s, transform 0.15s;
     width: 100%;
     max-width: 320px;
   }
 
-  .gwmf-cats__card-btn:hover {
-    filter: brightness(0.85);
-    transform: translateY(-2px);
-  }
+  .gwmf-cats__card-btn:hover { filter: brightness(0.85); transform: translateY(-2px); }
 
-  /* ---- CAROUSEL NAV (hidden on desktop) ---- */
-  .gwmf-cats__carousel-nav {
-    display: none;
-  }
+  .gwmf-cats__carousel-nav { display: none; }
 
-  /* ---- ANIMATIONS ---- */
-  .gwmf-cats__eyebrow,
-  .gwmf-cats__heading,
-  .gwmf-cats__subtitle,
-  .gwmf-cats__card {
+  .gwmf-cats__eyebrow, .gwmf-cats__heading, .gwmf-cats__subtitle, .gwmf-cats__card {
     opacity: 0;
     transform: translateY(36px);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
-  .gwmf-cats.is-visible .gwmf-cats__eyebrow {
-    opacity: 1; transform: translateY(0); transition-delay: 0s;
-  }
-  .gwmf-cats.is-visible .gwmf-cats__heading {
-    opacity: 1; transform: translateY(0); transition-delay: 0.1s;
-  }
-  .gwmf-cats.is-visible .gwmf-cats__subtitle {
-    opacity: 1; transform: translateY(0); transition-delay: 0.18s;
-  }
-  .gwmf-cats.is-visible .gwmf-cats__card:nth-child(1) {
-    opacity: 1; transform: translateY(0); transition-delay: 0.28s;
-  }
-  .gwmf-cats.is-visible .gwmf-cats__card:nth-child(2) {
-    opacity: 1; transform: translateY(0); transition-delay: 0.42s;
-  }
-  .gwmf-cats.is-visible .gwmf-cats__card:nth-child(3) {
-    opacity: 1; transform: translateY(0); transition-delay: 0.56s;
-  }
+  .gwmf-cats.is-visible .gwmf-cats__eyebrow { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+  .gwmf-cats.is-visible .gwmf-cats__heading  { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+  .gwmf-cats.is-visible .gwmf-cats__subtitle { opacity: 1; transform: translateY(0); transition-delay: 0.18s; }
+  .gwmf-cats.is-visible .gwmf-cats__card:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.28s; }
+  .gwmf-cats.is-visible .gwmf-cats__card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.42s; }
+  .gwmf-cats.is-visible .gwmf-cats__card:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.56s; }
 
-  /* ---- TABLET ---- */
   @media screen and (max-width: 989px) {
-    .gwmf-cats__inner {
-      padding: 52px 32px 60px;
-    }
-    .gwmf-cats__grid {
-      gap: 24px;
-    }
-    .gwmf-cats__label {
-      font-size: 32px;
-    }
-    .gwmf-cats__card-subtitle {
-      font-size: 20px;
-    }
+    .gwmf-cats__inner { padding: calc(var(--cats-pt)*0.72) calc(var(--cats-pr)*0.75) calc(var(--cats-pb)*0.75) calc(var(--cats-pl)*0.75); }
+    .gwmf-cats__grid { gap: calc(var(--cats-card-gap)*0.71); }
   }
 
-  /* ---- MOBILE CAROUSEL ---- */
   @media screen and (max-width: 749px) {
-    .gwmf-cats__inner {
-      padding: 40px 0 48px;
-    }
-
-    .gwmf-cats__eyebrow,
-    .gwmf-cats__heading,
-    .gwmf-cats__subtitle {
-      padding: 0 20px;
-    }
-
-    .gwmf-cats__subtitle {
-      font-size: 14px;
-      margin-bottom: 28px;
-    }
-
-    /* Override per-card animations — all cards must be visible in carousel */
-    .gwmf-cats__card {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
-
-    /* Carousel track */
-    .gwmf-cats__grid {
-      display: flex !important;
-      overflow-x: scroll;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      gap: 16px;
-      padding: 0 20px 4px;
-      scroll-padding-left: 20px;
-    }
-
-    .gwmf-cats__grid::-webkit-scrollbar {
-      display: none;
-    }
-
-    .gwmf-cats__card {
-      flex: 0 0 calc(100vw - 48px);
-      max-width: 420px;
-      scroll-snap-align: start;
-    }
-
-    .gwmf-cats__label {
-      font-size: 36px;
-    }
-
-    .gwmf-cats__card-subtitle {
-      font-size: 18px;
-    }
-
-    .gwmf-cats__card-btn {
-      max-width: 100%;
-      font-size: 13px;
-      padding: 14px 20px;
-    }
-
-    /* Show carousel nav on mobile */
-    .gwmf-cats__carousel-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 24px;
-      padding: 0 20px;
-    }
-
-    .gwmf-cats__carousel-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.1);
-      color: var(--cats-label);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
-
-    .gwmf-cats__carousel-btn:hover {
-      background: rgba(255,255,255,0.2);
-    }
-
-    .gwmf-cats__carousel-btn svg {
-      width: 20px;
-      height: 20px;
-      display: block;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .gwmf-cats__carousel-dots {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .gwmf-cats__dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      border: none;
-      background: rgba(255,255,255,0.3);
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .gwmf-cats__dot.is-active {
-      background: var(--cats-btn-bg);
-      transform: scale(1.3);
-    }
+    .gwmf-cats__inner { padding: var(--cats-pt) 0 var(--cats-pb); }
+    .gwmf-cats__eyebrow, .gwmf-cats__heading, .gwmf-cats__subtitle { padding: 0 20px; }
+    .gwmf-cats__subtitle { margin-bottom: 32px; }
+    .gwmf-cats__card { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .gwmf-cats__carousel-wrap { overflow: hidden; }
+    .gwmf-cats__grid { display: flex !important; flex-wrap: nowrap; gap: 0; padding: 0; transition: transform 0.36s cubic-bezier(0.25,0.46,0.45,0.94); will-change: transform; }
+    .gwmf-cats__card { flex: 0 0 100%; width: 100%; padding: 0 20px; box-sizing: border-box; }
+    .gwmf-cats__card-btn { max-width: 100%; padding: 14px 20px; }
+    .gwmf-cats__carousel-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; padding: 0 20px; }
+    .gwmf-cats__carousel-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.1); color: var(--cats-label); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background 0.2s; }
+    .gwmf-cats__carousel-btn svg { width: 20px; height: 20px; display: block; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .gwmf-cats__carousel-dots { display: flex; gap: 8px; align-items: center; }
+    .gwmf-cats__dot { width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(255,255,255,0.3); cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s; }
+    .gwmf-cats__dot.is-active { background: var(--cats-btn-bg); transform: scale(1.4); }
   }
 
   @media screen and (max-width: 480px) {
-    .gwmf-cats__inner {
-      padding: 32px 0 40px;
-    }
-
-    .gwmf-cats__card {
-      flex: 0 0 calc(100vw - 32px) !important;
-    }
-
-    .gwmf-cats__eyebrow {
-      font-size: 11px;
-    }
-
-    .gwmf-cats__label {
-      font-size: 30px;
-    }
-
-    .gwmf-cats__card-subtitle {
-      font-size: 16px;
-    }
+    .gwmf-cats__inner { padding: var(--cats-pt) 0 var(--cats-pb); }
+    .gwmf-cats__card { padding: 0 16px; }
   }
 </style>
 
 <section class="gwmf-cats" id="shopify-section-{{ section.id }}">
   <div class="gwmf-cats__inner">
-
-    {%- if section.settings.eyebrow != blank -%}
-      <p class="gwmf-cats__eyebrow">{{ section.settings.eyebrow }}</p>
-    {%- endif -%}
-
-    {%- if section.settings.heading != blank -%}
-      <h2 class="gwmf-cats__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-
-    {%- if section.settings.subtitle != blank -%}
-      <p class="gwmf-cats__subtitle">{{ section.settings.subtitle }}</p>
-    {%- endif -%}
+    {%- if section.settings.eyebrow != blank -%}<p class="gwmf-cats__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2 class="gwmf-cats__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.subtitle != blank -%}<p class="gwmf-cats__subtitle">{{ section.settings.subtitle }}</p>{%- endif -%}
 
     <div class="gwmf-cats__carousel-wrap">
       <div class="gwmf-cats__grid" id="cats-track-{{ section.id }}">
@@ -364,77 +298,45 @@
             <div class="gwmf-cats__img-wrap">
               {%- if block.settings.image != blank -%}
                 {%- assign img_alt = block.settings.image.alt | default: block.settings.label | escape -%}
-                {{
-                  block.settings.image
-                  | image_url: width: 800
-                  | image_tag: alt: img_alt, loading: 'lazy', widths: '400, 600, 800'
-                }}
+                {{ block.settings.image | image_url: width: 800 | image_tag: alt: img_alt, loading: 'lazy', widths: '400, 600, 800' }}
               {%- else -%}
-                <div class="gwmf-cats__img-placeholder">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
-                  </svg>
-                </div>
+                <div class="gwmf-cats__img-placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
               {%- endif -%}
             </div>
-
-            {%- if block.settings.label != blank -%}
-              <span class="gwmf-cats__label">{{ block.settings.label }}</span>
-            {%- endif -%}
-
-            {%- if block.settings.subtitle != blank -%}
-              <p class="gwmf-cats__card-subtitle">{{ block.settings.subtitle }}</p>
-            {%- endif -%}
-
+            {%- if block.settings.label != blank -%}<span class="gwmf-cats__label">{{ block.settings.label }}</span>{%- endif -%}
+            {%- if block.settings.subtitle != blank -%}<p class="gwmf-cats__card-subtitle">{{ block.settings.subtitle }}</p>{%- endif -%}
             {%- if block.settings.btn_label != blank -%}
-              <a href="{{ block.settings.btn_link }}" class="gwmf-cats__card-btn">
-                {{ block.settings.btn_label }}
-              </a>
+              <a href="{{ block.settings.btn_link }}" class="gwmf-cats__card-btn">{{ block.settings.btn_label }}</a>
             {%- endif -%}
           </div>
         {%- endfor -%}
       </div>
-
-      <!-- Mobile carousel navigation -->
       <div class="gwmf-cats__carousel-nav" id="cats-nav-{{ section.id }}">
-        <button class="gwmf-cats__carousel-btn gwmf-cats__carousel-btn--prev" id="cats-prev-{{ section.id }}" aria-label="Previous">
-          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
+        <button class="gwmf-cats__carousel-btn" id="cats-prev-{{ section.id }}" aria-label="Previous slide"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
         <div class="gwmf-cats__carousel-dots" id="cats-dots-{{ section.id }}"></div>
-        <button class="gwmf-cats__carousel-btn gwmf-cats__carousel-btn--next" id="cats-next-{{ section.id }}" aria-label="Next">
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
+        <button class="gwmf-cats__carousel-btn" id="cats-next-{{ section.id }}" aria-label="Next slide"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
       </div>
     </div>
-
   </div>
 </section>
 
 <script>
   (function () {
     var sectionId = '{{ section.id }}';
-    var sec  = document.querySelector('#shopify-section-' + sectionId + ' .gwmf-cats');
+    var sec = document.querySelector('#shopify-section-' + sectionId + ' .gwmf-cats');
     var track = document.getElementById('cats-track-' + sectionId);
     var dotsWrap = document.getElementById('cats-dots-' + sectionId);
     var prevBtn = document.getElementById('cats-prev-' + sectionId);
     var nextBtn = document.getElementById('cats-next-' + sectionId);
-
     if (!sec || !track) return;
-
-    /* ---- Scroll-in animation (desktop) ---- */
     var io = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting) { sec.classList.add('is-visible'); io.disconnect(); }
     }, { threshold: 0.1 });
     io.observe(sec);
-
-    /* ---- Carousel (mobile only) ---- */
-    var cards = track.querySelectorAll('.gwmf-cats__card');
+    var cards = Array.prototype.slice.call(track.querySelectorAll('.gwmf-cats__card'));
     if (cards.length === 0) return;
-
     var currentIndex = 0;
     var mq = window.matchMedia('(max-width: 749px)');
-
-    /* Build dots */
     cards.forEach(function (_, i) {
       var dot = document.createElement('button');
       dot.className = 'gwmf-cats__dot' + (i === 0 ? ' is-active' : '');
@@ -442,36 +344,26 @@
       dot.addEventListener('click', function () { goTo(i); });
       dotsWrap.appendChild(dot);
     });
-
-    function getDots() { return dotsWrap.querySelectorAll('.gwmf-cats__dot'); }
-
     function updateDots(idx) {
-      getDots().forEach(function (d, i) {
-        d.classList.toggle('is-active', i === idx);
-      });
+      dotsWrap.querySelectorAll('.gwmf-cats__dot').forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
     }
-
     function goTo(idx) {
       if (!mq.matches) return;
       idx = Math.max(0, Math.min(idx, cards.length - 1));
       currentIndex = idx;
-      cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
       updateDots(idx);
     }
-
-    prevBtn.addEventListener('click', function () { goTo(currentIndex - 1); });
-    nextBtn.addEventListener('click', function () { goTo(currentIndex + 1); });
-
-    /* Update dots on manual swipe */
-    var scrollTimer;
-    track.addEventListener('scroll', function () {
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(function () {
-        var cardWidth = cards[0].offsetWidth + 16;
-        var idx = Math.round(track.scrollLeft / cardWidth);
-        currentIndex = Math.max(0, Math.min(idx, cards.length - 1));
-        updateDots(currentIndex);
-      }, 60);
+    prevBtn && prevBtn.addEventListener('click', function () { goTo(currentIndex - 1); });
+    nextBtn && nextBtn.addEventListener('click', function () { goTo(currentIndex + 1); });
+    var touchStartX = 0;
+    track.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function (e) {
+      var diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+    }, { passive: true });
+    window.addEventListener('resize', function () {
+      if (!mq.matches) { track.style.transform = ''; currentIndex = 0; updateDots(0); }
     });
   })();
 </script>
@@ -481,114 +373,126 @@
   "name": "Category Showcase",
   "tag": "section",
   "settings": [
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background color",
-      "default": "#0a1a30"
-    },
-    {
-      "type": "color",
-      "id": "eyebrow_color",
-      "label": "Eyebrow text color",
-      "default": "#7aa8d8"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "default": "#4a9fe0"
-    },
-    {
-      "type": "color",
-      "id": "subtitle_color",
-      "label": "Subtitle color",
-      "default": "#8eacc8"
-    },
-    {
-      "type": "color",
-      "id": "label_color",
-      "label": "Card label color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "card_subtitle_color",
-      "label": "Card subtitle color",
-      "default": "#667085"
-    },
-    {
-      "type": "color",
-      "id": "btn_bg_color",
-      "label": "Button background color",
-      "default": "#0056a3"
-    },
-    {
-      "type": "color",
-      "id": "btn_text_color",
-      "label": "Button text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow text",
-      "default": "Because One Face Isn't Enough"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Wrap Every Occasion in Pure Ridiculous Joy"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Choose your product and make someone's day unforgettable."
-    }
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#0a1a30" },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow color", "default": "#7aa8d8" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#4a9fe0" },
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#8eacc8" },
+    { "type": "color", "id": "label_color", "label": "Card label color", "default": "#000000" },
+    { "type": "color", "id": "card_subtitle_color", "label": "Card subtitle color", "default": "#667085" },
+    { "type": "color", "id": "btn_bg_color", "label": "Button background", "default": "#0056a3" },
+    { "type": "color", "id": "btn_text_color", "label": "Button text color", "default": "#ffffff" },
+    { "type": "color", "id": "btn_border_color", "label": "Button border color", "default": "#0056a3" },
+
+    { "type": "header", "content": "Typography — Eyebrow" },
+    { "type": "select", "id": "eye_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "eye_size", "label": "Size (px)", "min": 10, "max": 100, "step": 1, "default": 14 },
+    { "type": "select", "id": "eye_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "500", "label": "500 — Medium" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }, { "value": "800", "label": "800 — Extra Bold" }], "default": "600" },
+    { "type": "select", "id": "eye_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "uppercase" },
+    { "type": "range", "id": "eye_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 25 },
+    { "type": "range", "id": "eye_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 14 },
+    { "type": "select", "id": "eye_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "eye_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Section Heading" },
+    { "type": "select", "id": "head_font", "label": "Font family", "options": [{ "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }, { "value": "Outfit, sans-serif", "label": "Outfit (Body)" }], "default": "Dimbo, Outfit, sans-serif" },
+    { "type": "range", "id": "head_size", "label": "Size — desktop (px)", "min": 24, "max": 224, "step": 2, "default": 62 },
+    { "type": "select", "id": "head_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "500", "label": "500 — Medium" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }, { "value": "800", "label": "800 — Extra Bold" }, { "value": "900", "label": "900 — Black" }], "default": "800" },
+    { "type": "select", "id": "head_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "head_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "head_lh", "label": "Line height (÷10)", "min": 6, "max": 50, "step": 1, "default": 11 },
+    { "type": "select", "id": "head_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "head_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Section Subtitle" },
+    { "type": "select", "id": "sub_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "sub_size", "label": "Size (px)", "min": 12, "max": 112, "step": 1, "default": 16 },
+    { "type": "select", "id": "sub_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "500", "label": "500 — Medium" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }], "default": "400" },
+    { "type": "select", "id": "sub_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "sub_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "sub_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 15 },
+    { "type": "select", "id": "sub_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "sub_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Card Label" },
+    { "type": "select", "id": "lbl_font", "label": "Font family", "options": [{ "value": "Dimbo, sans-serif", "label": "Dimbo (Display)" }, { "value": "Outfit, sans-serif", "label": "Outfit (Body)" }], "default": "Dimbo, sans-serif" },
+    { "type": "range", "id": "lbl_size", "label": "Size (px)", "min": 16, "max": 216, "step": 2, "default": 42 },
+    { "type": "select", "id": "lbl_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "500", "label": "500 — Medium" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }, { "value": "800", "label": "800 — Extra Bold" }], "default": "600" },
+    { "type": "select", "id": "lbl_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "uppercase" },
+    { "type": "range", "id": "lbl_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 20 },
+    { "type": "range", "id": "lbl_lh", "label": "Line height (÷10)", "min": 6, "max": 50, "step": 1, "default": 10 },
+    { "type": "select", "id": "lbl_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "lbl_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Card Subtitle" },
+    { "type": "select", "id": "csub_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "csub_size", "label": "Size (px)", "min": 12, "max": 112, "step": 1, "default": 24 },
+    { "type": "select", "id": "csub_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "500", "label": "500 — Medium" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }], "default": "400" },
+    { "type": "select", "id": "csub_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "csub_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "csub_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 15 },
+    { "type": "select", "id": "csub_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "csub_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Button" },
+    { "type": "select", "id": "btn_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "btn_size", "label": "Font size (px)", "min": 10, "max": 110, "step": 1, "default": 13 },
+    { "type": "select", "id": "btn_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }, { "value": "800", "label": "800 — Extra Bold" }], "default": "700" },
+    { "type": "select", "id": "btn_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "uppercase" },
+    { "type": "range", "id": "btn_ls", "label": "Letter spacing (×0.1px)", "min": 0, "max": 200, "step": 5, "default": 10 },
+    { "type": "range", "id": "btn_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 12 },
+    { "type": "select", "id": "btn_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "btn_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Button Style" },
+    { "type": "range", "id": "btn_pv", "label": "Padding top / bottom (px)", "min": 4, "max": 200, "step": 2, "default": 14 },
+    { "type": "range", "id": "btn_ph", "label": "Padding left / right (px)", "min": 8, "max": 200, "step": 2, "default": 28 },
+    { "type": "range", "id": "btn_radius", "label": "Border radius (px)", "min": 0, "max": 200, "step": 2, "default": 8 },
+    { "type": "range", "id": "btn_border_width", "label": "Border width (px)", "min": 0, "max": 20, "step": 1, "default": 0 },
+    { "type": "range", "id": "btn_min_width", "label": "Min width (px)", "min": 0, "max": 800, "step": 8, "default": 0 },
+
+    { "type": "header", "content": "Spacing & Layout" },
+    { "type": "range", "id": "section_pt", "label": "Padding top (px)", "min": 0, "max": 400, "step": 4, "default": 72 },
+    { "type": "range", "id": "section_pb", "label": "Padding bottom (px)", "min": 0, "max": 400, "step": 4, "default": 80 },
+    { "type": "range", "id": "card_gap", "label": "Gap between cards (px)", "min": 8, "max": 400, "step": 4, "default": 28 },
+
+    { "type": "header", "content": "Mobile Sizes" },
+    { "type": "range", "id": "eye_size_mobile",  "label": "Eyebrow size — mobile (px)",      "min": 10, "max": 100, "step": 1, "default": 12 },
+    { "type": "range", "id": "head_size_mobile", "label": "Heading size — mobile (px)",      "min": 24, "max": 224, "step": 2, "default": 40 },
+    { "type": "range", "id": "sub_size_mobile",  "label": "Subtitle size — mobile (px)",     "min": 12, "max": 112, "step": 1, "default": 14 },
+    { "type": "range", "id": "lbl_size_mobile",  "label": "Card label size — mobile (px)",   "min": 16, "max": 216, "step": 2, "default": 36 },
+    { "type": "range", "id": "csub_size_mobile", "label": "Card subtitle size — mobile (px)","min": 12, "max": 112, "step": 1, "default": 18 },
+    { "type": "range", "id": "btn_size_mobile",  "label": "Button size — mobile (px)",       "min": 10, "max": 110, "step": 1, "default": 13 },
+    { "type": "range", "id": "section_pt_mobile","label": "Padding top — mobile (px)",       "min": 0,  "max": 400, "step": 4, "default": 40 },
+    { "type": "range", "id": "section_pb_mobile","label": "Padding bottom — mobile (px)",    "min": 0,  "max": 400, "step": 4, "default": 48 },
+    { "type": "range", "id": "section_pl_mobile","label": "Padding left — mobile (px)",      "min": 0,  "max": 200, "step": 4, "default": 0 },
+    { "type": "range", "id": "section_pr_mobile","label": "Padding right — mobile (px)",     "min": 0,  "max": 200, "step": 4, "default": 0 },
+
+    { "type": "header", "content": "Alignment & Container" },
+    { "type": "select", "id": "content_align", "label": "Text alignment", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default": "center" },
+    { "type": "range", "id": "content_max_width", "label": "Container max width (px)", "min": 400, "max": 1600, "step": 20, "default": 1400 },
+    { "type": "range", "id": "section_pl", "label": "Padding left (px)", "min": 0, "max": 200, "step": 4, "default": 64 },
+    { "type": "range", "id": "section_pr", "label": "Padding right (px)", "min": 0, "max": 200, "step": 4, "default": 64 },
+    { "type": "range", "id": "section_minh", "label": "Min height (px)", "min": 0, "max": 800, "step": 8, "default": 0 },
+
+    { "type": "header", "content": "Image" },
+    { "type": "range", "id": "image_radius", "label": "Image border radius (px)", "min": 0, "max": 200, "step": 2, "default": 20 },
+
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Because One Face Isn't Enough" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Wrap Every Occasion in Pure Ridiculous Joy" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Choose your product and make someone's day unforgettable." }
   ],
   "blocks": [
     {
       "type": "category",
       "name": "Category Card",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Category image"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Category label",
-          "default": "Gift Wrap"
-        },
-        {
-          "type": "textarea",
-          "id": "subtitle",
-          "label": "Card subtitle"
-        },
-        {
-          "type": "text",
-          "id": "btn_label",
-          "label": "Button label",
-          "default": "Shop All Gift Wrap Designs"
-        },
-        {
-          "type": "url",
-          "id": "btn_link",
-          "label": "Button link",
-          "default": "/collections/all"
-        }
+        { "type": "image_picker", "id": "image", "label": "Category image" },
+        { "type": "text", "id": "label", "label": "Category label", "default": "Gift Wrap" },
+        { "type": "textarea", "id": "subtitle", "label": "Card subtitle" },
+        { "type": "text", "id": "btn_label", "label": "Button label", "default": "Shop All Gift Wrap Designs" },
+        { "type": "url", "id": "btn_link", "label": "Button link", "default": "/collections/all" }
       ]
     }
   ],
@@ -596,30 +500,9 @@
     {
       "name": "Category Showcase",
       "blocks": [
-        {
-          "type": "category",
-          "settings": {
-            "label": "Gift Wrap",
-            "btn_label": "Shop All Gift Wrap Designs",
-            "btn_link": "/collections/gift-wrap"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "label": "Gift Tags",
-            "btn_label": "Explore Gift Tags Collection",
-            "btn_link": "/collections/gift-tags"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "label": "Socks",
-            "btn_label": "Browse All Face Socks",
-            "btn_link": "/collections/socks"
-          }
-        }
+        { "type": "category", "settings": { "label": "Gift Wrap", "btn_label": "Shop All Gift Wrap Designs", "btn_link": "/collections/gift-wrap" } },
+        { "type": "category", "settings": { "label": "Gift Tags", "btn_label": "Explore Gift Tags Collection", "btn_link": "/collections/gift-tags" } },
+        { "type": "category", "settings": { "label": "Socks", "btn_label": "Browse All Face Socks", "btn_link": "/collections/socks" } }
       ]
     }
   ]

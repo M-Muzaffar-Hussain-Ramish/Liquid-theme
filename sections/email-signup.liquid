@@ -2,203 +2,218 @@
   #shopify-section-{{ section.id }} {
     width: 100% !important;
     max-width: 100% !important;
-    background-color: {{ section.settings.bg_color }};
+    /* Colors */
+    --su-bg:           {{ section.settings.bg_color }};
+    --su-eyebrow:      {{ section.settings.eyebrow_color }};
+    --su-heading:      {{ section.settings.heading_color }};
+    --su-subtext:      {{ section.settings.subtext_color }};
+    --su-btn:          {{ section.settings.btn_color }};
+    --su-btn-text:     {{ section.settings.btn_text_color }};
+    --su-btn-bc:       {{ section.settings.btn_border_color }};
+    --su-input-bg:     {{ section.settings.input_bg_color }};
+    --su-input-text:   {{ section.settings.input_text_color }};
+    /* Eyebrow typography */
+    --su-eye-font:       {{ section.settings.eye_font }};
+    --su-eye-size:       {{ section.settings.eye_size }}px;
+    --su-eye-weight:     {{ section.settings.eye_weight }};
+    --su-eye-transform:  {{ section.settings.eye_transform }};
+    --su-eye-ls:         {{ section.settings.eye_ls | times: 0.1 }}px;
+    --su-eye-lh:         {{ section.settings.eye_lh | divided_by: 10.0 }};
+    --su-eye-style:      {{ section.settings.eye_style }};
+    --su-eye-decoration: {{ section.settings.eye_decoration }};
+    /* Heading typography */
+    --su-head-font:       {{ section.settings.head_font }};
+    --su-head-size:       {{ section.settings.head_size }}px;
+    --su-head-weight:     {{ section.settings.head_weight }};
+    --su-head-transform:  {{ section.settings.head_transform }};
+    --su-head-ls:         {{ section.settings.head_ls | times: 0.1 }}px;
+    --su-head-lh:         {{ section.settings.head_lh | divided_by: 10.0 }};
+    --su-head-style:      {{ section.settings.head_style }};
+    --su-head-decoration: {{ section.settings.head_decoration }};
+    /* Subtext typography */
+    --su-sub-font:       {{ section.settings.sub_font }};
+    --su-sub-size:       {{ section.settings.sub_size }}px;
+    --su-sub-weight:     {{ section.settings.sub_weight }};
+    --su-sub-transform:  {{ section.settings.sub_transform }};
+    --su-sub-ls:         {{ section.settings.sub_ls | times: 0.1 }}px;
+    --su-sub-lh:         {{ section.settings.sub_lh | divided_by: 10.0 }};
+    --su-sub-style:      {{ section.settings.sub_style }};
+    --su-sub-decoration: {{ section.settings.sub_decoration }};
+    /* Button typography */
+    --su-btn-font:       {{ section.settings.btn_font }};
+    --su-btn-size:       {{ section.settings.btn_size }}px;
+    --su-btn-weight:     {{ section.settings.btn_weight }};
+    --su-btn-transform:  {{ section.settings.btn_transform }};
+    --su-btn-ls:         {{ section.settings.btn_ls | times: 0.1 }}px;
+    --su-btn-lh:         {{ section.settings.btn_lh | divided_by: 10.0 }};
+    --su-btn-style:      {{ section.settings.btn_style }};
+    --su-btn-decoration: {{ section.settings.btn_decoration }};
+    /* Button style */
+    --su-btn-pv:     {{ section.settings.btn_pv }}px;
+    --su-btn-ph:     {{ section.settings.btn_ph }}px;
+    --su-btn-radius: {{ section.settings.btn_radius }}px;
+    --su-btn-bw:     {{ section.settings.btn_bw }}px;
+    --su-btn-minw:   {{ section.settings.btn_minw }}px;
+    /* Layout */
+    --su-form-maxw: {{ section.settings.form_max_width }}px;
+    --su-pt:        {{ section.settings.section_pt }}px;
+    --su-pb:        {{ section.settings.section_pb }}px;
+    /* Alignment & Container */
+    --su-align: {{ section.settings.content_align }};
+    --su-maxw:  {{ section.settings.content_max_width }}px;
+    --su-pl:    {{ section.settings.section_pl }}px;
+    --su-pr:    {{ section.settings.section_pr }}px;
+    --su-minh:  {{ section.settings.section_minh }}px;
+    background-color: var(--su-bg);
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      --su-eye-size:  {{ section.settings.eye_size_mobile }}px;
+      --su-head-size: {{ section.settings.head_size_mobile }}px;
+      --su-sub-size:  {{ section.settings.sub_size_mobile }}px;
+      --su-btn-size:  {{ section.settings.btn_size_mobile }}px;
+      --su-pt: {{ section.settings.section_pt_mobile }}px;
+      --su-pb: {{ section.settings.section_pb_mobile }}px;
+      --su-pl: {{ section.settings.section_pl_mobile }}px;
+      --su-pr: {{ section.settings.section_pr_mobile }}px;
+    }
   }
 {%- endstyle -%}
 
 <style>
-  .gwmf-signup {
-    position: relative;
-    width: 100%;
-    background-color: {{ section.settings.bg_color }};
-    overflow: hidden;
-  }
+  .gwmf-signup { position: relative; width: 100%; background-color: var(--su-bg); overflow: hidden; }
 
-  /* ---- WAVE TOP ---- */
-  .gwmf-signup__wave-top {
-    position: absolute;
-    top: -1px;
-    left: 0;
-    width: 100%;
-    line-height: 0;
-    pointer-events: none;
-    z-index: 1;
-  }
+  .gwmf-signup__wave-top { position: absolute; top: -1px; left: 0; width: 100%; line-height: 0; pointer-events: none; z-index: 1; }
+  .gwmf-signup__wave-top svg { display: block; width: 100%; height: 80px; }
 
-  .gwmf-signup__wave-top svg {
-    display: block;
-    width: 100%;
-    height: 80px;
-  }
-
-  /* ---- INNER ---- */
   .gwmf-signup__inner {
-    position: relative;
-    z-index: 2;
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 100px 32px 100px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
+    position: relative; z-index: 2;
+    max-width: var(--su-maxw); margin: 0 auto;
+    padding: var(--su-pt) var(--su-pr) var(--su-pb) var(--su-pl);
+    min-height: var(--su-minh);
+    text-align: var(--su-align);
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
   }
 
-  /* ---- TEXT ---- */
   .gwmf-signup__eyebrow {
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-    color: {{ section.settings.eyebrow_color }};
+    font-family: var(--su-eye-font);
+    font-size: var(--su-eye-size);
+    font-weight: var(--su-eye-weight);
+    text-transform: var(--su-eye-transform);
+    letter-spacing: var(--su-eye-ls);
+    line-height: var(--su-eye-lh);
+    font-style: var(--su-eye-style);
+    text-decoration: var(--su-eye-decoration);
+    color: var(--su-eyebrow);
     margin: 0;
   }
 
   .gwmf-signup__heading {
-    font-family: 'Dimbo', 'Outfit', sans-serif;
-    font-size: clamp(28px, 4vw, 52px);
-    font-weight: 800;
-    line-height: 1.1;
-    color: {{ section.settings.heading_color }};
+    font-family: var(--su-head-font);
+    font-size: var(--su-head-size);
+    font-weight: var(--su-head-weight);
+    text-transform: var(--su-head-transform);
+    letter-spacing: var(--su-head-ls);
+    line-height: var(--su-head-lh);
+    font-style: var(--su-head-style);
+    text-decoration: var(--su-head-decoration);
+    color: var(--su-heading);
     margin: 0;
   }
 
   .gwmf-signup__subtext {
-    font-family: 'Outfit', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: {{ section.settings.subtext_color }};
+    font-family: var(--su-sub-font);
+    font-size: var(--su-sub-size);
+    font-weight: var(--su-sub-weight);
+    text-transform: var(--su-sub-transform);
+    letter-spacing: var(--su-sub-ls);
+    line-height: var(--su-sub-lh);
+    font-style: var(--su-sub-style);
+    text-decoration: var(--su-sub-decoration);
+    color: var(--su-subtext);
     margin: 0 0 8px;
-    line-height: 1.5;
   }
 
-  /* ---- FORM ---- */
   .gwmf-signup__form {
-    display: flex;
-    align-items: stretch;
-    gap: 0;
-    width: 100%;
-    max-width: 620px;
+    display: flex; align-items: stretch; gap: 0;
+    width: 100%; max-width: var(--su-form-maxw);
     margin-top: 10px;
   }
 
   .gwmf-signup__input {
     flex: 1;
-    padding: 20px 24px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #4a5568;
-    background: #ffffff;
+    padding: var(--su-btn-pv) var(--su-btn-ph);
+    font-family: var(--su-btn-font);
+    font-size: var(--su-btn-size);
+    font-weight: var(--su-btn-weight);
+    letter-spacing: var(--su-btn-ls);
+    text-transform: var(--su-btn-transform);
+    color: var(--su-input-text);
+    background: var(--su-input-bg);
     border: none;
-    border-radius: 10px 0 0 10px;
+    border-radius: var(--su-btn-radius) 0 0 var(--su-btn-radius);
     outline: none;
     min-width: 0;
   }
 
-  .gwmf-signup__input::placeholder {
-    color: #8a9ab0;
-  }
+  .gwmf-signup__input::placeholder { color: #8a9ab0; }
 
   .gwmf-signup__btn {
     flex-shrink: 0;
-    padding: 20px 32px;
-    background: {{ section.settings.btn_color }};
-    color: {{ section.settings.btn_text_color }};
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 0 10px 10px 0;
+    padding: var(--su-btn-pv) var(--su-btn-ph);
+    background: var(--su-btn);
+    color: var(--su-btn-text);
+    font-family: var(--su-btn-font);
+    font-size: var(--su-btn-size);
+    font-weight: var(--su-btn-weight);
+    text-transform: var(--su-btn-transform);
+    letter-spacing: var(--su-btn-ls);
+    line-height: var(--su-btn-lh);
+    font-style: var(--su-btn-style);
+    text-decoration: var(--su-btn-decoration);
+    border: var(--su-btn-bw) solid var(--su-btn-bc);
+    border-radius: 0 var(--su-btn-radius) var(--su-btn-radius) 0;
+    min-width: var(--su-btn-minw);
     cursor: pointer;
     transition: filter 0.2s, transform 0.15s;
     white-space: nowrap;
   }
 
-  .gwmf-signup__btn:hover {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
-  }
+  .gwmf-signup__btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
-  /* Success / error messages */
   .gwmf-signup__msg {
     font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    margin: 4px 0 0;
-    min-height: 20px;
+    font-size: 14px; font-weight: 600;
+    color: #ffffff; margin: 4px 0 0; min-height: 20px;
   }
 
-  /* ---- ANIMATIONS ---- */
   .gwmf-signup__eyebrow,
   .gwmf-signup__heading,
   .gwmf-signup__subtext,
-  .gwmf-signup__form {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
+  .gwmf-signup__form { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
 
-  .gwmf-signup.is-visible .gwmf-signup__eyebrow {
-    opacity: 1; transform: translateY(0); transition-delay: 0s;
-  }
-  .gwmf-signup.is-visible .gwmf-signup__heading {
-    opacity: 1; transform: translateY(0); transition-delay: 0.1s;
-  }
-  .gwmf-signup.is-visible .gwmf-signup__subtext {
-    opacity: 1; transform: translateY(0); transition-delay: 0.18s;
-  }
-  .gwmf-signup.is-visible .gwmf-signup__form {
-    opacity: 1; transform: translateY(0); transition-delay: 0.28s;
-  }
+  .gwmf-signup.is-visible .gwmf-signup__eyebrow { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+  .gwmf-signup.is-visible .gwmf-signup__heading  { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+  .gwmf-signup.is-visible .gwmf-signup__subtext  { opacity: 1; transform: translateY(0); transition-delay: 0.18s; }
+  .gwmf-signup.is-visible .gwmf-signup__form     { opacity: 1; transform: translateY(0); transition-delay: 0.28s; }
 
-  /* ---- RESPONSIVE ---- */
   @media screen and (max-width: 989px) {
-    .gwmf-signup__inner {
-      padding: 88px 32px 88px;
-    }
-    .gwmf-signup__wave-top svg {
-      height: 56px;
-    }
+    .gwmf-signup__inner { padding: calc(var(--su-pt) * 0.88) calc(var(--su-pr) * 0.75) calc(var(--su-pb) * 0.88) calc(var(--su-pl) * 0.75); }
+    .gwmf-signup__wave-top svg { height: 56px; }
   }
-
   @media screen and (max-width: 749px) {
-    .gwmf-signup__inner {
-      padding: 72px 20px 72px;
-      gap: 12px;
-    }
-    .gwmf-signup__wave-top svg {
-      height: 40px;
-    }
-    .gwmf-signup__form {
-      flex-direction: column;
-      gap: 10px;
-    }
-    .gwmf-signup__input {
-      border-radius: 10px;
-      text-align: center;
-    }
-    .gwmf-signup__btn {
-      border-radius: 10px;
-      padding: 18px 32px;
-    }
+    .gwmf-signup__inner { padding: var(--su-pt) var(--su-pr) var(--su-pb) var(--su-pl); gap: 12px; }
+    .gwmf-signup__wave-top svg { height: 40px; }
+    .gwmf-signup__form { flex-direction: column; gap: 10px; }
+    .gwmf-signup__input { border-radius: var(--su-btn-radius); text-align: center; }
+    .gwmf-signup__btn { border-radius: var(--su-btn-radius); }
   }
-
   @media screen and (max-width: 480px) {
-    .gwmf-signup__inner {
-      padding: 60px 16px 60px;
-    }
+    .gwmf-signup__inner { padding: var(--su-pt) var(--su-pr) var(--su-pb) var(--su-pl); }
   }
 </style>
 
 <section class="gwmf-signup" id="shopify-section-{{ section.id }}">
-  <!-- Wave top: white dips down into blue -->
   <div class="gwmf-signup__wave-top">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,0 C480,80 960,80 1440,0 Z" fill="#ffffff"/>
@@ -218,7 +233,6 @@
       <p class="gwmf-signup__subtext">{{ section.settings.subtext }}</p>
     {%- endif -%}
 
-    <!-- Shopify customer email signup form -->
     {%- form 'customer', id: 'gwmf-signup-form' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
       <div class="gwmf-signup__form">
@@ -262,91 +276,94 @@
   "name": "Email Signup",
   "tag": "section",
   "settings": [
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background color",
-      "default": "#1a6fcc"
-    },
-    {
-      "type": "color",
-      "id": "eyebrow_color",
-      "label": "Eyebrow color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "subtext_color",
-      "label": "Subtext color",
-      "default": "#cde3f7"
-    },
-    {
-      "type": "color",
-      "id": "btn_color",
-      "label": "Button background color",
-      "default": "#e8430a"
-    },
-    {
-      "type": "color",
-      "id": "btn_text_color",
-      "label": "Button text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow text",
-      "default": "Join the Fun"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Get First Dibs on New Designs & Promo Codes"
-    },
-    {
-      "type": "text",
-      "id": "subtext",
-      "label": "Subtext",
-      "default": "Join our email list and stay in the loop for fresh drops & holiday deals."
-    },
-    {
-      "type": "text",
-      "id": "input_placeholder",
-      "label": "Input placeholder",
-      "default": "YOUR EMAIL ADDRESS"
-    },
-    {
-      "type": "text",
-      "id": "btn_label",
-      "label": "Button label",
-      "default": "SIGN ME UP!"
-    },
-    {
-      "type": "text",
-      "id": "success_msg",
-      "label": "Success message",
-      "default": "You're in! Thanks for subscribing."
-    }
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color",          "label": "Background",         "default": "#1a6fcc" },
+    { "type": "color", "id": "eyebrow_color",      "label": "Eyebrow color",      "default": "#ffffff" },
+    { "type": "color", "id": "heading_color",      "label": "Heading color",      "default": "#ffffff" },
+    { "type": "color", "id": "subtext_color",      "label": "Subtext color",      "default": "#cde3f7" },
+    { "type": "color", "id": "btn_color",          "label": "Button background",  "default": "#e8430a" },
+    { "type": "color", "id": "btn_text_color",     "label": "Button text",        "default": "#ffffff" },
+    { "type": "color", "id": "btn_border_color",   "label": "Button border",      "default": "#e8430a" },
+    { "type": "color", "id": "input_bg_color",     "label": "Input background",   "default": "#ffffff" },
+    { "type": "color", "id": "input_text_color",   "label": "Input text",         "default": "#4a5568" },
+
+    { "type": "header", "content": "Typography — Eyebrow" },
+    { "type": "select", "id": "eye_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range",  "id": "eye_size", "label": "Size — desktop (px)", "min": 10, "max": 100, "step": 1, "default": 14 },
+    { "type": "select", "id": "eye_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "700" },
+    { "type": "select", "id": "eye_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "uppercase" },
+    { "type": "range",  "id": "eye_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 25 },
+    { "type": "range",  "id": "eye_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 14 },
+    { "type": "select", "id": "eye_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "eye_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Heading" },
+    { "type": "select", "id": "head_font", "label": "Font family", "options": [{ "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }, { "value": "Outfit, sans-serif", "label": "Outfit (Body)" }], "default": "Dimbo, Outfit, sans-serif" },
+    { "type": "range",  "id": "head_size", "label": "Size — desktop (px)", "min": 20, "max": 220, "step": 2, "default": 52 },
+    { "type": "select", "id": "head_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }, { "value": "900", "label": "900" }], "default": "800" },
+    { "type": "select", "id": "head_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range",  "id": "head_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range",  "id": "head_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 11 },
+    { "type": "select", "id": "head_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "head_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Subtext" },
+    { "type": "select", "id": "sub_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range",  "id": "sub_size", "label": "Size — desktop (px)", "min": 12, "max": 112, "step": 1, "default": 16 },
+    { "type": "select", "id": "sub_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "600" },
+    { "type": "select", "id": "sub_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range",  "id": "sub_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range",  "id": "sub_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 15 },
+    { "type": "select", "id": "sub_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "sub_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Button / Input" },
+    { "type": "select", "id": "btn_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range",  "id": "btn_size", "label": "Size (px)", "min": 10, "max": 100, "step": 1, "default": 13 },
+    { "type": "select", "id": "btn_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "800" },
+    { "type": "select", "id": "btn_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "uppercase" },
+    { "type": "range",  "id": "btn_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 15 },
+    { "type": "range",  "id": "btn_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 12 },
+    { "type": "select", "id": "btn_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "btn_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Button Style" },
+    { "type": "range", "id": "btn_pv",     "label": "Padding vertical (px)",   "min": 8,  "max": 200,  "step": 2, "default": 20 },
+    { "type": "range", "id": "btn_ph",     "label": "Padding horizontal (px)", "min": 12, "max": 400,  "step": 4, "default": 32 },
+    { "type": "range", "id": "btn_radius", "label": "Border radius (px)",      "min": 0,  "max": 200,  "step": 2, "default": 10 },
+    { "type": "range", "id": "btn_bw",     "label": "Border width (px)",       "min": 0,  "max": 20,   "step": 1, "default": 0 },
+    { "type": "range", "id": "btn_minw",   "label": "Min width (px)",          "min": 0,  "max": 800, "step": 8, "default": 0 },
+
+    { "type": "header", "content": "Spacing & Layout" },
+    { "type": "range", "id": "section_pt",    "label": "Padding top (px)",    "min": 40, "max": 400, "step": 4, "default": 100 },
+    { "type": "range", "id": "section_pb",    "label": "Padding bottom (px)", "min": 40, "max": 400, "step": 4, "default": 100 },
+    { "type": "range", "id": "form_max_width","label": "Form max width (px)", "min": 320,"max": 1200, "step": 20, "default": 620 },
+
+    { "type": "header", "content": "Mobile Sizes" },
+    { "type": "range", "id": "eye_size_mobile",   "label": "Eyebrow size — mobile (px)", "min": 10, "max": 100, "step": 1, "default": 13 },
+    { "type": "range", "id": "head_size_mobile",  "label": "Heading size — mobile (px)", "min": 20, "max": 220, "step": 2, "default": 40 },
+    { "type": "range", "id": "sub_size_mobile",   "label": "Subtext size — mobile (px)", "min": 12, "max": 112, "step": 1, "default": 14 },
+    { "type": "range", "id": "btn_size_mobile",   "label": "Button size — mobile (px)",  "min": 10, "max": 100, "step": 1, "default": 13 },
+    { "type": "range", "id": "section_pt_mobile", "label": "Padding top — mobile (px)",  "min": 40, "max": 400, "step": 4, "default": 72 },
+    { "type": "range", "id": "section_pb_mobile", "label": "Padding bottom — mobile (px)","min": 40, "max": 400, "step": 4, "default": 72 },
+    { "type": "range", "id": "section_pl_mobile", "label": "Padding left — mobile (px)",  "min": 0,  "max": 200, "step": 4, "default": 16 },
+    { "type": "range", "id": "section_pr_mobile", "label": "Padding right — mobile (px)", "min": 0,  "max": 200, "step": 4, "default": 16 },
+
+    { "type": "header", "content": "Alignment & Container" },
+    { "type": "select", "id": "content_align", "label": "Text alignment", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default": "center" },
+    { "type": "range", "id": "content_max_width", "label": "Container max width (px)", "min": 400, "max": 1600, "step": 20, "default": 760 },
+    { "type": "range", "id": "section_pl", "label": "Padding left (px)", "min": 0, "max": 200, "step": 4, "default": 32 },
+    { "type": "range", "id": "section_pr", "label": "Padding right (px)", "min": 0, "max": 200, "step": 4, "default": 32 },
+    { "type": "range", "id": "section_minh", "label": "Min height (px)", "min": 0, "max": 800, "step": 8, "default": 0 },
+
+    { "type": "header", "content": "Content" },
+    { "type": "text",     "id": "eyebrow",           "label": "Eyebrow",           "default": "Join the Fun" },
+    { "type": "text",     "id": "heading",            "label": "Heading",           "default": "Get First Dibs on New Designs & Promo Codes" },
+    { "type": "text",     "id": "subtext",            "label": "Subtext",           "default": "Join our email list and stay in the loop for fresh drops & holiday deals." },
+    { "type": "text",     "id": "input_placeholder",  "label": "Input placeholder", "default": "YOUR EMAIL ADDRESS" },
+    { "type": "text",     "id": "btn_label",          "label": "Button label",      "default": "SIGN ME UP!" },
+    { "type": "text",     "id": "success_msg",        "label": "Success message",   "default": "You're in! Thanks for subscribing." }
   ],
-  "presets": [
-    {
-      "name": "Email Signup"
-    }
-  ]
+  "presets": [{ "name": "Email Signup" }]
 }
 {% endschema %}

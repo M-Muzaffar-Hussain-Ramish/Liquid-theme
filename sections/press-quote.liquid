@@ -1,222 +1,137 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
+    /* Colors */
     --press-bg:    {{ section.settings.bg_color }};
     --press-quote: {{ section.settings.quote_color }};
     --press-stat:  {{ section.settings.stat_color }};
+    /* Quote */
+    --press-q-font:      {{ section.settings.q_font }};
+    --press-q-size:      {{ section.settings.q_size }}px;
+    --press-q-weight:    {{ section.settings.q_weight }};
+    --press-q-transform: {{ section.settings.q_transform }};
+    --press-q-ls:        {{ section.settings.q_ls | times: 0.1 }}px;
+    --press-q-lh:        {{ section.settings.q_lh | divided_by: 10.0 }};
+    --press-q-style:     {{ section.settings.q_style }};
+    --press-q-decoration:{{ section.settings.q_decoration }};
+    /* Stat */
+    --press-s-font:      {{ section.settings.s_font }};
+    --press-s-size:      {{ section.settings.s_size }}px;
+    --press-s-weight:    {{ section.settings.s_weight }};
+    --press-s-transform: {{ section.settings.s_transform }};
+    --press-s-ls:        {{ section.settings.s_ls | times: 0.1 }}px;
+    --press-s-lh:        {{ section.settings.s_lh | divided_by: 10.0 }};
+    --press-s-style:     {{ section.settings.s_style }};
+    --press-s-decoration:{{ section.settings.s_decoration }};
+    /* Layout */
+    --press-logo-maxh: {{ section.settings.logo_max_height }}px;
+    --press-pt:        {{ section.settings.section_pt }}px;
+    --press-pb:        {{ section.settings.section_pb }}px;
+    /* Alignment & Container */
+    --press-align: {{ section.settings.content_align }};
+    --press-maxw:  {{ section.settings.content_max_width }}px;
+    --press-pl:    {{ section.settings.section_pl }}px;
+    --press-pr:    {{ section.settings.section_pr }}px;
+    --press-minh:  {{ section.settings.section_minh }}px;
     background-color: var(--press-bg);
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      --press-q-size: {{ section.settings.q_size_mobile }}px;
+      --press-s-size: {{ section.settings.s_size_mobile }}px;
+      --press-pt: {{ section.settings.section_pt_mobile }}px;
+      --press-pb: {{ section.settings.section_pb_mobile }}px;
+      --press-pl: {{ section.settings.section_pl_mobile }}px;
+      --press-pr: {{ section.settings.section_pr_mobile }}px;
+    }
   }
 {%- endstyle -%}
 
 <style>
-  .gwmf-press {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
+  .gwmf-press { position: relative; width: 100%; overflow: hidden; }
 
-  .gwmf-press__wave-top,
-  .gwmf-press__wave-bottom {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    line-height: 0;
-    pointer-events: none;
-    z-index: 1;
-  }
+  .gwmf-press__wave-top, .gwmf-press__wave-bottom { position: absolute; left: 0; width: 100%; line-height: 0; pointer-events: none; z-index: 1; }
+  .gwmf-press__wave-top { top: -1px; }
+  .gwmf-press__wave-bottom { bottom: -1px; }
+  .gwmf-press__wave-top svg, .gwmf-press__wave-bottom svg { display: block; width: 100%; height: 80px; }
 
-  .gwmf-press__wave-top {
-    top: -1px;
-  }
-
-  .gwmf-press__wave-bottom {
-    bottom: -1px;
-  }
-
-  .gwmf-press__wave-top svg,
-  .gwmf-press__wave-bottom svg {
-    display: block;
-    width: 100%;
-    height: 80px;
-  }
-
-  /* Decorative circles */
-  .gwmf-press::before,
-  .gwmf-press::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .gwmf-press::before {
-    width: 460px;
-    height: 460px;
-    left: -120px;
-    bottom: -100px;
-  }
-
-  .gwmf-press::after {
-    width: 320px;
-    height: 320px;
-    right: -60px;
-    top: -40px;
-  }
+  .gwmf-press::before, .gwmf-press::after { content: ''; position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); pointer-events: none; z-index: 0; }
+  .gwmf-press::before { width: 460px; height: 460px; left: -120px; bottom: -100px; }
+  .gwmf-press::after { width: 320px; height: 320px; right: -60px; top: -40px; }
 
   .gwmf-press__inner {
-    position: relative;
-    z-index: 2;
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 100px 40px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    position: relative; z-index: 2;
+    max-width: var(--press-maxw); margin: 0 auto;
+    padding: var(--press-pt) var(--press-pr) var(--press-pb) var(--press-pl);
+    min-height: var(--press-minh);
+    text-align: var(--press-align);
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
   }
 
-  .gwmf-press__logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .gwmf-press__logo img {
-    max-height: 80px;
-    width: auto;
-    display: block;
-    filter: brightness(0) invert(1);
-  }
-
-  .gwmf-press__logo-placeholder {
-    font-family: 'Outfit', sans-serif;
-    font-size: 18px;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
+  .gwmf-press__logo { display: flex; align-items: center; justify-content: center; }
+  .gwmf-press__logo img { max-height: var(--press-logo-maxh); width: auto; display: block; filter: brightness(0) invert(1); }
+  .gwmf-press__logo-placeholder { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800; color: #fff; letter-spacing: 3px; text-transform: uppercase; }
 
   .gwmf-press__quote {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(22px, 3vw, 36px);
-    font-weight: 800;
+    font-family: var(--press-q-font);
+    font-size: var(--press-q-size);
+    font-weight: var(--press-q-weight);
+    text-transform: var(--press-q-transform);
+    letter-spacing: var(--press-q-ls);
+    line-height: var(--press-q-lh);
+    font-style: var(--press-q-style);
+    text-decoration: var(--press-q-decoration);
     color: var(--press-quote);
-    line-height: 1.25;
-    margin: 0;
-    max-width: 780px;
+    margin: 0; max-width: 780px;
   }
 
   .gwmf-press__stat {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(16px, 1.8vw, 22px);
-    font-weight: 800;
+    font-family: var(--press-s-font);
+    font-size: var(--press-s-size);
+    font-weight: var(--press-s-weight);
+    text-transform: var(--press-s-transform);
+    letter-spacing: var(--press-s-ls);
+    line-height: var(--press-s-lh);
+    font-style: var(--press-s-style);
+    text-decoration: var(--press-s-decoration);
     color: var(--press-stat);
     margin: 12px 0 0;
-    letter-spacing: 0.3px;
   }
 
-  /* ---- ANIMATIONS ---- */
-  .gwmf-press__logo,
-  .gwmf-press__quote,
-  .gwmf-press__stat {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
-  }
-
-  .gwmf-press.is-visible .gwmf-press__logo {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0s;
-  }
-
-  .gwmf-press.is-visible .gwmf-press__quote {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.15s;
-  }
-
-  .gwmf-press.is-visible .gwmf-press__stat {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.3s;
-  }
+  .gwmf-press__logo, .gwmf-press__quote, .gwmf-press__stat { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .gwmf-press.is-visible .gwmf-press__logo { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+  .gwmf-press.is-visible .gwmf-press__quote { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+  .gwmf-press.is-visible .gwmf-press__stat { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
 
   @media screen and (max-width: 989px) {
-    .gwmf-press__inner {
-      padding: 88px 32px;
-    }
-    .gwmf-press__wave-top svg,
-    .gwmf-press__wave-bottom svg {
-      height: 56px;
-    }
+    .gwmf-press__inner { padding: calc(var(--press-pt)*0.88) calc(var(--press-pr)*0.75) calc(var(--press-pb)*0.88) calc(var(--press-pl)*0.75); }
+    .gwmf-press__wave-top svg, .gwmf-press__wave-bottom svg { height: 56px; }
   }
-
   @media screen and (max-width: 749px) {
-    .gwmf-press__inner {
-      padding: 72px 20px;
-      gap: 16px;
-    }
-    .gwmf-press__wave-top svg,
-    .gwmf-press__wave-bottom svg {
-      height: 40px;
-    }
-    .gwmf-press__logo img {
-      max-height: 56px;
-    }
-    .gwmf-press__quote {
-      font-size: clamp(18px, 5.5vw, 26px);
-    }
-    .gwmf-press__stat {
-      font-size: 16px;
-    }
+    .gwmf-press__inner { padding: var(--press-pt) var(--press-pr) var(--press-pb) var(--press-pl); gap: 16px; }
+    .gwmf-press__wave-top svg, .gwmf-press__wave-bottom svg { height: 40px; }
   }
-
   @media screen and (max-width: 480px) {
-    .gwmf-press__inner {
-      padding: 60px 16px;
-    }
+    .gwmf-press__inner { padding: var(--press-pt) var(--press-pr) var(--press-pb) var(--press-pl); }
   }
 </style>
 
 <section class="gwmf-press" id="shopify-section-{{ section.id }}">
-  <!-- Wave top: white lens curves down into center -->
   <div class="gwmf-press__wave-top">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 C480,80 960,80 1440,0 Z" fill="#ffffff"/>
-    </svg>
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C480,80 960,80 1440,0 Z" fill="#ffffff"/></svg>
   </div>
-
   <div class="gwmf-press__inner">
-    <!-- Press logo -->
     <div class="gwmf-press__logo">
       {%- if section.settings.press_logo != blank -%}
-        {%- assign logo_alt = section.settings.press_logo.alt | default: section.settings.press_name | escape -%}
-        {{ section.settings.press_logo | image_url: width: 400 | image_tag: alt: logo_alt, loading: 'lazy' }}
+        {{ section.settings.press_logo | image_url: width: 400 | image_tag: alt: section.settings.press_name, loading: 'lazy' }}
       {%- elsif section.settings.press_name != blank -%}
         <span class="gwmf-press__logo-placeholder">{{ section.settings.press_name }}</span>
       {%- endif -%}
     </div>
-
-    <!-- Quote -->
-    {%- if section.settings.quote != blank -%}
-      <p class="gwmf-press__quote">&ldquo;{{ section.settings.quote }}&rdquo;</p>
-    {%- endif -%}
-
-    <!-- Stat -->
-    {%- if section.settings.stat != blank -%}
-      <p class="gwmf-press__stat">{{ section.settings.stat }}</p>
-    {%- endif -%}
+    {%- if section.settings.quote != blank -%}<p class="gwmf-press__quote">&ldquo;{{ section.settings.quote }}&rdquo;</p>{%- endif -%}
+    {%- if section.settings.stat != blank -%}<p class="gwmf-press__stat">{{ section.settings.stat }}</p>{%- endif -%}
   </div>
-
-  <!-- Wave bottom: white fills sides, center dips down same as top -->
   <div class="gwmf-press__wave-bottom">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 C480,80 960,80 1440,0 L1440,80 L0,80 Z" fill="#ffffff"/>
-    </svg>
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C480,80 960,80 1440,0 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
   </div>
 </section>
 
@@ -236,60 +151,57 @@
   "name": "Press Quote",
   "tag": "section",
   "settings": [
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background color",
-      "default": "#1a6fcc"
-    },
-    {
-      "type": "color",
-      "id": "quote_color",
-      "label": "Quote text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "stat_color",
-      "label": "Stat text color",
-      "default": "#FFD600"
-    },
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "image_picker",
-      "id": "press_logo",
-      "label": "Press logo (will be shown white)"
-    },
-    {
-      "type": "text",
-      "id": "press_name",
-      "label": "Press name (fallback if no logo)",
-      "default": "TODAY"
-    },
-    {
-      "type": "textarea",
-      "id": "quote",
-      "label": "Quote",
-      "default": "Customizable wrapping paper that’s just as exciting as the actual gift"
-    },
-    {
-      "type": "text",
-      "id": "stat",
-      "label": "Stat / supporting text",
-      "default": "Over 250,000 gifts wrapped"
-    }
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#1a6fcc" },
+    { "type": "color", "id": "quote_color", "label": "Quote color", "default": "#ffffff" },
+    { "type": "color", "id": "stat_color", "label": "Stat color", "default": "#FFD600" },
+
+    { "type": "header", "content": "Typography — Quote" },
+    { "type": "select", "id": "q_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "q_size", "label": "Size — desktop (px)", "min": 14, "max": 214, "step": 2, "default": 36 },
+    { "type": "select", "id": "q_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "800" },
+    { "type": "select", "id": "q_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "q_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "q_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 13 },
+    { "type": "select", "id": "q_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "italic" },
+    { "type": "select", "id": "q_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Stat" },
+    { "type": "select", "id": "s_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "s_size", "label": "Size — desktop (px)", "min": 12, "max": 112, "step": 1, "default": 22 },
+    { "type": "select", "id": "s_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "800" },
+    { "type": "select", "id": "s_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "s_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "s_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 14 },
+    { "type": "select", "id": "s_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "s_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Spacing & Logo" },
+    { "type": "range", "id": "logo_max_height", "label": "Logo max height (px)", "min": 32, "max": 400, "step": 4, "default": 80 },
+    { "type": "range", "id": "section_pt", "label": "Padding top (px)", "min": 40, "max": 400, "step": 4, "default": 100 },
+    { "type": "range", "id": "section_pb", "label": "Padding bottom (px)", "min": 40, "max": 400, "step": 4, "default": 100 },
+
+    { "type": "header", "content": "Mobile Sizes" },
+    { "type": "range", "id": "q_size_mobile",     "label": "Quote size — mobile (px)",    "min": 14, "max": 214, "step": 2, "default": 26 },
+    { "type": "range", "id": "s_size_mobile",     "label": "Stat size — mobile (px)",     "min": 12, "max": 112, "step": 1, "default": 18 },
+    { "type": "range", "id": "section_pt_mobile", "label": "Padding top — mobile (px)",   "min": 40, "max": 400, "step": 4, "default": 72 },
+    { "type": "range", "id": "section_pb_mobile", "label": "Padding bottom — mobile (px)","min": 40, "max": 400, "step": 4, "default": 72 },
+    { "type": "range", "id": "section_pl_mobile", "label": "Padding left — mobile (px)",  "min": 0,  "max": 200, "step": 4, "default": 20 },
+    { "type": "range", "id": "section_pr_mobile", "label": "Padding right — mobile (px)", "min": 0,  "max": 200, "step": 4, "default": 20 },
+
+    { "type": "header", "content": "Alignment & Container" },
+    { "type": "select", "id": "content_align", "label": "Text alignment", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default": "center" },
+    { "type": "range", "id": "content_max_width", "label": "Container max width (px)", "min": 400, "max": 1600, "step": 20, "default": 860 },
+    { "type": "range", "id": "section_pl", "label": "Padding left (px)", "min": 0, "max": 200, "step": 4, "default": 40 },
+    { "type": "range", "id": "section_pr", "label": "Padding right (px)", "min": 0, "max": 200, "step": 4, "default": 40 },
+    { "type": "range", "id": "section_minh", "label": "Min height (px)", "min": 0, "max": 800, "step": 8, "default": 0 },
+
+    { "type": "header", "content": "Content" },
+    { "type": "image_picker", "id": "press_logo", "label": "Press logo (shown white)" },
+    { "type": "text", "id": "press_name", "label": "Press name (fallback)", "default": "TODAY" },
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "Customizable wrapping paper that's just as exciting as the actual gift" },
+    { "type": "text", "id": "stat", "label": "Stat / supporting text", "default": "Over 250,000 gifts wrapped" }
   ],
-  "presets": [
-    {
-      "name": "Press Quote"
-    }
-  ]
+  "presets": [{ "name": "Press Quote" }]
 }
 {% endschema %}

@@ -1,12 +1,77 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    --hero-bg:        {{ section.settings.bg_color }};
-    --hero-word1:     {{ section.settings.word1_color }};
-    --hero-word2:     {{ section.settings.word2_color }};
-    --hero-sub:       {{ section.settings.subheading_color }};
-    --hero-btn-bg:    {{ section.settings.btn_bg_color }};
-    --hero-btn-text:  {{ section.settings.btn_text_color }};
+    /* Colors */
+    --hero-bg:         {{ section.settings.bg_color }};
+    --hero-word1:      {{ section.settings.word1_color }};
+    --hero-word2:      {{ section.settings.word2_color }};
+    --hero-sub:        {{ section.settings.subheading_color }};
+    --hero-btn-bg:     {{ section.settings.btn_bg_color }};
+    --hero-btn-text:   {{ section.settings.btn_text_color }};
+    --hero-btn-bc:     {{ section.settings.btn_border_color }};
+    /* Heading 1 */
+    --hero-h1-font:      {{ section.settings.h1_font }};
+    --hero-h1-size:      {{ section.settings.h1_size }}px;
+    --hero-h1-weight:    {{ section.settings.h1_weight }};
+    --hero-h1-transform: {{ section.settings.h1_transform }};
+    --hero-h1-ls:        {{ section.settings.h1_ls | times: 0.1 }}px;
+    --hero-h1-lh:        {{ section.settings.h1_lh | divided_by: 10.0 }};
+    --hero-h1-style:     {{ section.settings.h1_style }};
+    --hero-h1-decoration:{{ section.settings.h1_decoration }};
+    /* Heading 2 */
+    --hero-h2-font:      {{ section.settings.h2_font }};
+    --hero-h2-size:      {{ section.settings.h2_size }}px;
+    --hero-h2-weight:    {{ section.settings.h2_weight }};
+    --hero-h2-transform: {{ section.settings.h2_transform }};
+    --hero-h2-ls:        {{ section.settings.h2_ls | times: 0.1 }}px;
+    --hero-h2-lh:        {{ section.settings.h2_lh | divided_by: 10.0 }};
+    --hero-h2-style:     {{ section.settings.h2_style }};
+    --hero-h2-decoration:{{ section.settings.h2_decoration }};
+    /* Subheading */
+    --hero-sub-font:      {{ section.settings.sub_font }};
+    --hero-sub-size:      {{ section.settings.sub_size }}px;
+    --hero-sub-weight:    {{ section.settings.sub_weight }};
+    --hero-sub-transform: {{ section.settings.sub_transform }};
+    --hero-sub-ls:        {{ section.settings.sub_ls | times: 0.1 }}px;
+    --hero-sub-lh:        {{ section.settings.sub_lh | divided_by: 10.0 }};
+    --hero-sub-style:     {{ section.settings.sub_style }};
+    --hero-sub-decoration: {{ section.settings.sub_decoration }};
+    /* Button */
+    --hero-btn-font:       {{ section.settings.btn_font }};
+    --hero-btn-size:       {{ section.settings.btn_size }}px;
+    --hero-btn-weight:     {{ section.settings.btn_weight }};
+    --hero-btn-transform:  {{ section.settings.btn_transform }};
+    --hero-btn-ls:         {{ section.settings.btn_ls | times: 0.1 }}px;
+    --hero-btn-lh:         {{ section.settings.btn_lh | divided_by: 10.0 }};
+    --hero-btn-style:      {{ section.settings.btn_style }};
+    --hero-btn-decoration: {{ section.settings.btn_decoration }};
+    --hero-btn-pv:         {{ section.settings.btn_pv }}px;
+    --hero-btn-ph:         {{ section.settings.btn_ph }}px;
+    --hero-btn-radius:     {{ section.settings.btn_radius }}px;
+    --hero-btn-bw:         {{ section.settings.btn_border_width }}px;
+    --hero-btn-minw:       {{ section.settings.btn_min_width }}px;
+    /* Layout */
+    --hero-img-maxw: {{ section.settings.image_max_width }}px;
+    --hero-pt:       {{ section.settings.section_pt }}px;
+    --hero-pb:       {{ section.settings.section_pb }}px;
+    /* Alignment & Container */
+    --hero-align: {{ section.settings.content_align }};
+    --hero-maxw:  {{ section.settings.content_max_width }}px;
+    --hero-pl:    {{ section.settings.section_pl }}px;
+    --hero-pr:    {{ section.settings.section_pr }}px;
+    --hero-minh:  {{ section.settings.section_minh }}px;
     background-color: var(--hero-bg);
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      --hero-h1-size:  {{ section.settings.h1_size_mobile }}px;
+      --hero-h2-size:  {{ section.settings.h2_size_mobile }}px;
+      --hero-sub-size: {{ section.settings.sub_size_mobile }}px;
+      --hero-btn-size: {{ section.settings.btn_size_mobile }}px;
+      --hero-pt: {{ section.settings.section_pt_mobile }}px;
+      --hero-pb: {{ section.settings.section_pb_mobile }}px;
+      --hero-pl: {{ section.settings.section_pl_mobile }}px;
+      --hero-pr: {{ section.settings.section_pr_mobile }}px;
+    }
   }
 {%- endstyle -%}
 
@@ -17,17 +82,16 @@
     overflow: hidden;
   }
 
-  /* Snow dots background */
   .gwmf-hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.85) 5px, transparent 5px),
-      radial-gradient(circle, rgba(255, 255, 255, 0.7) 4px, transparent 4px),
-      radial-gradient(circle, rgba(255, 255, 255, 0.9) 6px, transparent 6px),
-      radial-gradient(circle, rgba(255, 255, 255, 0.75) 4px, transparent 4px),
-      radial-gradient(circle, rgba(255, 255, 255, 0.8) 5px, transparent 5px),
-      radial-gradient(circle, rgba(255, 255, 255, 0.65) 3px, transparent 3px);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.85) 5px, transparent 5px),
+      radial-gradient(circle, rgba(255,255,255,0.7) 4px, transparent 4px),
+      radial-gradient(circle, rgba(255,255,255,0.9) 6px, transparent 6px),
+      radial-gradient(circle, rgba(255,255,255,0.75) 4px, transparent 4px),
+      radial-gradient(circle, rgba(255,255,255,0.8) 5px, transparent 5px),
+      radial-gradient(circle, rgba(255,255,255,0.65) 3px, transparent 3px);
     background-size: 280px 280px, 200px 200px, 340px 340px, 220px 220px, 300px 300px, 180px 180px;
     background-position: 30px 40px, 100px 160px, 200px 60px, 60px 220px, 260px 140px, 140px 80px;
     pointer-events: none;
@@ -37,57 +101,63 @@
   .gwmf-hero__inner {
     position: relative;
     z-index: 1;
-    max-width: 1400px;
+    max-width: var(--hero-maxw);
     margin: 0 auto;
-    padding: 60px 48px 0px 64px;
+    padding: var(--hero-pt) var(--hero-pr) var(--hero-pb) var(--hero-pl);
     display: grid;
     grid-template-columns: 45% 55%;
     align-items: center;
-    min-height: 520px;
+    min-height: var(--hero-minh);
     gap: 0;
+    text-align: var(--hero-align);
   }
 
-  /* ---- LEFT COLUMN ---- */
   .gwmf-hero__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 18px;
     padding-right: 20px;
+    margin-bottom: 50px;
   }
 
-  .gwmf-hero__heading {
-    margin: 0;
-    line-height: 0.9;
-  }
+  .gwmf-hero__heading { margin: 0; line-height: 0.9; }
 
   .gwmf-hero__word1 {
     display: block;
-    font-family: 'Dimbo', 'Outfit', sans-serif;
-    font-size: clamp(80px, 10vw, 140px);
-    font-weight: 800;
+    font-family: var(--hero-h1-font);
+    font-size: var(--hero-h1-size);
+    font-weight: var(--hero-h1-weight);
+    text-transform: var(--hero-h1-transform);
+    letter-spacing: var(--hero-h1-ls);
+    line-height: var(--hero-h1-lh);
+    font-style: var(--hero-h1-style);
     color: var(--hero-word1);
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    line-height: 0.95;
+    text-decoration: var(--hero-h1-decoration);
   }
 
   .gwmf-hero__word2 {
     display: block;
-    font-family: 'Amatic SC', cursive;
-    font-size: clamp(52px, 6.5vw, 90px);
-    font-weight: 700;
+    font-family: var(--hero-h2-font);
+    font-size: var(--hero-h2-size);
+    font-weight: var(--hero-h2-weight);
+    text-transform: var(--hero-h2-transform);
+    letter-spacing: var(--hero-h2-ls);
+    line-height: var(--hero-h2-lh);
+    font-style: var(--hero-h2-style);
     color: var(--hero-word2);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    line-height: 1.05;
+    text-decoration: var(--hero-h2-decoration);
   }
 
   .gwmf-hero__subheading {
-    font-family: 'Outfit', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1.4;
+    font-family: var(--hero-sub-font);
+    font-size: var(--hero-sub-size);
+    font-weight: var(--hero-sub-weight);
+    text-transform: var(--hero-sub-transform);
+    letter-spacing: var(--hero-sub-ls);
+    line-height: var(--hero-sub-lh);
+    font-style: var(--hero-sub-style);
+    text-decoration: var(--hero-sub-decoration);
     color: var(--hero-sub);
     margin: 4px 0 0;
     max-width: 420px;
@@ -97,29 +167,27 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 16px 32px;
+    padding: var(--hero-btn-pv) var(--hero-btn-ph);
     background: var(--hero-btn-bg);
     color: var(--hero-btn-text);
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    text-decoration: none;
-    border-radius: 6px;
-    border: none;
+    font-family: var(--hero-btn-font);
+    font-size: var(--hero-btn-size);
+    font-weight: var(--hero-btn-weight);
+    text-transform: var(--hero-btn-transform);
+    letter-spacing: var(--hero-btn-ls);
+    line-height: var(--hero-btn-lh);
+    font-style: var(--hero-btn-style);
+    text-decoration: var(--hero-btn-decoration);
+    border-radius: var(--hero-btn-radius);
+    border: var(--hero-btn-bw) solid var(--hero-btn-bc);
+    min-width: var(--hero-btn-minw);
     cursor: pointer;
     transition: filter 0.2s, transform 0.15s;
     margin-top: 6px;
-    min-width: 240px;
   }
 
-  .gwmf-hero__btn:hover {
-    filter: brightness(0.85);
-    transform: translateY(-2px);
-  }
+  .gwmf-hero__btn:hover { filter: brightness(0.85); transform: translateY(-2px); }
 
-  /* ---- RIGHT COLUMN ---- */
   .gwmf-hero__image-wrap {
     position: relative;
     display: flex;
@@ -130,7 +198,7 @@
 
   .gwmf-hero__image-wrap img {
     width: 100%;
-    max-width: 700px;
+    max-width: var(--hero-img-maxw);
     height: auto;
     display: block;
     object-fit: contain;
@@ -140,9 +208,9 @@
 
   .gwmf-hero__image-placeholder {
     width: 100%;
-    max-width: 700px;
+    max-width: var(--hero-img-maxw);
     aspect-ratio: 16/10;
-    background: rgba(26, 95, 190, 0.08);
+    background: rgba(26,95,190,0.08);
     border-radius: 16px;
     display: flex;
     flex-direction: column;
@@ -152,147 +220,60 @@
     color: #1a5fbe;
     font-family: 'Outfit', sans-serif;
     font-size: 15px;
-    font-weight: 500;
-    border: 2px dashed rgba(26, 95, 190, 0.25);
+    border: 2px dashed rgba(26,95,190,0.25);
   }
 
-  /* ---- ANIMATIONS ---- */
-  .gwmf-hero__content,
-  .gwmf-hero__image-wrap {
+  .gwmf-hero__content, .gwmf-hero__image-wrap {
     opacity: 0;
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
+  .gwmf-hero__content { transform: translateX(-48px); }
+  .gwmf-hero__image-wrap { transform: translateX(48px); }
+  .gwmf-hero.is-visible .gwmf-hero__content { opacity: 1; transform: translateX(0); }
+  .gwmf-hero.is-visible .gwmf-hero__image-wrap { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
 
-  .gwmf-hero__content {
-    transform: translateX(-48px);
-  }
-
-  .gwmf-hero__image-wrap {
-    transform: translateX(48px);
-  }
-
-  .gwmf-hero.is-visible .gwmf-hero__content {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .gwmf-hero.is-visible .gwmf-hero__image-wrap {
-    opacity: 1;
-    transform: translateX(0);
-    transition-delay: 0.15s;
-  }
-
-  /* ---- RESPONSIVE ---- */
   @media screen and (max-width: 989px) {
-    .gwmf-hero__inner {
-      grid-template-columns: 1fr;
-      padding: 40px 24px 0;
-      min-height: auto;
-      gap: 24px;
-      text-align: center;
-    }
-    .gwmf-hero__content {
-      align-items: center;
-      padding-right: 0;
-      order: 1;
-    }
-    .gwmf-hero__image-wrap {
-      justify-content: center;
-      order: 2;
-    }
-    .gwmf-hero__subheading {
-      max-width: 560px;
-    }
-    .gwmf-hero__btn {
-      width: 100%;
-      max-width: 360px;
-      min-width: unset;
-    }
-    .gwmf-hero__word1 {
-      font-size: clamp(64px, 16vw, 100px);
-    }
-    .gwmf-hero__word2 {
-      font-size: clamp(40px, 10vw, 64px);
-    }
+    .gwmf-hero__inner { grid-template-columns: 1fr; padding: calc(var(--hero-pt)*0.67) calc(var(--hero-pr)*0.75) 0 calc(var(--hero-pl)*0.75); min-height: auto; gap: 24px; text-align: center; }
+    .gwmf-hero__content { align-items: center; padding-right: 0; order: 1; }
+    .gwmf-hero__image-wrap { justify-content: center; order: 2; }
+    .gwmf-hero__subheading { max-width: 560px; }
+    .gwmf-hero__btn { width: 100%; max-width: 360px; min-width: unset; }
   }
 
   @media screen and (max-width: 749px) {
-    .gwmf-hero__inner {
-      padding: 32px 20px 0;
-      gap: 20px;
-    }
-    .gwmf-hero__word1 {
-      font-size: clamp(52px, 17vw, 80px);
-    }
-    .gwmf-hero__word2 {
-      font-size: clamp(32px, 11vw, 54px);
-    }
-    .gwmf-hero__subheading {
-      font-size: 16px;
-      max-width: 100%;
-    }
-    .gwmf-hero__btn {
-      width: 100%;
-      max-width: 100%;
-      padding: 15px 20px;
-      font-size: 13px;
-    }
-    .gwmf-hero__image-wrap img {
-      max-width: 100%;
-    }
+    .gwmf-hero__inner { padding: var(--hero-pt) var(--hero-pr) var(--hero-pb) var(--hero-pl); gap: 20px; }
+    .gwmf-hero__subheading { max-width: 100%; }
+    .gwmf-hero__btn { width: 100%; max-width: 100%; }
+    .gwmf-hero__image-wrap img { max-width: 100%; }
   }
 
   @media screen and (max-width: 480px) {
-    .gwmf-hero__inner {
-      padding: 24px 16px 0;
-    }
-    .gwmf-hero__word1 {
-      font-size: clamp(44px, 18vw, 68px);
-    }
-    .gwmf-hero__word2 {
-      font-size: clamp(28px, 12vw, 46px);
-    }
-    .gwmf-hero__subheading {
-      font-size: 15px;
-    }
+    .gwmf-hero__inner { padding: var(--hero-pt) var(--hero-pr) var(--hero-pb) var(--hero-pl); }
   }
 </style>
 
 <section class="gwmf-hero" id="shopify-section-{{ section.id }}" aria-label="Hero banner">
   <div class="gwmf-hero__inner">
-    {%- comment -%} LEFT — Text {%- endcomment -%}
     <div class="gwmf-hero__content">
       <h1 class="gwmf-hero__heading">
         <span class="gwmf-hero__word1">{{ section.settings.heading_word1 }}</span>
         <span class="gwmf-hero__word2">{{ section.settings.heading_word2 }}</span>
       </h1>
-
       {%- if section.settings.subheading != blank -%}
         <p class="gwmf-hero__subheading">{{ section.settings.subheading }}</p>
       {%- endif -%}
-
       {%- if section.settings.btn_label != blank -%}
-        <a href="{{ section.settings.btn_link }}" class="gwmf-hero__btn">
-          {{ section.settings.btn_label }}
-        </a>
+        <a href="{{ section.settings.btn_link }}" class="gwmf-hero__btn">{{ section.settings.btn_label }}</a>
       {%- endif -%}
     </div>
-
-    {%- comment -%} RIGHT — Image {%- endcomment -%}
     <div class="gwmf-hero__image-wrap">
       {%- if section.settings.image != blank -%}
         {%- assign img_alt = section.settings.image.alt | default: shop.name | escape -%}
-        {{
-          section.settings.image
-          | image_url: width: 1400
-          | image_tag: alt: img_alt, loading: 'eager', fetchpriority: 'high', widths: '600, 800, 1000, 1200, 1400'
-        }}
+        {{ section.settings.image | image_url: width: 1400 | image_tag: alt: img_alt, loading: 'eager', fetchpriority: 'high', widths: '600, 800, 1000, 1200, 1400' }}
       {%- else -%}
         <div class="gwmf-hero__image-placeholder">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
-          </svg>
-          Upload hero image in Theme Editor → Hero Banner → Hero image
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          Upload hero image in Theme Editor
         </div>
       {%- endif -%}
     </div>
@@ -315,90 +296,94 @@
   "name": "Hero Banner",
   "tag": "section",
   "settings": [
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background color",
-      "default": "#D8F3FC"
-    },
-    {
-      "type": "color",
-      "id": "word1_color",
-      "label": "Heading line 1 color",
-      "default": "#1a5fbe"
-    },
-    {
-      "type": "color",
-      "id": "word2_color",
-      "label": "Heading line 2 color",
-      "default": "#1a1a1a"
-    },
-    {
-      "type": "color",
-      "id": "subheading_color",
-      "label": "Subheading color",
-      "default": "#1a3a6e"
-    },
-    {
-      "type": "color",
-      "id": "btn_bg_color",
-      "label": "Button background color",
-      "default": "#1a3a6e"
-    },
-    {
-      "type": "color",
-      "id": "btn_text_color",
-      "label": "Button text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "heading_word1",
-      "label": "Heading — Line 1",
-      "default": "GIFT"
-    },
-    {
-      "type": "text",
-      "id": "heading_word2",
-      "label": "Heading — Line 2 (dark)",
-      "default": "HILARIOUSLY"
-    },
-    {
-      "type": "textarea",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Gifts featuring your face, your pets or the people you love with your own custom gift wrap."
-    },
-    {
-      "type": "text",
-      "id": "btn_label",
-      "label": "Button label",
-      "default": "CREATE MY FACE WRAP"
-    },
-    {
-      "type": "url",
-      "id": "btn_link",
-      "label": "Button link",
-      "default": "/collections/all"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Hero image (right column)"
-    }
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#D8F3FC" },
+    { "type": "color", "id": "word1_color", "label": "Heading line 1 color", "default": "#1a5fbe" },
+    { "type": "color", "id": "word2_color", "label": "Heading line 2 color", "default": "#1a1a1a" },
+    { "type": "color", "id": "subheading_color", "label": "Subheading color", "default": "#1a3a6e" },
+    { "type": "color", "id": "btn_bg_color", "label": "Button background", "default": "#1a3a6e" },
+    { "type": "color", "id": "btn_text_color", "label": "Button text color", "default": "#ffffff" },
+    { "type": "color", "id": "btn_border_color", "label": "Button border color", "default": "#1a3a6e" },
+
+    { "type": "header", "content": "Typography — Heading Line 1" },
+    { "type": "select", "id": "h1_font", "label": "Font family", "options": [{ "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }, { "value": "Outfit, sans-serif", "label": "Outfit (Body)" }], "default": "Dimbo, Outfit, sans-serif" },
+    { "type": "range", "id": "h1_size", "label": "Size (px)", "min": 40, "max": 300, "step": 4, "default": 140 },
+    { "type": "select", "id": "h1_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "500", "label": "500 — Medium" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }, { "value": "800", "label": "800 — Extra Bold" }, { "value": "900", "label": "900 — Black" }], "default": "800" },
+    { "type": "select", "id": "h1_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "uppercase" },
+    { "type": "range", "id": "h1_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": -10 },
+    { "type": "range", "id": "h1_lh", "label": "Line height (÷10, e.g. 10=1.0)", "min": 6, "max": 50, "step": 1, "default": 10 },
+    { "type": "select", "id": "h1_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "h1_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Heading Line 2" },
+    { "type": "select", "id": "h2_font", "label": "Font family", "options": [{ "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }, { "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Amatic SC, cursive", "label": "Amatic SC (Handwritten)" }], "default": "Amatic SC, cursive" },
+    { "type": "range", "id": "h2_size", "label": "Size (px)", "min": 30, "max": 230, "step": 2, "default": 90 },
+    { "type": "select", "id": "h2_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "500", "label": "500 — Medium" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }, { "value": "800", "label": "800 — Extra Bold" }, { "value": "900", "label": "900 — Black" }], "default": "700" },
+    { "type": "select", "id": "h2_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "uppercase" },
+    { "type": "range", "id": "h2_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 10 },
+    { "type": "range", "id": "h2_lh", "label": "Line height (÷10)", "min": 6, "max": 50, "step": 1, "default": 11 },
+    { "type": "select", "id": "h2_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "h2_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Subheading" },
+    { "type": "select", "id": "sub_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "sub_size", "label": "Size (px)", "min": 12, "max": 112, "step": 1, "default": 20 },
+    { "type": "select", "id": "sub_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "500", "label": "500 — Medium" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }, { "value": "800", "label": "800 — Extra Bold" }], "default": "800" },
+    { "type": "select", "id": "sub_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "sub_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "sub_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 14 },
+    { "type": "select", "id": "sub_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "sub_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }, { "value": "overline", "label": "Overline" }], "default": "none" },
+
+    { "type": "header", "content": "Typography — Button" },
+    { "type": "select", "id": "btn_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "btn_size", "label": "Font size (px)", "min": 10, "max": 110, "step": 1, "default": 14 },
+    { "type": "select", "id": "btn_weight", "label": "Weight", "options": [{ "value": "400", "label": "400 — Regular" }, { "value": "500", "label": "500 — Medium" }, { "value": "600", "label": "600 — Semi Bold" }, { "value": "700", "label": "700 — Bold" }, { "value": "800", "label": "800 — Extra Bold" }], "default": "700" },
+    { "type": "select", "id": "btn_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "uppercase" },
+    { "type": "range", "id": "btn_ls", "label": "Letter spacing (×0.1px)", "min": 0, "max": 200, "step": 5, "default": 10 },
+    { "type": "range", "id": "btn_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 12 },
+    { "type": "select", "id": "btn_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "btn_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+
+    { "type": "header", "content": "Button Style" },
+    { "type": "range", "id": "btn_pv", "label": "Padding top / bottom (px)", "min": 4, "max": 200, "step": 2, "default": 16 },
+    { "type": "range", "id": "btn_ph", "label": "Padding left / right (px)", "min": 8, "max": 200, "step": 2, "default": 32 },
+    { "type": "range", "id": "btn_radius", "label": "Border radius (px)", "min": 0, "max": 200, "step": 2, "default": 6 },
+    { "type": "range", "id": "btn_border_width", "label": "Border width (px)", "min": 0, "max": 20, "step": 1, "default": 0 },
+    { "type": "range", "id": "btn_min_width", "label": "Min width (px)", "min": 0, "max": 1000, "step": 10, "default": 240 },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "section_pt", "label": "Padding top (px)", "min": 0, "max": 400, "step": 4, "default": 60 },
+    { "type": "range", "id": "section_pb", "label": "Padding bottom (px)", "min": 0, "max": 400, "step": 4, "default": 0 },
+
+    { "type": "header", "content": "Mobile Sizes" },
+    { "type": "range", "id": "h1_size_mobile",    "label": "Heading line 1 size — mobile (px)", "min": 40, "max": 300, "step": 4, "default": 80 },
+    { "type": "range", "id": "h2_size_mobile",    "label": "Heading line 2 size — mobile (px)", "min": 30, "max": 230, "step": 2, "default": 52 },
+    { "type": "range", "id": "sub_size_mobile",   "label": "Subheading size — mobile (px)",     "min": 12, "max": 112, "step": 1, "default": 16 },
+    { "type": "range", "id": "btn_size_mobile",   "label": "Button size — mobile (px)",         "min": 10, "max": 110, "step": 1, "default": 14 },
+    { "type": "range", "id": "section_pt_mobile", "label": "Padding top — mobile (px)",         "min": 0,  "max": 400, "step": 4, "default": 32 },
+    { "type": "range", "id": "section_pb_mobile", "label": "Padding bottom — mobile (px)",      "min": 0,  "max": 400, "step": 4, "default": 0 },
+    { "type": "range", "id": "section_pl_mobile", "label": "Padding left — mobile (px)",        "min": 0,  "max": 200, "step": 4, "default": 32 },
+    { "type": "range", "id": "section_pr_mobile", "label": "Padding right — mobile (px)",       "min": 0,  "max": 200, "step": 4, "default": 24 },
+
+    { "type": "header", "content": "Alignment & Container" },
+    { "type": "select", "id": "content_align", "label": "Text alignment", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default": "center" },
+    { "type": "range", "id": "content_max_width", "label": "Container max width (px)", "min": 400, "max": 1600, "step": 20, "default": 1400 },
+    { "type": "range", "id": "section_pl", "label": "Padding left (px)", "min": 0, "max": 200, "step": 4, "default": 64 },
+    { "type": "range", "id": "section_pr", "label": "Padding right (px)", "min": 0, "max": 200, "step": 4, "default": 48 },
+    { "type": "range", "id": "section_minh", "label": "Min height (px)", "min": 0, "max": 800, "step": 8, "default": 520 },
+
+    { "type": "header", "content": "Image" },
+    { "type": "range", "id": "image_max_width", "label": "Hero image max width (px)", "min": 300, "max": 1200, "step": 20, "default": 700 },
+
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading_word1", "label": "Heading — Line 1", "default": "GIFT" },
+    { "type": "text", "id": "heading_word2", "label": "Heading — Line 2", "default": "HILARIOUSLY" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Gifts featuring your face, your pets or the people you love with your own custom gift wrap." },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "CREATE MY FACE WRAP" },
+    { "type": "url", "id": "btn_link", "label": "Button link", "default": "/collections/all" },
+    { "type": "image_picker", "id": "image", "label": "Hero image (right column)" }
   ],
-  "presets": [
-    {
-      "name": "Hero Banner"
-    }
-  ]
+  "presets": [{ "name": "Hero Banner" }]
 }
 {% endschema %}

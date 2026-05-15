@@ -5,6 +5,15 @@
     --blog-heading:  {{ section.settings.heading_color }};
     --blog-btn-bg:   {{ section.settings.btn_bg_color }};
     --blog-btn-text: {{ section.settings.btn_text_color }};
+    /* Excerpt Typography */
+    --blog-ex-font:       {{ section.settings.excerpt_font }};
+    --blog-ex-size:       {{ section.settings.excerpt_size }}px;
+    --blog-ex-weight:     {{ section.settings.excerpt_weight }};
+    --blog-ex-transform:  {{ section.settings.excerpt_transform }};
+    --blog-ex-ls:         {{ section.settings.excerpt_ls | times: 0.1 }}px;
+    --blog-ex-lh:         {{ section.settings.excerpt_lh | divided_by: 10.0 }};
+    --blog-ex-style:      {{ section.settings.excerpt_style }};
+    --blog-ex-decoration: {{ section.settings.excerpt_decoration }};
     background-color: var(--blog-bg);
   }
 {%- endstyle -%}
@@ -22,8 +31,8 @@
   }
 
   .gwmf-blog__eyebrow {
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
+    font-family: 'Dimbo', sans-serif;
+    font-size: 24px;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -32,9 +41,9 @@
   }
 
   .gwmf-blog__heading {
-    font-family: 'Dimbo', 'Outfit', sans-serif;
-    font-size: clamp(36px, 4.5vw, 60px);
-    font-weight: 800;
+    font-family: 'Dimbo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
     color: var(--blog-heading);
     line-height: 1.05;
     margin: 0 0 48px;
@@ -53,6 +62,8 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    padding: 40px;
+    gap: 14px;
   }
 
   .gwmf-blog__card-img-wrap {
@@ -60,6 +71,7 @@
     aspect-ratio: 16 / 10;
     overflow: hidden;
     flex-shrink: 0;
+    border-radius: 20px;
   }
 
   .gwmf-blog__card-img-wrap img {
@@ -85,7 +97,6 @@
   }
 
   .gwmf-blog__card-content {
-    padding: 28px 32px 36px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -94,26 +105,30 @@
   }
 
   .gwmf-blog__card-eyebrow {
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
+    font-family: 'Dimbo', sans-serif;
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: 0.5px;
     margin: 0;
   }
 
   .gwmf-blog__card-heading {
-    font-family: 'Dimbo', 'Outfit', sans-serif;
-    font-size: clamp(24px, 2.5vw, 36px);
+    font-family: 'Dimbo', sans-serif;
+    font-size: clamp(16px, 2.5vw, 36px);
     font-weight: 800;
     line-height: 1.1;
     margin: 0;
   }
 
   .gwmf-blog__card-body {
-    font-family: 'Outfit', sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.65;
+    font-family: var(--blog-ex-font);
+    font-size: var(--blog-ex-size);
+    font-weight: var(--blog-ex-weight);
+    text-transform: var(--blog-ex-transform);
+    letter-spacing: var(--blog-ex-ls);
+    line-height: var(--blog-ex-lh);
+    font-style: var(--blog-ex-style);
+    text-decoration: var(--blog-ex-decoration);
     margin: 0;
     flex: 1;
   }
@@ -125,9 +140,9 @@
     padding: 14px 28px;
     background: var(--blog-btn-bg);
     color: var(--blog-btn-text);
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
+    font-family: 'Dimbo', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-decoration: none;
@@ -262,9 +277,13 @@
                 <h3 class="gwmf-blog__card-heading" style="color: {{ block.settings.heading_color }};">
                   {{ art.title }}
                 </h3>
-                {%- if art.excerpt != blank -%}
+                {%- assign card_excerpt = art.excerpt | strip_html -%}
+                {%- if card_excerpt == blank -%}
+                  {%- assign card_excerpt = art.content | strip_html -%}
+                {%- endif -%}
+                {%- if card_excerpt != blank -%}
                   <p class="gwmf-blog__card-body" style="color: {{ block.settings.body_color }};">
-                    {{ art.excerpt | strip_html | truncate: 180 }}
+                    {{ card_excerpt | truncate: section.settings.excerpt_length }}
                   </p>
                 {%- endif -%}
               {%- endif -%}
@@ -339,6 +358,17 @@
       "label": "Button text color",
       "default": "#ffffff"
     },
+    { "type": "header", "content": "Typography — Excerpt" },
+    { "type": "select", "id": "excerpt_font", "label": "Font family", "options": [{ "value": "Outfit, sans-serif", "label": "Outfit (Body)" }, { "value": "Dimbo, Outfit, sans-serif", "label": "Dimbo (Display)" }], "default": "Outfit, sans-serif" },
+    { "type": "range", "id": "excerpt_size", "label": "Size (px)", "min": 10, "max": 110, "step": 1, "default": 15 },
+    { "type": "select", "id": "excerpt_weight", "label": "Weight", "options": [{ "value": "400", "label": "400" }, { "value": "500", "label": "500" }, { "value": "600", "label": "600" }, { "value": "700", "label": "700" }, { "value": "800", "label": "800" }], "default": "400" },
+    { "type": "select", "id": "excerpt_transform", "label": "Text transform", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "UPPERCASE" }, { "value": "lowercase", "label": "lowercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+    { "type": "range", "id": "excerpt_ls", "label": "Letter spacing (×0.1px)", "min": -20, "max": 200, "step": 5, "default": 0 },
+    { "type": "range", "id": "excerpt_lh", "label": "Line height (÷10)", "min": 8, "max": 50, "step": 1, "default": 17 },
+    { "type": "select", "id": "excerpt_style", "label": "Font style", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }], "default": "normal" },
+    { "type": "select", "id": "excerpt_decoration", "label": "Text decoration", "options": [{ "value": "none", "label": "None" }, { "value": "underline", "label": "Underline" }, { "value": "line-through", "label": "Line-through" }], "default": "none" },
+    { "type": "range", "id": "excerpt_length", "label": "Max characters shown", "min": 60, "max": 400, "step": 10, "default": 200 },
+
     {
       "type": "header",
       "content": "Content"
@@ -382,7 +412,7 @@
           "type": "color",
           "id": "heading_color",
           "label": "Heading color",
-          "default": "#1a3a6e"
+          "default": "#0065ac"
         },
         {
           "type": "color",

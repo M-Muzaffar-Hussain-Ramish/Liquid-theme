@@ -139,9 +139,10 @@
 
 /* ---- Add to cart button ---- */
 .product-form__submit,
+.product-form__submit.button,
 .product-form__submit.button--full-width {
   background-color: #EE021A !important;
-  border: 2px solid #EE021A !important;
+  border: none !important;
   border-radius: 50px !important;
   font-family: 'Outfit', sans-serif !important;
   font-size: 15px !important;
@@ -151,11 +152,16 @@
   box-shadow: none !important;
   outline: none !important;
 }
-.product-form__submit:hover {
+.product-form__submit:hover,
+.product-form__submit.button:hover {
   background-color: #c40016 !important;
-  border-color: #c40016 !important;
+  box-shadow: none !important;
 }
-.product-form__submit::after { box-shadow: none !important; }
+.product-form__submit::after,
+.product-form__submit.button::after {
+  display: none !important;
+  box-shadow: none !important;
+}
 
 /* ---- Hide "View full details" link (quick-add artifact) ---- */
 .product__view-details { display: none !important; }
@@ -259,3 +265,121 @@
   .gwmf-tab__btn { padding: 14px 16px; font-size: 13px; }
   .gwmf-tab__panel { padding: 24px 0 36px; }
 }
+
+/* ---- Custom Image Upload Block ---- */
+.gwmf-upload-block {
+  margin: 6px 0 10px;
+}
+.gwmf-upload-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a2e4a;
+  margin: 0 0 10px;
+}
+.gwmf-upload-zone {
+  position: relative;
+  border: 2px dashed #c5d4e8;
+  border-radius: 12px;
+  background: #f7fafd;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.gwmf-upload-zone.is-dragover {
+  border-color: #1a5fbe;
+  background: #eef5ff;
+}
+.gwmf-upload-zone.has-file {
+  border-color: #1a7a4a;
+  border-style: solid;
+}
+.gwmf-upload-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+.gwmf-upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px 20px;
+  pointer-events: none;
+  text-align: center;
+}
+.gwmf-upload-placeholder svg {
+  width: 40px;
+  height: 40px;
+  color: #1a5fbe;
+  opacity: 0.65;
+}
+.gwmf-upload-placeholder-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: #5a7a9a;
+  line-height: 1.5;
+}
+.gwmf-upload-placeholder-text strong {
+  color: #1a5fbe;
+  font-weight: 700;
+}
+.gwmf-upload-preview {
+  display: none;
+  position: relative;
+  padding: 12px;
+}
+.gwmf-upload-preview img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+.gwmf-upload-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  line-height: 1;
+  pointer-events: all;
+}
+.gwmf-upload-remove:hover { background: rgba(0,0,0,0.8); }
+.gwmf-upload-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 7px;
+}
+.gwmf-upload-subtext {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  color: #8a9bb0;
+  margin: 0;
+}
+.gwmf-upload-status {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  color: #5a7a9a;
+  margin: 0;
+}
+.gwmf-upload-status.is-uploading { color: #1a5fbe; }
+.gwmf-upload-status.is-success   { color: #1a7a4a; font-weight: 600; }
+.gwmf-upload-status.is-error     { color: #c0392b; }

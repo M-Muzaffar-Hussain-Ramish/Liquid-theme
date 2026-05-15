@@ -27,8 +27,9 @@
     align-items: center;
     max-width: 1300px;
     margin: 0 auto;
-    padding: 12px 24px;
+    padding: 10px 24px;
     gap: 16px;
+    min-height: 64px;
   }
 
   /* --- LOGO --- */
@@ -41,15 +42,10 @@
     text-decoration: none;
   }
   .gwmf-logo img {
-    height: 26px;
-    width: auto;
+    height: 27px;
+    width: 223px;
     display: block;
-  }
-  .gwmf-logo-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: #1a1a1a;
+    object-fit: contain;
   }
 
   /* --- DESKTOP NAV --- */
@@ -57,6 +53,7 @@
     flex: 1;
     display: flex;
     justify-content: center;
+    min-width: 0;
   }
   .gwmf-nav-list {
     display: flex;
@@ -65,6 +62,7 @@
     margin: 0;
     padding: 0;
     gap: 2px;
+    flex-wrap: nowrap;
   }
   .gwmf-nav-item {
     position: relative;
@@ -73,14 +71,14 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 10px 13px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 800;
+    padding: 10px 12px;
+    font-family: 'Dimbo', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
     color: #222;
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
     white-space: nowrap;
     transition: color 0.2s;
     border-radius: 4px;
@@ -100,22 +98,28 @@
 
   /* --- DROPDOWN BASE --- */
   .gwmf-dropdown {
-    display: none;
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% + 6px);
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(8px);
     background: #fff;
     min-width: 200px;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
     z-index: 200;
     border-radius: 14px;
+    /* Hidden state — JS toggles .is-open */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s;
   }
-  .gwmf-nav-item:hover .gwmf-dropdown {
-    display: block;
+  .gwmf-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0s;
   }
-
-  /* Standard dropdown (few items) */
   .gwmf-dropdown-list {
     list-style: none;
     margin: 0;
@@ -124,8 +128,8 @@
   .gwmf-dropdown-link {
     display: block;
     padding: 14px 24px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
+    font-family: 'Dimbo', sans-serif;
+    font-size: 22px;
     font-weight: 400;
     color: #222;
     text-decoration: none;
@@ -142,17 +146,20 @@
     color: #1a6fcc;
   }
 
-  /* Mega menu (many items — 3-column grid) */
+  /* Mega menu */
   .gwmf-dropdown--mega {
-    min-width: 760px;
+    min-width: 700px;
     left: 50%;
-    transform: translateX(-50%);
   }
   .gwmf-nav-item:last-child .gwmf-dropdown--mega,
   .gwmf-nav-item:nth-last-child(2) .gwmf-dropdown--mega {
     left: auto;
     right: 0;
-    transform: none;
+    transform: translateY(8px);
+  }
+  .gwmf-nav-item:last-child .gwmf-dropdown--mega.is-open,
+  .gwmf-nav-item:nth-last-child(2) .gwmf-dropdown--mega.is-open {
+    transform: translateY(0);
   }
   .gwmf-dropdown--mega .gwmf-dropdown-list {
     padding: 0;
@@ -163,14 +170,13 @@
     white-space: normal;
     padding: 15px 24px;
     border-bottom: 1px solid #e8e8e8;
-    border-right: none;
   }
 
   /* --- RIGHT ICONS --- */
   .gwmf-icons {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 2px;
     flex-shrink: 0;
   }
   .gwmf-icon-btn {
@@ -227,6 +233,7 @@
     padding: 8px;
     color: #333;
     flex-shrink: 0;
+    width: 40px;
   }
   .gwmf-mobile-toggle span {
     display: block;
@@ -263,8 +270,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 320px;
-    max-width: 90vw;
+    width: 300px;
+    max-width: 88vw;
     height: 100%;
     background: #fff;
     z-index: 400;
@@ -281,7 +288,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
+    padding: 14px 20px;
     border-bottom: 1px solid #eee;
     flex-shrink: 0;
   }
@@ -293,6 +300,15 @@
     color: #333;
     line-height: 1;
     padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+  }
+  .gwmf-mobile-close:hover {
+    background: #f4f8ff;
   }
   .gwmf-mobile-nav {
     flex: 1;
@@ -313,7 +329,7 @@
   .gwmf-mobile-nav-link {
     flex: 1;
     display: block;
-    padding: 14px 20px;
+    padding: 15px 20px;
     font-family: 'Outfit', sans-serif;
     font-size: 13px;
     font-weight: 700;
@@ -321,6 +337,9 @@
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.4px;
+  }
+  .gwmf-mobile-nav-link:hover {
+    color: #1a6fcc;
   }
   .gwmf-mobile-sub-toggle {
     display: flex;
@@ -333,6 +352,7 @@
     cursor: pointer;
     color: #666;
     transition: background 0.15s;
+    flex-shrink: 0;
   }
   .gwmf-mobile-sub-toggle:hover {
     background: #f4f8ff;
@@ -360,7 +380,7 @@
   }
   .gwmf-mobile-submenu-link {
     display: block;
-    padding: 11px 20px 11px 32px;
+    padding: 12px 20px 12px 32px;
     font-family: 'Outfit', sans-serif;
     font-size: 12px;
     font-weight: 600;
@@ -369,6 +389,7 @@
     text-transform: uppercase;
     letter-spacing: 0.3px;
     border-bottom: 1px solid #efefef;
+    transition: color 0.15s, background 0.15s;
   }
   .gwmf-mobile-submenu-link:last-child {
     border-bottom: none;
@@ -379,26 +400,30 @@
   }
   .gwmf-mobile-footer {
     padding: 20px;
-    border-top: 1px solid #eee;
+    border-top: 2px solid #eee;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 4px;
     flex-shrink: 0;
   }
   .gwmf-mobile-footer-link {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     font-family: 'Outfit', sans-serif;
     font-size: 13px;
     font-weight: 600;
     color: #333;
     text-decoration: none;
+    padding: 10px 4px;
+    border-radius: 6px;
+    transition: color 0.15s;
   }
   .gwmf-mobile-footer-link svg {
     width: 20px;
     height: 20px;
     color: #666;
+    flex-shrink: 0;
   }
   .gwmf-mobile-footer-link:hover {
     color: #1a6fcc;
@@ -413,7 +438,7 @@
     width: 100%;
     background: #fff;
     z-index: 500;
-    padding: 24px 20px;
+    padding: 20px 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   }
   .gwmf-search-modal.is-open {
@@ -430,7 +455,8 @@
   }
   .gwmf-search-input {
     flex: 1;
-    padding: 12px 18px;
+    min-width: 0;
+    padding: 12px 16px;
     font-family: 'Outfit', sans-serif;
     font-size: 15px;
     border: 2px solid #1a6fcc;
@@ -442,7 +468,7 @@
     color: #aaa;
   }
   .gwmf-search-submit {
-    padding: 12px 22px;
+    padding: 12px 20px;
     background: #1a6fcc;
     color: #fff;
     border: none;
@@ -451,7 +477,9 @@
     font-family: 'Outfit', sans-serif;
     font-size: 14px;
     font-weight: 600;
+    white-space: nowrap;
     transition: background 0.2s;
+    flex-shrink: 0;
   }
   .gwmf-search-submit:hover {
     background: #1558a8;
@@ -472,7 +500,9 @@
     color: #222;
   }
 
-  /* --- RESPONSIVE --- */
+  /* ===== RESPONSIVE ===== */
+
+  /* Tablet/mobile: hide desktop nav, show hamburger, center logo */
   @media screen and (max-width: 989px) {
     .gwmf-nav {
       display: none;
@@ -480,13 +510,74 @@
     .gwmf-mobile-toggle {
       display: flex;
     }
-  }
-  @media screen and (max-width: 749px) {
     .gwmf-header {
-      padding: 10px 16px;
+      position: relative;
+      justify-content: space-between;
+      padding: 8px 14px;
+      min-height: 54px;
+    }
+    .gwmf-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .gwmf-logo img {
+      height: 28px;
+      max-width: 140px;
+      object-fit: contain;
+    }
+    /* Hide account icon — it lives in the mobile menu footer */
+    .gwmf-account-btn {
+      display: none;
+    }
+    .gwmf-icons {
+      gap: 0;
+    }
+    .gwmf-icon-btn {
+      width: 38px;
       height: 38px;
+    }
+    .gwmf-icon-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 749px) {
+    .gwmf-header {
+      padding: 6px 12px;
+      min-height: 50px;
+    }
+    .gwmf-logo img {
+      height: 26px;
+      max-width: 120px;
+    }
+    .gwmf-search-modal {
+      padding: 16px 14px;
+    }
+    .gwmf-search-submit {
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+  }
+
+  /* Very small screens */
+  @media screen and (max-width: 400px) {
+    .gwmf-header {
+      padding: 6px 10px;
+    }
+    .gwmf-logo img {
+      height: 22px;
+      max-width: 100px;
+    }
+    .gwmf-icon-btn {
+      width: 34px;
+      height: 34px;
+    }
+    .gwmf-icon-btn svg {
+      width: 18px;
+      height: 18px;
     }
   }
 </style>
@@ -502,7 +593,8 @@
 
 <div class="gwmf-header-wrapper">
   <div class="gwmf-header">
-    {%- comment -%} Mobile hamburger toggle {%- endcomment -%}
+
+    {%- comment -%} Mobile hamburger {%- endcomment -%}
     <button
       class="gwmf-mobile-toggle"
       id="gwmf-mobile-toggle"
@@ -518,7 +610,13 @@
     {%- comment -%} Logo {%- endcomment -%}
     <div class="gwmf-logo">
       <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
-        <img src="{{ 'logo.webp' | asset_url }}" alt="{{ shop.name | escape }}" height="46" loading="eager">
+        <img
+          src="{{ 'logo.webp' | asset_url }}"
+          alt="{{ shop.name | escape }}"
+          height="44"
+          width="auto"
+          loading="eager"
+        >
       </a>
     </div>
 
@@ -533,9 +631,7 @@
                 class="gwmf-nav-link"
                 aria-haspopup="true"
                 aria-expanded="false"
-                {% if link.active %}
-                  aria-current="page"
-                {% endif %}
+                {% if link.active %}aria-current="page"{% endif %}
               >
                 {{- link.title -}}
                 <svg class="chevron" viewBox="0 0 10 6" fill="none" aria-hidden="true">
@@ -553,9 +649,7 @@
                       <a
                         href="{{ child_link.url }}"
                         class="gwmf-dropdown-link"
-                        {% if child_link.active %}
-                          aria-current="page"
-                        {% endif %}
+                        {% if child_link.active %}aria-current="page"{% endif %}
                       >
                         {{- child_link.title -}}
                       </a>
@@ -567,9 +661,7 @@
               <a
                 href="{{ link.url }}"
                 class="gwmf-nav-link"
-                {% if link.active %}
-                  aria-current="page"
-                {% endif %}
+                {% if link.active %}aria-current="page"{% endif %}
               >
                 {{- link.title -}}
               </a>
@@ -579,7 +671,7 @@
       </ul>
     </nav>
 
-    {%- comment -%} Right Icons: Search, Account, Cart {%- endcomment -%}
+    {%- comment -%} Right Icons {%- endcomment -%}
     <div class="gwmf-icons">
       <button
         class="gwmf-icon-btn"
@@ -595,7 +687,7 @@
 
       <a
         href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-        class="gwmf-icon-btn"
+        class="gwmf-icon-btn gwmf-account-btn"
         aria-label="{%- if customer -%}My account{%- else -%}Sign in{%- endif -%}"
         rel="nofollow"
       >
@@ -613,6 +705,7 @@
         {%- endif -%}
       </a>
     </div>
+
   </div>
 </div>
 
@@ -655,7 +748,7 @@
   <div class="gwmf-mobile-menu-top">
     <div class="gwmf-logo">
       <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
-        <img src="{{ 'logo.webp' | asset_url }}" alt="{{ shop.name | escape }}" height="38" loading="lazy">
+        <img src="{{ 'logo.webp' | asset_url }}" alt="{{ shop.name | escape }}" height="36" loading="lazy">
       </a>
     </div>
     <button class="gwmf-mobile-close" id="gwmf-mobile-close" aria-label="Close menu">&times;</button>
@@ -711,24 +804,55 @@
     </a>
     <a href="{{ routes.cart_url }}" class="gwmf-mobile-footer-link">
       <svg viewBox="0 0 25 23" fill="none" aria-hidden="true">
-        <path d="M24.47 2.204L23.351 11.45C23.24 12.326 22.55 13.004 21.678 13.091L7.294 14.365H7.26L6.7 14.415C6.154 14.418 5.99 14.165 5.84 13.778C5.084 13.778 4.433 12.949 4.302 11.942L3.013 2.156H1.424C0.908 2.156 0.49 1.738 0.49 1.222C0.49 0.706 0.908 0.288 1.424 0.288H3.013L4.84 1.908L4.966 2.849L23.471 1.209C23.943 1.205 24.47 1.796 24.47 2.204ZM5.206 4.702L6.13 11.697C6.193 12.156 6.583 12.506 7.054 12.506L21.518 11.227L22.497 3.17L5.206 4.702Z" fill="currentColor"/>
+        <path d="M24.47 2.204L23.351 11.45C23.24 12.326 22.55 13.004 21.678 13.091L7.294 14.365H7.26L6.7 14.415C6.154 14.418 5.99 14.165 5.99 14.165C5.084 13.778 4.433 12.949 4.302 11.942L3.013 2.156H1.424C0.908 2.156 0.49 1.738 0.49 1.222C0.49 0.706 0.908 0.288 1.424 0.288H3.013C3.949 0.297 4.84 1.908 4.84 1.908L4.966 2.849L23.471 1.209C23.943 1.205 24.47 1.796 24.47 2.204ZM5.206 4.702L6.13 11.697C6.193 12.156 6.583 12.506 7.054 12.506L21.518 11.227L22.497 3.17L5.206 4.702ZM9.4 15.232C11.205 15.232 12.669 16.695 12.669 18.501C12.669 20.306 11.205 21.77 9.4 21.77C7.594 21.77 6.13 20.306 6.13 18.501C6.143 16.715 7.576 15.269 9.358 15.234L9.4 15.232ZM9.4 19.901C10.15 19.901 10.777 19.275 10.777 18.503C10.777 17.73 10.15 17.104 9.378 17.104C8.605 17.104 7.979 17.73 7.979 18.502C7.992 19.263 8.599 19.878 9.378 19.901H9.4ZM18.121 15.232C19.968 15.232 21.432 16.695 21.432 18.501C21.432 20.306 19.968 21.77 18.163 21.77C16.357 21.77 14.893 20.306 14.893 18.501C14.908 16.716 16.34 15.271 18.121 15.234V15.232ZM18.121 19.901C18.908 19.901 19.535 19.275 19.535 18.503C19.535 17.73 18.908 17.104 18.136 17.104C17.363 17.104 16.737 17.73 16.737 18.502C16.752 19.264 17.361 19.879 18.121 19.901Z" fill="currentColor"/>
       </svg>
       Cart
-      {%- if cart.item_count > 0 -%}({{ cart.item_count }}){%- endif -%}
+      {%- if cart.item_count > 0 -%}
+        <span>({{ cart.item_count }})</span>
+      {%- endif -%}
     </a>
   </div>
 </div>
 
 <script>
   (function () {
-    const overlay = document.getElementById('gwmf-overlay');
-    const mobileToggle = document.getElementById('gwmf-mobile-toggle');
-    const mobileMenu = document.getElementById('gwmf-mobile-menu');
-    const mobileClose = document.getElementById('gwmf-mobile-close');
-    const searchToggle = document.getElementById('gwmf-search-toggle');
-    const searchModal = document.getElementById('gwmf-search-modal');
-    const searchClose = document.getElementById('gwmf-search-close');
-    const searchInput = document.getElementById('gwmf-search-input');
+    /* ---- Desktop dropdown with 350ms close delay ---- */
+    document.querySelectorAll('.gwmf-nav-item').forEach(function (item) {
+      var dropdown = item.querySelector('.gwmf-dropdown');
+      if (!dropdown) return;
+
+      var closeTimer = null;
+
+      function openDropdown() {
+        clearTimeout(closeTimer);
+        dropdown.classList.add('is-open');
+      }
+
+      function scheduleClose() {
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(function () {
+          dropdown.classList.remove('is-open');
+        }, 350);
+      }
+
+      /* Hovering the nav link opens it */
+      item.addEventListener('mouseenter', openDropdown);
+      item.addEventListener('mouseleave', scheduleClose);
+
+      /* Moving into the dropdown itself cancels the close timer */
+      dropdown.addEventListener('mouseenter', openDropdown);
+      dropdown.addEventListener('mouseleave', scheduleClose);
+    });
+
+    /* ---- Mobile menu & search ---- */
+    var overlay = document.getElementById('gwmf-overlay');
+    var mobileToggle = document.getElementById('gwmf-mobile-toggle');
+    var mobileMenu = document.getElementById('gwmf-mobile-menu');
+    var mobileClose = document.getElementById('gwmf-mobile-close');
+    var searchToggle = document.getElementById('gwmf-search-toggle');
+    var searchModal = document.getElementById('gwmf-search-modal');
+    var searchClose = document.getElementById('gwmf-search-close');
+    var searchInput = document.getElementById('gwmf-search-input');
 
     function openMobile() {
       mobileMenu.classList.add('is-open');
@@ -752,9 +876,7 @@
       searchModal.classList.add('is-open');
       searchModal.setAttribute('aria-hidden', 'false');
       searchToggle.setAttribute('aria-expanded', 'true');
-      setTimeout(function () {
-        searchInput && searchInput.focus();
-      }, 50);
+      setTimeout(function () { searchInput && searchInput.focus(); }, 50);
     }
 
     function closeSearch() {
@@ -763,20 +885,15 @@
       searchToggle.setAttribute('aria-expanded', 'false');
     }
 
-    function closeAll() {
-      closeMobile();
-      closeSearch();
-    }
+    function closeAll() { closeMobile(); closeSearch(); }
 
-    mobileToggle &&
-      mobileToggle.addEventListener('click', function () {
-        mobileMenu.classList.contains('is-open') ? closeMobile() : openMobile();
-      });
+    mobileToggle && mobileToggle.addEventListener('click', function () {
+      mobileMenu.classList.contains('is-open') ? closeMobile() : openMobile();
+    });
     mobileClose && mobileClose.addEventListener('click', closeMobile);
-    searchToggle &&
-      searchToggle.addEventListener('click', function () {
-        searchModal.classList.contains('is-open') ? closeSearch() : openSearch();
-      });
+    searchToggle && searchToggle.addEventListener('click', function () {
+      searchModal.classList.contains('is-open') ? closeSearch() : openSearch();
+    });
     searchClose && searchClose.addEventListener('click', closeSearch);
     overlay && overlay.addEventListener('click', closeAll);
 

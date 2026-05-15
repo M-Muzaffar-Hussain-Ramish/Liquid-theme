@@ -119,72 +119,158 @@
     padding-right: 0 !important;
   }
 
-  /* ---- Card overrides ---- */
-  .gwmf-col-main .card-wrapper {
-    border-radius: 16px;
-    overflow: hidden;
+  /* ---- Product Cards ---- */
+  .gwmf-prodcard { display: flex; flex-direction: column; gap: 10px; text-align: center; }
+
+  .gwmf-prodcard__img-wrap {
+    position: relative; width: 100%; aspect-ratio: 1/1;
+    border-radius: 12px; overflow: hidden; background: #f4f4f4; display: block;
+  }
+  .gwmf-prodcard__img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .gwmf-prodcard:hover .gwmf-prodcard__img-wrap img { transform: scale(1.04); }
+  .gwmf-prodcard__img-wrap::after {
+    content: ''; position: absolute; bottom: 0; right: 0;
+    width: 0; height: 0; border-style: solid;
+    border-width: 0 0 48px 48px;
+    border-color: transparent transparent #ffffff transparent;
+    filter: drop-shadow(-2px -2px 3px rgba(0,0,0,0.12)); z-index: 2;
+  }
+  .gwmf-prodcard__img-placeholder {
+    width: 100%; height: 100%; display: flex; align-items: center;
+    justify-content: center; background: #eef2f7; color: #b0bec5;
   }
 
-  .gwmf-col-main .card__heading a {
+  .gwmf-prodcard__title {
+    font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.3;
+    color: #1a3a6e; text-decoration: none; display: block; margin: 0;
+    transition: color 0.15s;
+  }
+  .gwmf-prodcard__title:hover { color: #0065ac; }
+
+  .gwmf-prodcard__price { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .gwmf-prodcard__price-from { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500; color: #0065ac; }
+  .gwmf-prodcard__price-sale { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: #1a2e4a; }
+
+  .gwmf-prodcard__badge {
+    display: inline-block; font-family: 'Outfit', sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 4px; line-height: 1.6;
+  }
+  .gwmf-prodcard__badge--soldout { background: #9eaab8; color: #fff; }
+
+  .gwmf-prodcard__swatches { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .gwmf-prodcard__swatch-thumb {
+    display: inline-block; width: 36px; height: 36px; border-radius: 50px;
+    overflow: hidden; border: 2px solid #fff; box-shadow: 0 0 0 1.5px #d0dce8;
+    flex-shrink: 0; transition: box-shadow 0.18s;
+  }
+  .gwmf-prodcard__swatch-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gwmf-prodcard__swatch-thumb:hover { box-shadow: 0 0 0 2px #1a5fbe; }
+
+  /* ---- Category Nav ---- */
+  .gwmf-cat-nav { margin-bottom: 4px; }
+
+  .gwmf-cat-nav__heading {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a3a6e;
+    margin: 0 0 8px;
+    padding: 0;
+  }
+
+  .gwmf-cat-nav__list,
+  .gwmf-cat-nav__sub {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gwmf-cat-nav__item {
+    border-bottom: 1px solid #e8edf4;
+  }
+
+  .gwmf-cat-nav__btn,
+  .gwmf-cat-nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 11px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
     font-family: 'Outfit', sans-serif;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 600;
+    color: #2a4a7a;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #1a3a6e;
-  }
-
-  /* ---- SALE badge ---- */
-  .gwmf-grid-item { position: relative; }
-
-  .gwmf-sale-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
-    background: #ff3b3b;
-    color: #fff;
-    font-family: 'Outfit', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    padding: 4px 10px;
-    border-radius: 6px;
-    pointer-events: none;
-    text-transform: uppercase;
-  }
-
-  /* ---- Swatches ---- */
-  .gwmf-swatches {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    padding: 6px 8px 10px;
-  }
-
-  .gwmf-swatch {
-    display: block;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 1.5px #dde4ee;
-    transition: box-shadow 0.15s, transform 0.15s;
-    flex-shrink: 0;
+    letter-spacing: 0.07em;
     text-decoration: none;
+    transition: color 0.15s;
   }
 
-  .gwmf-swatch:hover {
-    box-shadow: 0 0 0 2px #1a5fbe;
-    transform: scale(1.15);
+  .gwmf-cat-nav__btn:hover,
+  .gwmf-cat-nav__link:hover { color: #0065ac; }
+
+  .gwmf-cat-nav__btn svg {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    transition: transform 0.2s;
+    flex-shrink: 0;
   }
 
-  .gwmf-swatch img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .gwmf-cat-nav__btn.is-open svg { transform: rotate(180deg); }
+
+  .gwmf-cat-nav__sub {
+    display: none;
+    padding: 2px 0 10px 12px;
+    border-left: 3px solid #0065ac;
+    margin-left: 2px;
+  }
+
+  .gwmf-cat-nav__sub.is-open { display: block; }
+
+  .gwmf-cat-nav__child {
     display: block;
+    padding: 7px 0 7px 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #2a4a7a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: color 0.15s, font-weight 0.1s;
+  }
+
+  .gwmf-cat-nav__child:hover,
+  .gwmf-cat-nav__child.is-active {
+    color: #0065ac;
+    font-weight: 700;
+  }
+
+  .gwmf-cat-nav__item--active > .gwmf-cat-nav__btn,
+  .gwmf-cat-nav__item--active > .gwmf-cat-nav__link {
+    color: #0065ac;
+    font-weight: 700;
+  }
+
+  .gwmf-cat-nav__divider {
+    border: none;
+    border-top: 2px solid #e8edf4;
+    margin: 18px 0 16px;
+  }
+
+  .gwmf-filters-heading {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a3a6e;
+    margin: 0 0 10px;
+    padding: 0;
   }
 
   /* ---- Responsive: tablet ---- */
@@ -254,6 +340,55 @@
         {%- comment -%} LEFT: Filters (30%) {%- endcomment -%}
         <div class="gwmf-col-filters-wrap">
 
+          {%- comment -%} Categories Navigation {%- endcomment -%}
+          {%- if section.settings.cat_menu != blank -%}
+            {%- assign cat_list = linklists[section.settings.cat_menu] -%}
+            {%- if cat_list.links.size > 0 -%}
+              <nav class="gwmf-cat-nav" aria-label="Shop categories">
+                <h3 class="gwmf-cat-nav__heading">Categories</h3>
+                <ul class="gwmf-cat-nav__list">
+                  {%- for link in cat_list.links -%}
+                    {%- assign is_active = false -%}
+                    {%- if link.active or link.child_active -%}{%- assign is_active = true -%}{%- endif -%}
+                    <li class="gwmf-cat-nav__item{% if link.links.size > 0 %} gwmf-cat-nav__item--has-children{% endif %}{% if is_active %} gwmf-cat-nav__item--active{% endif %}">
+                      {%- if link.links.size > 0 -%}
+                        <button
+                          class="gwmf-cat-nav__btn{% if is_active %} is-open{% endif %}"
+                          aria-expanded="{{ is_active }}"
+                          aria-controls="gwmf-cat-sub-{{ section.id }}-{{ forloop.index }}"
+                        >
+                          <span>{{ link.title }}</span>
+                          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <ul
+                          class="gwmf-cat-nav__sub{% if is_active %} is-open{% endif %}"
+                          id="gwmf-cat-sub-{{ section.id }}-{{ forloop.index }}"
+                        >
+                          {%- for child in link.links -%}
+                            <li>
+                              <a
+                                href="{{ child.url }}"
+                                class="gwmf-cat-nav__child{% if child.active %} is-active{% endif %}"
+                              >{{ child.title }}</a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- else -%}
+                        <a
+                          href="{{ link.url }}"
+                          class="gwmf-cat-nav__link{% if link.active %} is-active{% endif %}"
+                        >
+                          <span>{{ link.title }}</span>
+                        </a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </nav>
+              <hr class="gwmf-cat-nav__divider">
+            {%- endif -%}
+          {%- endif -%}
+
           {%- comment -%} Mobile toggle — shown only on small screens via CSS {%- endcomment -%}
           <button class="gwmf-filter-toggle" id="gwmf-filter-toggle-{{ section.id }}" aria-expanded="false" aria-controls="gwmf-filter-body-{{ section.id }}">
             <span>Filters</span>
@@ -261,6 +396,7 @@
           </button>
 
           <div class="gwmf-filter-body" id="gwmf-filter-body-{{ section.id }}">
+            <h3 class="gwmf-filters-heading">Filters</h3>
             <aside
               aria-labelledby="verticalTitle"
               class="facets-wrapper"
@@ -310,72 +446,68 @@
                     {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
                   "
                 >
-                  {% assign skip_card_product_styles = false %}
                   {%- for product in collection.products -%}
-                    {% assign lazy_load = false %}
-                    {%- if forloop.index > 2 -%}{%- assign lazy_load = true -%}{%- endif -%}
+                    {%- assign loading_attr = 'lazy' -%}
+                    {%- if forloop.index <= 2 -%}{%- assign loading_attr = 'eager' -%}{%- endif -%}
                     <li
-                      class="grid__item gwmf-grid-item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                      class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                       {% if settings.animations_reveal_on_scroll %}
                         data-cascade
                         style="--animation-order: {{ forloop.index }};"
                       {% endif %}
                     >
-                      {%- if section.settings.show_sale_badge and product.compare_at_price > product.price -%}
-                        <div class="gwmf-sale-badge">SALE</div>
-                      {%- endif -%}
+                      <div class="gwmf-prodcard">
 
-                      {% render 'card-product',
-                        card_product: product,
-                        media_aspect_ratio: section.settings.image_ratio,
-                        image_shape: section.settings.image_shape,
-                        show_secondary_image: section.settings.show_secondary_image,
-                        show_vendor: section.settings.show_vendor,
-                        show_rating: section.settings.show_rating,
-                        lazy_load: lazy_load,
-                        skip_styles: skip_card_product_styles,
-                        quick_add: section.settings.quick_add,
-                        section_id: section.id
-                      %}
-
-                      {%- if section.settings.show_swatches -%}
-                        {%- assign color_option_index = nil -%}
-                        {%- for option in product.options -%}
-                          {%- assign option_down = option | downcase -%}
-                          {%- if option_down == 'color' or option_down == 'colour' or option_down == 'shade' or option_down == 'face color' -%}
-                            {%- assign color_option_index = forloop.index0 -%}
-                            {%- break -%}
+                        <a href="{{ product.url }}" class="gwmf-prodcard__img-wrap">
+                          {%- if product.featured_image != blank -%}
+                            {%- assign img_alt = product.featured_image.alt | default: product.title | escape -%}
+                            {{ product.featured_image | image_url: width: 600 | image_tag: alt: img_alt, loading: loading_attr, widths: '300, 400, 600' }}
+                          {%- else -%}
+                            <div class="gwmf-prodcard__img-placeholder">
+                              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                            </div>
                           {%- endif -%}
-                        {%- endfor -%}
-                        {%- if color_option_index != nil -%}
-                          <div class="gwmf-swatches">
-                            {%- assign seen_colors = '' -%}
-                            {%- for variant in product.variants -%}
-                              {%- unless variant.featured_image -%}{%- continue -%}{%- endunless -%}
-                              {%- assign color_val = variant.options[color_option_index] -%}
-                              {%- assign color_key = color_val | handle | append: ',' -%}
-                              {%- unless seen_colors contains color_key -%}
-                                {%- assign seen_colors = seen_colors | append: color_key -%}
-                                <a
-                                  href="{{ product.url }}?variant={{ variant.id }}"
-                                  class="gwmf-swatch"
-                                  title="{{ color_val | escape }}"
-                                >
-                                  <img
-                                    src="{{ variant.featured_image | image_url: width: 60 }}"
-                                    alt="{{ color_val | escape }}"
-                                    width="24" height="24"
-                                    loading="lazy"
-                                  >
-                                </a>
-                              {%- endunless -%}
-                            {%- endfor -%}
-                          </div>
-                        {%- endif -%}
-                      {%- endif -%}
+                        </a>
 
+                        <a href="{{ product.url }}" class="gwmf-prodcard__title">{{ product.title }}</a>
+
+                        <div class="gwmf-prodcard__price">
+                          {%- if product.available == false -%}
+                            <span class="gwmf-prodcard__badge gwmf-prodcard__badge--soldout">Sold Out</span>
+                          {%- endif -%}
+                          <span class="gwmf-prodcard__price-from">FROM</span>
+                          <span class="gwmf-prodcard__price-sale">{{ product.price_min | money }}</span>
+                        </div>
+
+                        {%- if section.settings.show_swatches -%}
+                          {%- assign seen_img_ids = '' -%}
+                          {%- assign swatch_count = 0 -%}
+                          {%- assign has_swatches = false -%}
+                          {%- for variant in product.variants -%}
+                            {%- if variant.featured_image != blank -%}
+                              {%- assign has_swatches = true -%}
+                              {%- break -%}
+                            {%- endif -%}
+                          {%- endfor -%}
+                          {%- if has_swatches -%}
+                            <div class="gwmf-prodcard__swatches">
+                              {%- for variant in product.variants -%}
+                                {%- if variant.featured_image == blank -%}{%- continue -%}{%- endif -%}
+                                {%- assign img_key = variant.featured_image.id | append: ',' -%}
+                                {%- if seen_img_ids contains img_key -%}{%- continue -%}{%- endif -%}
+                                {%- assign seen_img_ids = seen_img_ids | append: img_key -%}
+                                {%- assign swatch_count = swatch_count | plus: 1 -%}
+                                <a href="{{ product.url }}?variant={{ variant.id }}" class="gwmf-prodcard__swatch-thumb" title="{{ variant.title | escape }}">
+                                  <img src="{{ variant.featured_image | image_url: width: 80 }}" alt="{{ variant.title | escape }}" width="36" height="36" loading="lazy">
+                                </a>
+                                {%- if swatch_count >= 6 -%}{%- break -%}{%- endif -%}
+                              {%- endfor -%}
+                            </div>
+                          {%- endif -%}
+                        {%- endif -%}
+
+                      </div>
                     </li>
-                    {%- assign skip_card_product_styles = true -%}
                   {%- endfor -%}
                 </ul>
 
@@ -398,13 +530,27 @@
 
 <script>
 (function () {
+  /* Mobile filter panel toggle */
   var toggle = document.getElementById('gwmf-filter-toggle-{{ section.id }}');
   var body   = document.getElementById('gwmf-filter-body-{{ section.id }}');
-  if (!toggle || !body) return;
-  toggle.addEventListener('click', function () {
-    var open = body.classList.toggle('is-open');
-    toggle.classList.toggle('is-open', open);
-    toggle.setAttribute('aria-expanded', open);
+  if (toggle && body) {
+    toggle.addEventListener('click', function () {
+      var open = body.classList.toggle('is-open');
+      toggle.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', open);
+    });
+  }
+
+  /* Category nav accordion */
+  document.querySelectorAll('.gwmf-cat-nav__btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var subId = this.getAttribute('aria-controls');
+      var sub   = subId ? document.getElementById(subId) : this.nextElementSibling;
+      if (!sub) return;
+      var open = sub.classList.toggle('is-open');
+      this.classList.toggle('is-open', open);
+      this.setAttribute('aria-expanded', open);
+    });
   });
 })();
 </script>
@@ -414,6 +560,16 @@
   "name": "t:sections.main-collection-product-grid.name",
   "class": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Categories Sidebar"
+    },
+    {
+      "type": "link_list",
+      "id": "cat_menu",
+      "label": "Categories navigation menu",
+      "info": "Create a navigation menu in Shopify Admin > Navigation with your collection links (supports 2 levels)."
+    },
     {
       "type": "header",
       "content": "Product Badges"
